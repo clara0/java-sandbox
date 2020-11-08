@@ -1,9 +1,9 @@
 package clara;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Greeter {
-    private String name;
 
     public static void main(String[] args) {
         for(int i = 0; i < 5; i++) {
@@ -175,6 +175,19 @@ public class Greeter {
         }
 
         return longest;
+    }
+
+    public List<Integer> findFactors(int num) {
+        if (num < 2) {
+            throw new IllegalArgumentException("Please enter an integer greater than 1");
+        }
+        List<Integer> factorlist = new ArrayList<>();
+        for (int i = 2; i < num; i++) {
+            if (num % i == 0) {
+                factorlist.add(i);
+            }
+        }
+        return factorlist;
     }
 
 }

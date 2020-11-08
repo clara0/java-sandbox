@@ -3,7 +3,6 @@ package clara;
 import org.junit.Test;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -220,5 +219,51 @@ public class GreeterTest {
             add(" ");
         }};
         assertEquals(" ", greeter.findLongest(list4));
+    }
+
+    @Test
+    public void findFactors() {
+        Greeter greeter = new Greeter();
+        List<Integer> list = new ArrayList<Integer>() {{
+            add(2);
+        }};
+        assertEquals(list, greeter.findFactors(4));
+        List<Integer> list1 = new ArrayList<Integer>() {{
+            add(2);
+            add(3);
+        }};
+        assertEquals(list1, greeter.findFactors(6));
+        List<Integer> list2 = new ArrayList<Integer>() {{
+            add(2);
+            add(3);
+            add(5);
+            add(6);
+            add(10);
+            add(15);
+        }};
+        assertEquals(list2, greeter.findFactors(30));
+        List<Integer> list3 = new ArrayList<>();
+        assertEquals(list3, greeter.findFactors(17));
+
+        try {
+            greeter.findFactors(0);
+            fail("Please enter a positive, non-one number");
+        } catch (IllegalArgumentException e) {
+            //expected
+        }
+        try {
+            greeter.findFactors(-123);
+            fail("Please enter a positive, non-one number");
+        } catch (IllegalArgumentException e) {
+            //expected
+        }
+
+        try {
+            greeter.findFactors(1);
+            fail("Please enter a positive, non-one number");
+        } catch (IllegalArgumentException e) {
+            //expected
+        }
+
     }
 }
