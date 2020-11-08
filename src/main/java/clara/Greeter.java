@@ -1,5 +1,7 @@
 package clara;
 
+import java.util.List;
+
 public class Greeter {
     private String name;
 
@@ -152,6 +154,18 @@ public class Greeter {
     }
 
     public String findLongest(String[] strs) {
+        String longest = "";
+
+        for (String str: strs) {
+            if (str.length() > longest.length()) {
+                longest = str;
+            }
+        }
+
+        return longest;
+    }
+
+    public String findLongest(List<String> strs) {
         String longest = "";
 
         for (String str: strs) {

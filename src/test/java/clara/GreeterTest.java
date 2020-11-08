@@ -2,6 +2,10 @@ package clara;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class GreeterTest {
@@ -149,9 +153,10 @@ public class GreeterTest {
         assertEquals(120, greeter.findFactorial(5));
         assertEquals(1, greeter.findFactorial(0));
 
-        try { greeter.findFactorial(-4);
+        try {
+            greeter.findFactorial(-4);
             fail("Please enter a non-negative number");
-    } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException e) {
             // as expected
         }
     }
@@ -166,7 +171,8 @@ public class GreeterTest {
         assertEquals(120, greeter.recursiveFindFactorial(5));
         assertEquals(1, greeter.recursiveFindFactorial(0));
 
-        try { greeter.findFactorial(-4);
+        try {
+            greeter.findFactorial(-4);
             fail("Please enter a non-negative number");
         } catch (IllegalArgumentException e) {
             // as expected
@@ -182,5 +188,37 @@ public class GreeterTest {
         assertEquals("asdfasdf", greeter.findLongest(new String[]{"abc", "", "asdfasdf", "123123"}));
         assertEquals("abc", greeter.findLongest(new String[]{"abc", "", " "}));
         assertEquals(" ", greeter.findLongest(new String[]{"", " "}));
+    }
+
+    @Test
+    public void testFindLongest() {
+        Greeter greeter = new Greeter();
+        List<String> list = new ArrayList<String>() {{
+            add("asdfasdf");
+            add("");
+            add("   ");
+        }};
+        assertEquals("asdfasdf", greeter.findLongest(list));
+        List<String> list1 = new ArrayList<String>() {{
+            add("");
+        }};
+        assertEquals("", greeter.findLongest(list1));
+        List<String> list2 = new ArrayList<String>() {{
+            add("hello world");
+            add("hi");
+            add("a b c");
+        }};
+        assertEquals("hello world", greeter.findLongest(list2));
+        List<String> list3 = new ArrayList<String>() {{
+            add("abc");
+            add("");
+            add("123123");
+        }};
+        assertEquals("123123", greeter.findLongest(list3));
+        List<String> list4 = new ArrayList<String>() {{
+            add("");
+            add(" ");
+        }};
+        assertEquals(" ", greeter.findLongest(list4));
     }
 }
