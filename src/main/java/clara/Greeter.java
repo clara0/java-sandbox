@@ -1,7 +1,9 @@
 package clara;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Greeter {
 
@@ -10,9 +12,6 @@ public class Greeter {
             System.out.println(i + " Hello");
         }
 
-        Greeter greeter = new Greeter();
-        String echoVal = greeter.echo("abc");
-        System.out.println(echoVal);
     }
 
     public String echo(String msg) {
@@ -188,6 +187,24 @@ public class Greeter {
             }
         }
         return factorlist;
+    }
+
+    public Map<Character, Integer> findUsages(String string) {
+        if (string.length() == 0) {
+            throw new IllegalArgumentException("Please enter a string with at least one character");
+        }
+
+        Map<Character, Integer> letterCount = new HashMap<>();
+        char[] chars = string.toLowerCase().toCharArray();
+        for (char letter: chars) {
+            if (letterCount.containsKey(letter)) {
+                letterCount.replace(letter, letterCount.get(letter) + 1);
+            } else {
+                letterCount.put(letter, 1);
+            }
+        }
+
+        return letterCount;
     }
 
 }

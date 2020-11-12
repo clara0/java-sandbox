@@ -3,7 +3,9 @@ package clara;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static org.junit.Assert.*;
 
@@ -261,6 +263,38 @@ public class GreeterTest {
         try {
             greeter.findFactors(1);
             fail("Please enter a positive, non-one number");
+        } catch (IllegalArgumentException e) {
+            //expected
+        }
+
+    }
+
+    @Test
+    public void findUsages() {
+        Greeter greeter = new Greeter();
+        Map<Character, Integer> letterCount = new HashMap<>();
+        letterCount.put('a', 1);
+        letterCount.put('b', 1);
+        letterCount.put('c', 1);
+        letterCount.put('s', 1);
+        assertEquals(letterCount, greeter.findUsages("cabs"));
+        Map<Character, Integer> letterCount1 = new HashMap<>();
+        letterCount1.put('b', 1);
+        letterCount1.put('o', 2);
+        letterCount1.put('k', 1);
+        assertEquals(letterCount1, greeter.findUsages("book"));
+        Map<Character, Integer> letterCount2 = new HashMap<>();
+        letterCount2.put('h', 2);
+        letterCount2.put('i', 1);
+        letterCount2.put('e', 2);
+        letterCount2.put('t', 1);
+        letterCount2.put('r', 1);
+        letterCount2.put(' ', 1);
+        assertEquals(letterCount2, greeter.findUsages("Hi there"));
+
+        try {
+            greeter.findUsages("");
+            fail("Please enter a string with at least one character");
         } catch (IllegalArgumentException e) {
             //expected
         }
