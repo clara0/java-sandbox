@@ -189,13 +189,13 @@ public class Greeter {
         return factorlist;
     }
 
-    public Map<Character, Integer> findUsages(String string) {
-        if (string.length() == 0) {
-            throw new IllegalArgumentException("Please enter a string with at least one character");
+    public Map<Character, Integer> findUsages(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("invalid input");
         }
 
         Map<Character, Integer> letterCount = new HashMap<>();
-        char[] chars = string.toLowerCase().toCharArray();
+        char[] chars = str.toLowerCase().toCharArray();
         for (char letter: chars) {
             if (letterCount.containsKey(letter)) {
                 letterCount.replace(letter, letterCount.get(letter) + 1);

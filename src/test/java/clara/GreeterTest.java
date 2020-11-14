@@ -272,29 +272,54 @@ public class GreeterTest {
     @Test
     public void findUsages() {
         Greeter greeter = new Greeter();
-        Map<Character, Integer> letterCount = new HashMap<>();
-        letterCount.put('a', 1);
-        letterCount.put('b', 1);
-        letterCount.put('c', 1);
-        letterCount.put('s', 1);
-        assertEquals(letterCount, greeter.findUsages("cabs"));
-        Map<Character, Integer> letterCount1 = new HashMap<>();
-        letterCount1.put('b', 1);
-        letterCount1.put('o', 2);
-        letterCount1.put('k', 1);
-        assertEquals(letterCount1, greeter.findUsages("book"));
-        Map<Character, Integer> letterCount2 = new HashMap<>();
-        letterCount2.put('h', 2);
-        letterCount2.put('i', 1);
-        letterCount2.put('e', 2);
-        letterCount2.put('t', 1);
-        letterCount2.put('r', 1);
-        letterCount2.put(' ', 1);
-        assertEquals(letterCount2, greeter.findUsages("Hi there"));
+        Map<Character, Integer> charCount = new HashMap<>();
+        charCount.put('a', 1);
+        charCount.put('b', 1);
+        charCount.put('c', 1);
+        charCount.put('s', 1);
+        assertEquals(charCount, greeter.findUsages("cabs"));
+        charCount.clear();
+        charCount.put('*', 1);
+        charCount.put('o', 1);
+        charCount.put('w', 2);
+        assertEquals(charCount, greeter.findUsages("*wow"));
+        charCount.clear();
+        charCount.put('h', 2);
+        charCount.put('i', 1);
+        charCount.put('e', 2);
+        charCount.put('t', 1);
+        charCount.put('r', 1);
+        charCount.put(' ', 1);
+        assertEquals(charCount, greeter.findUsages("Hi there"));
+        charCount.clear();
+        charCount.put('!', 2);
+        charCount.put('%', 1);
+        charCount.put('(', 2);
+        charCount.put('^', 1);
+        charCount.put('\\', 1);
+        charCount.put('`', 1);
+        assertEquals(charCount, greeter.findUsages("!%(^\\`!("));
+        charCount.clear();
+        charCount.put('\n', 1);
+        charCount.put('\t', 1);
+        assertEquals(charCount, greeter.findUsages("\t\n"));
+        charCount.clear();
+        charCount.put('\n', 1);
+        assertEquals(charCount, greeter.findUsages("\n"));
+        charCount.clear();
+        charCount.put('\t', 1);
+        assertEquals(charCount, greeter.findUsages("\t"));
+        charCount.clear();
+        charCount.put('\t', 2);
+        charCount.put('\n', 2);
+        assertEquals(charCount, greeter.findUsages("\t\n\t\n"));
+
+        charCount.clear();
+        assertEquals(charCount, greeter.findUsages(""));
 
         try {
-            greeter.findUsages("");
-            fail("Please enter a string with at least one character");
+            greeter.findUsages(null);
+            fail("invalid input");
         } catch (IllegalArgumentException e) {
             //expected
         }
