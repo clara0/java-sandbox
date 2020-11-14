@@ -191,20 +191,20 @@ public class Greeter {
 
     public Map<Character, Integer> findUsages(String str) {
         if (str == null) {
-            throw new IllegalArgumentException("invalid input");
+            throw new IllegalArgumentException("invalid input: " + str);
         }
 
-        Map<Character, Integer> letterCount = new HashMap<>();
+        Map<Character, Integer> charCount = new HashMap<>();
         char[] chars = str.toLowerCase().toCharArray();
-        for (char letter: chars) {
-            if (letterCount.containsKey(letter)) {
-                letterCount.replace(letter, letterCount.get(letter) + 1);
+        for (char c: chars) {
+            if (charCount.containsKey(c)) {
+                charCount.replace(c, charCount.get(c) + 1);
             } else {
-                letterCount.put(letter, 1);
+                charCount.put(c, 1);
             }
         }
 
-        return letterCount;
+        return charCount;
     }
 
 }

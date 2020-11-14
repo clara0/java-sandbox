@@ -279,11 +279,13 @@ public class GreeterTest {
         charCount.put('s', 1);
         assertEquals(charCount, greeter.findUsages("cabs"));
         charCount.clear();
+
         charCount.put('*', 1);
         charCount.put('o', 1);
         charCount.put('w', 2);
         assertEquals(charCount, greeter.findUsages("*wow"));
         charCount.clear();
+
         charCount.put('h', 2);
         charCount.put('i', 1);
         charCount.put('e', 2);
@@ -292,6 +294,7 @@ public class GreeterTest {
         charCount.put(' ', 1);
         assertEquals(charCount, greeter.findUsages("Hi there"));
         charCount.clear();
+
         charCount.put('!', 2);
         charCount.put('%', 1);
         charCount.put('(', 2);
@@ -300,16 +303,20 @@ public class GreeterTest {
         charCount.put('`', 1);
         assertEquals(charCount, greeter.findUsages("!%(^\\`!("));
         charCount.clear();
+
         charCount.put('\n', 1);
         charCount.put('\t', 1);
         assertEquals(charCount, greeter.findUsages("\t\n"));
         charCount.clear();
+
         charCount.put('\n', 1);
         assertEquals(charCount, greeter.findUsages("\n"));
         charCount.clear();
+
         charCount.put('\t', 1);
         assertEquals(charCount, greeter.findUsages("\t"));
         charCount.clear();
+
         charCount.put('\t', 2);
         charCount.put('\n', 2);
         assertEquals(charCount, greeter.findUsages("\t\n\t\n"));
@@ -319,7 +326,7 @@ public class GreeterTest {
 
         try {
             greeter.findUsages(null);
-            fail("invalid input");
+            fail("unexpected input: null");
         } catch (IllegalArgumentException e) {
             //expected
         }
