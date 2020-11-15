@@ -204,17 +204,29 @@ public class Greeter {
         return charCount;
     }
 
-    public Set<Character> findCommon(String str1, String str2) {
+    public Set<Character> findCommon(String str1, String str2, boolean ignoreCase) {
         if (str1 == null || str2 == null) {
-            throw new IllegalArgumentException("invalid input: " + str1 + "," + str2);
+            throw new IllegalArgumentException("invalid input: " + str1 + ", " + str2);
         }
         Set<Character> commonChars = new HashSet<>();
-        char[] chars1 = str1.toLowerCase().toCharArray();
-        char[] chars2 = str2.toLowerCase().toCharArray();
-        for (char c1: chars1) {
-            for (char c2: chars2) {
-                if (c1 == c2) {
-                    commonChars.add(c1);
+        if (ignoreCase) {
+            char[] chars1 = str1.toLowerCase().toCharArray();
+            char[] chars2 = str2.toLowerCase().toCharArray();
+            for (char c1 : chars1) {
+                for (char c2 : chars2) {
+                    if (c1 == c2) {
+                        commonChars.add(c1);
+                    }
+                }
+            }
+        } else {
+            char[] chars1 = str1.toCharArray();
+            char[] chars2 = str2.toCharArray();
+            for (char c1 : chars1) {
+                for (char c2 : chars2) {
+                    if (c1 == c2) {
+                        commonChars.add(c1);
+                    }
                 }
             }
         }

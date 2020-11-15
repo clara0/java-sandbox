@@ -7,10 +7,10 @@ import java.util.*;
 import static org.junit.Assert.*;
 
 public class GreeterTest {
+    Greeter greeter = new Greeter();
 
     @Test
     public void echo() {
-        Greeter greeter = new Greeter();
         assertEquals("hello", greeter.echo("hello"));
         assertEquals("123", greeter.echo("123"));
         assertEquals("Hello World!", greeter.echo("Hello World!"));
@@ -25,7 +25,6 @@ public class GreeterTest {
 
     @Test
     public void isEven() {
-        Greeter greeter = new Greeter();
         int[] oddNumbers = {1, 11111, -1, -1100011};
         int[] evenNumbers = {10, -111112, 0, 2, -2};
 
@@ -53,7 +52,6 @@ public class GreeterTest {
 
     @Test
     public void sum() {
-        Greeter greeter = new Greeter();
         assertEquals(10, greeter.sum(new int[]{1, 2, 3, 4}));
         assertEquals(1, greeter.sum(new int[]{1}));
         assertEquals(2, greeter.sum(new int[]{1, 2, 3, -4}));
@@ -65,7 +63,6 @@ public class GreeterTest {
 
     @Test
     public void min() {
-        Greeter greeter = new Greeter();
         assertEquals(1, greeter.min(new int[]{1, 2, 3, 4}));
         assertEquals(1, greeter.min(new int[]{1, 2, 3, 12345}));
         assertEquals(-4, greeter.min(new int[]{1, 3, 4, -4}));
@@ -82,13 +79,11 @@ public class GreeterTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void max2() {
-        Greeter g = new Greeter();
-        g.max(new int[]{});
+        greeter.max(new int[]{});
     }
 
     @Test
     public void max() {
-        Greeter greeter = new Greeter();
         assertEquals(4, greeter.max(new int[]{1, 2, 3, 4}));
         assertEquals(12345, greeter.max(new int[]{1, 2, 3, 12345}));
         assertEquals(4, greeter.max(new int[]{1, 3, 4, -4}));
@@ -98,7 +93,6 @@ public class GreeterTest {
 
     @Test
     public void recursiveSum() {
-        Greeter greeter = new Greeter();
         assertEquals(10, greeter.recursiveSum(new int[]{1, 2, 3, 4}));
         assertEquals(1, greeter.recursiveSum(new int[]{1}));
         assertEquals(2, greeter.recursiveSum(new int[]{1, 2, 3, -4}));
@@ -109,7 +103,6 @@ public class GreeterTest {
 
     @Test
     public void recursiveMin() {
-        Greeter greeter = new Greeter();
         assertEquals(1, greeter.recursiveMin(new int[]{1, 2, 3, 4}));
         assertEquals(1, greeter.recursiveMin(new int[]{1, 2, 3, 12345}));
         assertEquals(-4, greeter.recursiveMin(new int[]{1, 3, 4, -4}));
@@ -126,7 +119,6 @@ public class GreeterTest {
 
     @Test
     public void recursiveMax() {
-        Greeter greeter = new Greeter();
         assertEquals(4, greeter.recursiveMax(new int[]{1, 2, 3, 4}));
         assertEquals(12345, greeter.recursiveMax(new int[]{1, 2, 3, 12345}));
         assertEquals(4, greeter.recursiveMax(new int[]{1, 3, 4, -4}));
@@ -143,7 +135,6 @@ public class GreeterTest {
 
     @Test
     public void findFactorial() {
-        Greeter greeter = new Greeter();
         assertEquals(1, greeter.findFactorial(1));
         assertEquals(2, greeter.findFactorial(2));
         assertEquals(24, greeter.findFactorial(4));
@@ -161,7 +152,6 @@ public class GreeterTest {
 
     @Test
     public void recursiveFindFactorial() {
-        Greeter greeter = new Greeter();
         assertEquals(1, greeter.recursiveFindFactorial(1));
         assertEquals(2, greeter.recursiveFindFactorial(2));
         assertEquals(24, greeter.recursiveFindFactorial(4));
@@ -179,7 +169,6 @@ public class GreeterTest {
 
     @Test
     public void findLongest() {
-        Greeter greeter = new Greeter();
         assertEquals("asdfasdf", greeter.findLongest(new String[]{"abc", "", "asdfasdf"}));
         assertEquals("", greeter.findLongest(new String[]{""}));
         assertEquals("hello world", greeter.findLongest(new String[]{"hello world", "hi", "a b c"}));
@@ -190,7 +179,6 @@ public class GreeterTest {
 
     @Test
     public void testFindLongest() {
-        Greeter greeter = new Greeter();
         List<String> list = new ArrayList<String>() {{
             add("asdfasdf");
             add("");
@@ -222,7 +210,6 @@ public class GreeterTest {
 
     @Test
     public void findFactors() {
-        Greeter greeter = new Greeter();
         List<Integer> list = new ArrayList<Integer>() {{
             add(2);
         }};
@@ -268,7 +255,6 @@ public class GreeterTest {
 
     @Test
     public void findUsages() {
-        Greeter greeter = new Greeter();
         Map<Character, Integer> charCount = new HashMap<>();
         charCount.put('a', 1);
         charCount.put('b', 1);
@@ -332,27 +318,31 @@ public class GreeterTest {
 
     @Test
     public void findCommon() {
-        Greeter greeter = new Greeter();
         Set<Character> commonChars = new HashSet<>();
         commonChars.add('a');
         commonChars.add('b');
-        assertEquals(commonChars, greeter.findCommon("abc", "ba"));
+        assertEquals(commonChars, greeter.findCommon("abc", "ba", true));
         commonChars.clear();
 
-        assertEquals(commonChars, greeter.findCommon("****", "ba"));
+        commonChars.add('A');
+        commonChars.add('b');
+        assertEquals(commonChars, greeter.findCommon("Abc", "bA", false));
+        commonChars.clear();
+
+        assertEquals(commonChars, greeter.findCommon("****", "ba", true));
         commonChars.clear();
 
         commonChars.add(' ');
-        assertEquals(commonChars, greeter.findCommon("** **", "b a"));
+        assertEquals(commonChars, greeter.findCommon("** **", "b a", true));
         commonChars.clear();
 
         commonChars.add('*');
-        assertEquals(commonChars, greeter.findCommon("**", "*a"));
+        assertEquals(commonChars, greeter.findCommon("**", "*a", false));
         commonChars.clear();
 
         commonChars.add('\n');
         commonChars.add('\t');
-        assertEquals(commonChars, greeter.findCommon("a\nc\t", "b\t\n"));
+        assertEquals(commonChars, greeter.findCommon("a\nc\t", "b\t\n", false));
         commonChars.clear();
 
         commonChars.add('!');
@@ -361,11 +351,26 @@ public class GreeterTest {
         commonChars.add('e');
         commonChars.add('r');
         commonChars.add(' ');
-        assertEquals(commonChars, greeter.findCommon("Hi there!", "Hello there!"));
+        commonChars.add('H');
+        assertEquals(commonChars, greeter.findCommon("Hi there!", "Hello there!", false));
         commonChars.clear();
 
         try {
-            greeter.findCommon(null, "abc");
+            greeter.findCommon(null, "abc", true);
+            fail("unexpected input: null");
+        } catch (IllegalArgumentException e) {
+            //expected
+        }
+
+        try {
+            greeter.findCommon(null, null, true);
+            fail("unexpected input: null");
+        } catch (IllegalArgumentException e) {
+            //expected
+        }
+
+        try {
+            greeter.findCommon(null, "abc", false);
             fail("unexpected input: null");
         } catch (IllegalArgumentException e) {
             //expected
