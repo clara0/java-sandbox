@@ -2,10 +2,7 @@ package clara;
 
 import org.junit.Test;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import static org.junit.Assert.*;
 
@@ -326,6 +323,49 @@ public class GreeterTest {
 
         try {
             greeter.findUsages(null);
+            fail("unexpected input: null");
+        } catch (IllegalArgumentException e) {
+            //expected
+        }
+
+    }
+
+    @Test
+    public void findCommon() {
+        Greeter greeter = new Greeter();
+        Set<Character> commonChars = new HashSet<>();
+        commonChars.add('a');
+        commonChars.add('b');
+        assertEquals(commonChars, greeter.findCommon("abc", "ba"));
+        commonChars.clear();
+
+        assertEquals(commonChars, greeter.findCommon("****", "ba"));
+        commonChars.clear();
+
+        commonChars.add(' ');
+        assertEquals(commonChars, greeter.findCommon("** **", "b a"));
+        commonChars.clear();
+
+        commonChars.add('*');
+        assertEquals(commonChars, greeter.findCommon("**", "*a"));
+        commonChars.clear();
+
+        commonChars.add('\n');
+        commonChars.add('\t');
+        assertEquals(commonChars, greeter.findCommon("a\nc\t", "b\t\n"));
+        commonChars.clear();
+
+        commonChars.add('!');
+        commonChars.add('h');
+        commonChars.add('t');
+        commonChars.add('e');
+        commonChars.add('r');
+        commonChars.add(' ');
+        assertEquals(commonChars, greeter.findCommon("Hi there!", "Hello there!"));
+        commonChars.clear();
+
+        try {
+            greeter.findCommon(null, "abc");
             fail("unexpected input: null");
         } catch (IllegalArgumentException e) {
             //expected

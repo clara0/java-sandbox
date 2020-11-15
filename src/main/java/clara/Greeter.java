@@ -1,9 +1,6 @@
 package clara;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class Greeter {
 
@@ -205,6 +202,23 @@ public class Greeter {
         }
 
         return charCount;
+    }
+
+    public Set<Character> findCommon(String str1, String str2) {
+        if (str1 == null || str2 == null) {
+            throw new IllegalArgumentException("invalid input: " + str1 + "," + str2);
+        }
+        Set<Character> commonChars = new HashSet<>();
+        char[] chars1 = str1.toLowerCase().toCharArray();
+        char[] chars2 = str2.toLowerCase().toCharArray();
+        for (char c1: chars1) {
+            for (char c2: chars2) {
+                if (c1 == c2) {
+                    commonChars.add(c1);
+                }
+            }
+        }
+        return commonChars;
     }
 
 }
