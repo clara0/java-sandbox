@@ -1,6 +1,7 @@
 package clara;
 
 
+
 public class StringUtils {
 
     public String pigLatin(String sentence) {
@@ -9,18 +10,14 @@ public class StringUtils {
         }
 
         String[] words = sentence.toLowerCase().split(" ");
-        String prevSegment = "";
+        String[] translatedWords = new String[words.length];
 
         for (int i = 0; i < words.length; i++) {
             String word = words[i];
             String newWord = word.substring(1) + word.substring(0, 1) + "ay";
 
-            if (i == words.length - 1) {
-                prevSegment += newWord;
-            } else {
-                prevSegment += newWord + " ";
-            }
+            translatedWords[i] = newWord;
         }
-        return prevSegment;
+        return String.join(" ", translatedWords);
     }
 }
