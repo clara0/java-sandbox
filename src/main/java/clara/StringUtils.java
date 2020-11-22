@@ -26,8 +26,8 @@ public class StringUtils {
         }
         char[] chars = str.toCharArray();
         char[] reversed = new char[chars.length];
-        for (int i = 0; i < chars.length; i++) {
-            reversed[chars.length - 1 - i] = chars[i];
+        for (int i = chars.length - 1, j = 0; i >= 0; i--) {
+            reversed[j++] = chars[i];
         }
         return new String(reversed);
     }
