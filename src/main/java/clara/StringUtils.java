@@ -25,10 +25,10 @@ public class StringUtils {
             throw new IllegalArgumentException("Invalid input: " + str);
         }
         char[] chars = str.toCharArray();
-        String[] reversed = new String[chars.length];
+        char[] reversed = new char[chars.length];
         for (int i = 0; i < chars.length; i++) {
-            reversed[chars.length - 1 - i] = String.valueOf(chars[i]);
+            reversed[chars.length - 1 - i] = chars[i];
         }
-        return String.join("", reversed);
+        return new String(reversed);
     }
 }
