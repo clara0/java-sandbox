@@ -19,4 +19,16 @@ public class StringUtils {
         }
         return String.join(" ", words);
     }
+
+    public String reverseString(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("Invalid input: " + str);
+        }
+        char[] chars = str.toCharArray();
+        String reversed = "";
+        for (char c: chars) {
+            reversed = c + reversed;
+        }
+        return reversed;
+    }
 }

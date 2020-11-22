@@ -25,4 +25,23 @@ public class StringUtilsTest {
             // expected
         }
     }
+
+    @Test
+    public void reverseString() {
+        StringUtils stringUtils = new StringUtils();
+        assertEquals("ih", stringUtils.reverseString("hi"));
+        assertEquals(" ih", stringUtils.reverseString("hi "));
+        assertEquals("olleh", stringUtils.reverseString("hello"));
+        assertEquals("", stringUtils.reverseString(""));
+        assertEquals(" ", stringUtils.reverseString(" "));
+        assertEquals("dlrow olleh", stringUtils.reverseString("hello world"));
+
+        try {
+            stringUtils.reverseString(null);
+            fail("Unexpected input" + null);
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
+
+    }
 }
