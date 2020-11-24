@@ -44,4 +44,22 @@ public class StringUtilsTest {
         }
 
     }
+
+    @Test
+    public void switchCase() {
+        StringUtils stringUtils = new StringUtils();
+        assertEquals("Hi", stringUtils.switchCase("hI"));
+        assertEquals("hI THERE", stringUtils.switchCase("Hi there"));
+        assertEquals("oOf", stringUtils.switchCase("OoF"));
+        assertEquals("HI", stringUtils.switchCase("hi"));
+        assertEquals("", stringUtils.switchCase(""));
+        assertEquals(" ", stringUtils.switchCase(" "));
+
+        try {
+            stringUtils.switchCase(null);
+            fail("Unexpected input" + null);
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
+    }
 }
