@@ -73,8 +73,11 @@ public class StringUtilsTest {
         assertTrue(stringUtils.isPalindrome(" "));
         assertTrue(stringUtils.isPalindrome("a"));
         assertTrue(stringUtils.isPalindrome("aa"));
+        assertTrue(stringUtils.isPalindrome("1221"));
+        assertTrue(stringUtils.isPalindrome("989"));
         assertFalse(stringUtils.isPalindrome("asdfasdf"));
         assertFalse(stringUtils.isPalindrome("asdfsa"));
         assertFalse(stringUtils.isPalindrome("gah"));
+        assertFalse(stringUtils.isPalindrome("123"));
     }
 }
