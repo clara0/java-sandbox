@@ -56,10 +56,9 @@ public class StringUtils {
         }
         char[] chars = str.toCharArray();
         for (int i = 0, j = chars.length - 1; i < chars.length; i++) {
-            if (chars[j] != chars[i]) {
+            if (chars[j--] != chars[i]) {
                 return false;
             }
-            j--;
         }
 
         return true;
