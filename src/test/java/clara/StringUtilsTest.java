@@ -62,4 +62,19 @@ public class StringUtilsTest {
             // expected
         }
     }
+
+    @Test
+    public void isPalindrome() {
+        StringUtils stringUtils = new StringUtils();
+        assertTrue(stringUtils.isPalindrome("racecar"));
+        assertTrue(stringUtils.isPalindrome("abba"));
+        assertTrue(stringUtils.isPalindrome("aabaa"));
+        assertTrue(stringUtils.isPalindrome(""));
+        assertTrue(stringUtils.isPalindrome(" "));
+        assertTrue(stringUtils.isPalindrome("a"));
+        assertTrue(stringUtils.isPalindrome("aa"));
+        assertFalse(stringUtils.isPalindrome("asdfasdf"));
+        assertFalse(stringUtils.isPalindrome("asdfsa"));
+        assertFalse(stringUtils.isPalindrome("gah"));
+    }
 }
