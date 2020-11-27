@@ -79,5 +79,38 @@ public class StringUtilsTest {
         assertFalse(stringUtils.isPalindrome("asdfsa"));
         assertFalse(stringUtils.isPalindrome("gah"));
         assertFalse(stringUtils.isPalindrome("123"));
+
+        try {
+            stringUtils.switchCase(null);
+            fail("Unexpected input" + null);
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
+    }
+
+    @Test
+    public void validBrackets() {
+        StringUtils stringUtils = new StringUtils();
+        assertTrue(stringUtils.validBrackets("{}"));
+        assertTrue(stringUtils.validBrackets(""));
+        assertTrue(stringUtils.validBrackets(" "));
+        assertTrue(stringUtils.validBrackets("{1[2 + 2]}"));
+        assertTrue(stringUtils.validBrackets("{12 + 24}"));
+        assertTrue(stringUtils.validBrackets("{12 + gh}"));
+        assertTrue(stringUtils.validBrackets("(21<12>21)"));
+        assertTrue(stringUtils.validBrackets("(21<as>21)"));
+        assertTrue(stringUtils.validBrackets("(21<>1 + 21)"));
+        assertFalse(stringUtils.validBrackets("(21>1 + 21"));
+        assertFalse(stringUtils.validBrackets("(21>1 + 2)1"));
+        assertFalse(stringUtils.validBrackets("(21>1 + 2>1"));
+        assertFalse(stringUtils.validBrackets("("));
+        assertFalse(stringUtils.validBrackets("(a"));
+
+        try {
+            stringUtils.switchCase(null);
+            fail("Unexpected input" + null);
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
     }
 }

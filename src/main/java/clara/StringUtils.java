@@ -1,6 +1,8 @@
 package clara;
 
 
+import java.util.ArrayList;
+import java.util.List;
 
 public class StringUtils {
 
@@ -62,5 +64,43 @@ public class StringUtils {
         }
 
         return true;
+    }
+
+    public boolean validBrackets(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("Invalid input: " + str);
+        }
+        List<Character> firstBrackets = new ArrayList<Character>() {{
+            add('{');
+            add('[');
+            add('<');
+            add('(');
+        }};
+        List<Character> lastBrackets = new ArrayList<Character>() {{
+            add('}');
+            add(']');
+            add('>');
+            add(')');
+        }};
+        char[] chars = str.toCharArray();
+        List<Character> brackets = new ArrayList<>();
+
+        for (char c : chars) {
+            if (firstBrackets.contains(c)) {
+                brackets.add(c);
+            } else if (lastBrackets.contains(c)) {
+                try {
+                    char matchingBracket = firstBrackets.get(lastBrackets.indexOf(c));
+                    char lastBracket = brackets.remove(brackets.size() - 1);
+                    if (matchingBracket != lastBracket) {
+                        return false;
+                    }
+                } catch (Exception e) {
+                    return false;
+                }
+            }
+        }
+
+        return brackets.size() == 0;
     }
 }
