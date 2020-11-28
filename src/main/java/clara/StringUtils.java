@@ -103,4 +103,43 @@ public class StringUtils {
 
         return brackets.size() == 0;
     }
+
+    public boolean validBrackets1(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("Invalid input: " + str);
+        }
+        char[] chars = str.toCharArray();
+        List<Character> brackets = new ArrayList<>();
+
+        for (char c : chars) {
+            switch (c) {
+                case '{':
+                case '[':
+                case '<':
+                case '(':
+                    brackets.add(c);
+                    break;
+                case '}':
+                    if (brackets.remove(brackets.size() - 1) != '{') {
+                        return false;
+                    }
+                    break;
+                case '>':
+                    if (brackets.remove(brackets.size() - 1) != '<') {
+                        return false;
+                    }
+                    break;
+                case ']':
+                    if (brackets.remove(brackets.size() - 1) != '[') {
+                        return false;
+                    }
+                    break;
+                case ')':
+                    if (brackets.remove(brackets.size() - 1) != '(') {
+                        return false;
+                    }
+            }
+        }
+        return brackets.size() == 0;
+    }
 }

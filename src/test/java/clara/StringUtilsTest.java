@@ -113,4 +113,30 @@ public class StringUtilsTest {
             // expected
         }
     }
+
+    @Test
+    public void validBrackets1() {
+        StringUtils stringUtils = new StringUtils();
+        assertTrue(stringUtils.validBrackets1("{}"));
+        assertTrue(stringUtils.validBrackets1(""));
+        assertTrue(stringUtils.validBrackets1(" "));
+        assertTrue(stringUtils.validBrackets1("{1[2 + 2]}"));
+        assertTrue(stringUtils.validBrackets1("{12 + 24}"));
+        assertTrue(stringUtils.validBrackets1("{12 + gh}"));
+        assertTrue(stringUtils.validBrackets1("(21<12>21)"));
+        assertTrue(stringUtils.validBrackets1("(21<as>21)"));
+        assertTrue(stringUtils.validBrackets1("(21<>1 + 21)"));
+        assertFalse(stringUtils.validBrackets1("(21>1 + 21"));
+        assertFalse(stringUtils.validBrackets1("(21>1 + 2)1"));
+        assertFalse(stringUtils.validBrackets1("(21>1 + 2>1"));
+        assertFalse(stringUtils.validBrackets1("("));
+        assertFalse(stringUtils.validBrackets1("(a"));
+
+        try {
+            stringUtils.switchCase(null);
+            fail("Unexpected input" + null);
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
+    }
 }
