@@ -1,6 +1,7 @@
 package clara;
 
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -141,5 +142,19 @@ public class StringUtils {
             }
         }
         return brackets.size() == 0;
+    }
+
+    public List<Integer> listDigits(int num) {
+        num = Math.abs(num);
+        if (num < 10) {
+            List<Integer> digit = new ArrayList<>();
+            digit.add(num);
+            return digit;
+        }
+        int lastDigit = num % 10;
+        int newNum = Math.floorDiv(num, 10);
+        List<Integer> digits = listDigits(newNum);
+        digits.add(lastDigit);
+        return digits;
     }
 }

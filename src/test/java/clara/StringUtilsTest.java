@@ -2,6 +2,9 @@ package clara;
 
 import org.junit.Test;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.Assert.*;
 
 public class StringUtilsTest {
@@ -138,5 +141,56 @@ public class StringUtilsTest {
         } catch (IllegalArgumentException e) {
             // expected
         }
+    }
+
+    @Test
+    public void listDigits() {
+        StringUtils stringUtils = new StringUtils();
+        List<Integer> digits = new ArrayList<>();
+        digits.add(1);
+        digits.add(0);
+        assertEquals(digits, stringUtils.listDigits(10));
+
+        digits.clear();
+        digits.add(1);
+        digits.add(0);
+        digits.add(0);
+        assertEquals(digits, stringUtils.listDigits(100));
+
+        digits.clear();
+        digits.add(1);
+        digits.add(0);
+        digits.add(1);
+        digits.add(0);
+        assertEquals(digits, stringUtils.listDigits(1010));
+
+        digits.clear();
+        digits.add(0);
+        assertEquals(digits, stringUtils.listDigits(0));
+
+        digits.clear();
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        assertEquals(digits, stringUtils.listDigits(22222222));
+
+        digits.clear();
+        digits.add(1);
+        assertEquals(digits, stringUtils.listDigits(1));
+
+        digits.clear();
+        digits.add(1);
+        assertEquals(digits, stringUtils.listDigits(-1));
+
+        digits.clear();
+        digits.add(2);
+        digits.add(1);
+        assertEquals(digits, stringUtils.listDigits(-21));
+
     }
 }
