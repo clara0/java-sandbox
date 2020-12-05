@@ -198,4 +198,107 @@ public class NumberUtilsTest {
         }
 
     }
+
+    @Test
+    public void listDigits() {
+        NumberUtils numberUtils = new NumberUtils();
+        List<Integer> digits = new ArrayList<>();
+        digits.add(1);
+        digits.add(0);
+        assertEquals(digits, numberUtils.listDigits(10));
+
+        digits.clear();
+        digits.add(1);
+        digits.add(0);
+        digits.add(0);
+        assertEquals(digits, numberUtils.listDigits(100));
+
+        digits.clear();
+        digits.add(1);
+        digits.add(0);
+        digits.add(1);
+        digits.add(0);
+        assertEquals(digits, numberUtils.listDigits(1010));
+
+        digits.clear();
+        digits.add(0);
+        assertEquals(digits, numberUtils.listDigits(0));
+
+        digits.clear();
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        assertEquals(digits, numberUtils.listDigits(22222222));
+
+        digits.clear();
+        digits.add(1);
+        assertEquals(digits, numberUtils.listDigits(1));
+
+        digits.clear();
+        digits.add(1);
+        assertEquals(digits, numberUtils.listDigits(-1));
+
+        digits.clear();
+        digits.add(2);
+        digits.add(1);
+        assertEquals(digits, numberUtils.listDigits(-21));
+
+    }
+
+    @Test
+    public void listDigits1() {
+        NumberUtils numberUtils = new NumberUtils();
+        List<Integer> digits = new ArrayList<>();
+        digits.add(1);
+        digits.add(0);
+        assertEquals(digits, numberUtils.listDigits(10));
+
+        digits.clear();
+        digits.add(1);
+        digits.add(0);
+        digits.add(0);
+        assertEquals(digits, numberUtils.listDigits(100));
+
+        digits.clear();
+        digits.add(1);
+        digits.add(0);
+        digits.add(1);
+        digits.add(0);
+        assertEquals(digits, numberUtils.listDigits(1010));
+
+        digits.clear();
+        digits.add(0);
+        assertEquals(digits, numberUtils.listDigits(0));
+
+        digits.clear();
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        digits.add(2);
+        assertEquals(digits, numberUtils.listDigits(22222222));
+
+        digits.clear();
+        digits.add(1);
+        assertEquals(digits, numberUtils.listDigits(1));
+
+        digits.clear();
+        digits.add(1);
+        assertEquals(digits, numberUtils.listDigits(-1));
+
+        digits.clear();
+        digits.add(2);
+        digits.add(1);
+        assertEquals(digits, numberUtils.listDigits(-21));
+
+    }
+
 }

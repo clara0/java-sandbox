@@ -148,5 +148,31 @@ public class NumberUtils {
         return factorlist;
     }
 
+    public List<Integer> listDigits(int num) {
+        num = Math.abs(num);
+        if (num < 10) {
+            List<Integer> digit = new ArrayList<>();
+            digit.add(num);
+            return digit;
+        }
+        int lastDigit = num % 10;
+        int newNum = Math.floorDiv(num, 10);
+        List<Integer> digits = listDigits(newNum);
+        digits.add(lastDigit);
+        return digits;
+    }
+
+    public List<Integer> listDigits1(int num) {
+        num = Math.abs(num);
+        List<Integer> digits = new ArrayList<>();
+        while (num >= 10) {
+            int lastDigit = num % 10;
+            digits.add(lastDigit);
+            num = num / 10;
+        }
+        digits.add(num);
+        return digits;
+    }
+
 
 }
