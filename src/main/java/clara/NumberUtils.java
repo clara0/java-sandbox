@@ -174,5 +174,14 @@ public class NumberUtils {
         return digits;
     }
 
+    public List<Integer> reverseList(List<Integer> list1){
+        List<Integer> reversedList = new ArrayList<>();
+        for (int i = list1.size() - 1; i >= 0; i--) {
+            reversedList.add(list1.get(i));
+        }
+
+        return reversedList;
+    }
+
 
 }

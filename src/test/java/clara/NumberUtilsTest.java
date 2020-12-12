@@ -256,24 +256,24 @@ public class NumberUtilsTest {
         List<Integer> digits = new ArrayList<>();
         digits.add(1);
         digits.add(0);
-        assertEquals(digits, numberUtils.listDigits(10));
+        assertEquals(digits, numberUtils.listDigits1(10));
 
         digits.clear();
         digits.add(1);
         digits.add(0);
         digits.add(0);
-        assertEquals(digits, numberUtils.listDigits(100));
+        assertEquals(digits, numberUtils.listDigits1(100));
 
         digits.clear();
         digits.add(1);
         digits.add(0);
         digits.add(1);
         digits.add(0);
-        assertEquals(digits, numberUtils.listDigits(1010));
+        assertEquals(digits, numberUtils.listDigits1(1010));
 
         digits.clear();
         digits.add(0);
-        assertEquals(digits, numberUtils.listDigits(0));
+        assertEquals(digits, numberUtils.listDigits1(0));
 
         digits.clear();
         digits.add(2);
@@ -284,21 +284,74 @@ public class NumberUtilsTest {
         digits.add(2);
         digits.add(2);
         digits.add(2);
-        assertEquals(digits, numberUtils.listDigits(22222222));
-
-        digits.clear();
-        digits.add(1);
-        assertEquals(digits, numberUtils.listDigits(1));
+        assertEquals(digits, numberUtils.listDigits1(22222222));
 
         digits.clear();
         digits.add(1);
-        assertEquals(digits, numberUtils.listDigits(-1));
+        assertEquals(digits, numberUtils.listDigits1(1));
+
+        digits.clear();
+        digits.add(1);
+        assertEquals(digits, numberUtils.listDigits1(-1));
 
         digits.clear();
         digits.add(2);
         digits.add(1);
-        assertEquals(digits, numberUtils.listDigits(-21));
+        assertEquals(digits, numberUtils.listDigits1(-21));
 
     }
 
+    @Test
+    public void reverseList() {
+        NumberUtils numberUtils = new NumberUtils();
+        List<Integer> list1 = new ArrayList<>();
+        List<Integer> result = new ArrayList<>();
+
+        list1.add(1);
+        list1.add(0);
+        result.add(0);
+        result.add(1);
+        assertEquals(result, numberUtils.reverseList(list1));
+
+        list1.clear();
+        result.clear();
+        list1.add(1);
+        list1.add(2);
+        result.add(2);
+        result.add(1);
+        assertEquals(result, numberUtils.reverseList(list1));
+
+        list1.clear();
+        result.clear();
+        list1.add(1);
+        list1.add(2);
+        list1.add(3);
+        list1.add(4);
+        list1.add(5);
+        result.add(5);
+        result.add(4);
+        result.add(3);
+        result.add(2);
+        result.add(1);
+        assertEquals(result, numberUtils.reverseList(list1));
+
+        list1.clear();
+        result.clear();
+        assertEquals(result, numberUtils.reverseList(list1));
+
+        list1.clear();
+        result.clear();
+        list1.add(1);
+        result.add(1);
+        assertEquals(result, numberUtils.reverseList(list1));
+
+        list1.clear();
+        result.clear();
+        list1.add(-1);
+        list1.add(2);
+        result.add(2);
+        result.add(-1);
+        assertEquals(result, numberUtils.reverseList(list1));
+
+    }
 }
