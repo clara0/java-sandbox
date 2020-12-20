@@ -38,4 +38,23 @@ public class PersonTest {
         person.setLastName(newLastName1);
         assertEquals(newLastName1, person.getLastName());
     }
+
+    @Test
+    public void Person() {
+        Person person = new Person();
+        assertEquals(0, person.getAge());
+        int newAge = 10;
+        person.setAge(newAge);
+        assertEquals(newAge, person.getAge());
+
+        assertNull(person.getFirstName());
+        String newFirstName = "Bill";
+        person.setFirstName(newFirstName);
+        assertEquals(newFirstName, person.getFirstName());
+
+        assertNull(person.getLastName());
+        String newLastName = "Appleman";
+        person.setLastName(newLastName);
+        assertEquals(newLastName, person.getLastName());
+    }
 }
