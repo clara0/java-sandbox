@@ -40,7 +40,7 @@ public class PersonTest {
     }
 
     @Test
-    public void Person() {
+    public void person() {
         Person person = new Person();
         assertEquals(0, person.getAge());
         int newAge = 10;
@@ -53,6 +53,23 @@ public class PersonTest {
         assertEquals(newFirstName, person.getFirstName());
 
         assertNull(person.getLastName());
+        String newLastName = "Appleman";
+        person.setLastName(newLastName);
+        assertEquals(newLastName, person.getLastName());
+    }
+
+    @Test
+    public void person1() {
+        Person person = new Person();
+        assertEquals(0, person.getAge());
+        int newAge = 10;
+        person.setAge(newAge);
+        assertEquals(newAge, person.getAge());
+
+        String newFirstName = "Bill";
+        person.setFirstName(newFirstName);
+        assertEquals(newFirstName, person.getFirstName());
+
         String newLastName = "Appleman";
         person.setLastName(newLastName);
         assertEquals(newLastName, person.getLastName());
