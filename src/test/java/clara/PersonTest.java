@@ -60,16 +60,18 @@ public class PersonTest {
 
     @Test
     public void person1() {
-        Person person = new Person();
+        Person person = new Person("Bob", "Smith");
         assertEquals(0, person.getAge());
         int newAge = 10;
         person.setAge(newAge);
         assertEquals(newAge, person.getAge());
 
+        assertEquals("Bob", person.getFirstName());
         String newFirstName = "Bill";
         person.setFirstName(newFirstName);
         assertEquals(newFirstName, person.getFirstName());
 
+        assertEquals("Smith", person.getLastName());
         String newLastName = "Appleman";
         person.setLastName(newLastName);
         assertEquals(newLastName, person.getLastName());
