@@ -3,6 +3,11 @@ package clara;
 public class Customer extends Person{
     private String id;
 
+    @Override
+    public String toString() {
+        return "ID:" + this.id + " " + "Age:" + this.getAge() + " " + "First Name:" + this.getFirstName() + " " + "Last Name:" + this.getLastName();
+    }
+
     public Customer() {
     }
 

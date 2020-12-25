@@ -10,6 +10,8 @@ public class CustomerTest {
     public void customer() {
         Customer customer = new Customer();
 
+        assertEquals("ID:null Age:0 First Name:null Last Name:null", customer.toString());
+
         assertNull(customer.getId());
         String newId = "1234";
         customer.setId(newId);
@@ -34,6 +36,9 @@ public class CustomerTest {
     @Test
     public void customer1() {
         Customer customer = new Customer("3392", 35, "Mary", "Smith");
+
+        assertEquals("ID:3392 Age:35 First Name:Mary Last Name:Smith", customer.toString());
+
         assertEquals("3392", customer.getId());
         assertEquals(35, customer.getAge());
         assertEquals("Mary", customer.getFirstName());

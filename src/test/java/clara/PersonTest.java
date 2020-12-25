@@ -42,6 +42,9 @@ public class PersonTest {
     @Test
     public void person() {
         Person person = new Person();
+
+        assertEquals("Age:0 First Name:null Last Name:null", person.toString());
+
         assertEquals(0, person.getAge());
         int newAge = 10;
         person.setAge(newAge);
@@ -61,6 +64,9 @@ public class PersonTest {
     @Test
     public void person1() {
         Person person = new Person("Bob", "Smith");
+
+        assertEquals("Age:0 First Name:Bob Last Name:Smith", person.toString());
+
         assertEquals(0, person.getAge());
         int newAge = 10;
         person.setAge(newAge);
