@@ -84,13 +84,15 @@ public class PersonTest {
     }
 
     @Test
-    public void person2() {
+    public void equalsTest() {
         Person person = new Person();
         Person person1 = new Person();
         Person person2 = new Person(10, "George", "Alder");
 
+        assertFalse(person.equals(null));
         assertTrue(person.equals(person1));
         assertFalse(person.equals(person2));
+        assertTrue(person.equals(person));
 
     }
 }

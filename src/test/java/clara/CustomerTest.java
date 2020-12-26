@@ -62,12 +62,14 @@ public class CustomerTest {
     }
 
     @Test
-    public void customer2() {
+    public void equalsTest() {
         Customer customer = new Customer();
         Customer customer1 = new Customer();
         Customer customer2 = new Customer("1234", 13, "Ben", "Rogers");
 
         assertTrue(customer.equals(customer1));
+        assertTrue(customer.equals(customer));
+        assertFalse(customer.equals(null));
         assertFalse(customer.equals(customer2));
     }
 }

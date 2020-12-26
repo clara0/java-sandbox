@@ -12,15 +12,15 @@ public class Customer extends Person{
 
     @Override
     public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
         if (other instanceof Customer) {
             Customer otherCustomer = (Customer) other;
-            if (Objects.equals(this.id, otherCustomer.id)) {
-                if (this.getAge() == otherCustomer.getAge()) {
-                    if (Objects.equals(this.getFirstName(), otherCustomer.getFirstName())) {
-                        return Objects.equals(this.getLastName(), otherCustomer.getLastName());
-                    }
-                }
-            }
+            return Objects.equals(this.id, otherCustomer.id) &&
+                    this.getAge() == otherCustomer.getAge() &&
+                    Objects.equals(this.getFirstName(), otherCustomer.getFirstName()) &&
+                    Objects.equals(this.getLastName(), otherCustomer.getLastName());
         }
         return false;
     }

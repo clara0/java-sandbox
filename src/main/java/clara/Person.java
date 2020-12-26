@@ -14,14 +14,15 @@ public class Person {
 
     @Override
     public boolean equals(Object other) {
+        if (this == other) {
+            return true;
+        }
         if (other instanceof Person) {
             Person otherPerson = (Person) other;
-            if (this.age == otherPerson.age) {
-                if (Objects.equals(this.firstName, otherPerson.firstName)) {
-                    return Objects.equals(this.lastName, otherPerson.lastName);
-                    }
-                }
-            }
+            return this.age == otherPerson.age &&
+                    Objects.equals(this.firstName, otherPerson.firstName) &&
+                    Objects.equals(this.lastName, otherPerson.lastName);
+        }
         return false;
     }
 
