@@ -10,7 +10,7 @@ public class CustomerTest {
     public void customer() {
         Customer customer = new Customer();
 
-        assertEquals("ID:null Age:0 First Name:null Last Name:null", customer.toString());
+        assertEquals("ID: null Age: 0 First Name: null Last Name: null", customer.toString());
 
         assertNull(customer.getId());
         String newId = "1234";
@@ -37,7 +37,7 @@ public class CustomerTest {
     public void customer1() {
         Customer customer = new Customer("3392", 35, "Mary", "Smith");
 
-        assertEquals("ID:3392 Age:35 First Name:Mary Last Name:Smith", customer.toString());
+        assertEquals("ID: 3392 Age: 35 First Name: Mary Last Name: Smith", customer.toString());
 
         assertEquals("3392", customer.getId());
         assertEquals(35, customer.getAge());
@@ -59,5 +59,15 @@ public class CustomerTest {
         String newLastName = "Green";
         customer.setLastName(newLastName);
         assertEquals(newLastName, customer.getLastName());
+    }
+
+    @Test
+    public void customer2() {
+        Customer customer = new Customer();
+        Customer customer1 = new Customer();
+        Customer customer2 = new Customer("1234", 13, "Ben", "Rogers");
+
+        assertTrue(customer.equals(customer1));
+        assertFalse(customer.equals(customer2));
     }
 }
