@@ -10,34 +10,43 @@ public class AddressTest {
     public void address() {
         Address address = new Address();
 
-        assertEquals("Zipcode: null, City: null, State: null, Country: null", address.toString());
+        String newStreet = "10 Newbury Street";
 
-        assertNull(address.getZipcode());
         String newZip = "02101";
         address.setZipcode(newZip);
         assertEquals(address.getZipcode(), newZip);
 
-        assertNull(address.getCity());
         String newCity = "Boston";
         address.setCity(newCity);
         assertEquals(address.getCity(), newCity);
 
-        assertNull(address.getState());
         String newState = "Massachusetts";
         address.setState(newState);
         assertEquals(address.getState(), newState);
 
-        assertNull(address.getCountry());
         String newCountry = "USA";
         address.setCountry(newCountry);
         assertEquals(address.getCountry(), newCountry);
+
+        assertTrue(address.toString().contains("02101"));
+        assertTrue(address.toString().contains("Boston"));
+        assertTrue(address.toString().contains("Massachusetts"));
+        assertTrue(address.toString().contains("USA"));
     }
 
     @Test
     public void person1() {
-        Address address = new Address("200000", "Shanghai", "Shanghai", "China");
+        Address address = new Address("12 Central Street", "150000", "Harbin", "Heilongjiang", "China");
 
-        assertEquals("Zipcode: 200000, City: Shanghai, State: Shanghai, Country: China", address.toString());
+        assertTrue(address.toString().contains("12 Central Street"));
+        assertTrue(address.toString().contains("150000"));
+        assertTrue(address.toString().contains("Harbin"));
+        assertTrue(address.toString().contains("Heilongjiang"));
+        assertTrue(address.toString().contains("China"));
+
+        String newStreet = "10 Newbury Street";
+        address.setStreet(newStreet);
+        assertEquals(address.getStreet(), newStreet);
 
         String newZip = "02101";
         address.setZipcode(newZip);

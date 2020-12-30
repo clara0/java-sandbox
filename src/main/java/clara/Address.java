@@ -3,6 +3,7 @@ package clara;
 import java.util.Objects;
 
 public class Address {
+    private String street;
     private String zipcode;
     private String city;
     private String state;
@@ -10,7 +11,7 @@ public class Address {
 
     @Override
     public String toString() {
-        return "Zipcode: " + this.zipcode + ", City: " + this.city + ", State: " + this.state + ", Country: " + this.country;
+        return "Street: " + this.street + ", Zipcode: " + this.zipcode + ", City: " + this.city + ", State: " + this.state + ", Country: " + this.country;
     }
 
     @Override
@@ -20,8 +21,9 @@ public class Address {
         }
         if (other instanceof Address) {
             Address otherAddress = (Address) other;
-            return Objects.equals(this.zipcode, otherAddress.zipcode) &&
-                    this.city.equals(otherAddress.city) &&
+            return Objects.equals(this.street, otherAddress.street) &&
+                    Objects.equals(this.zipcode, otherAddress.zipcode) &&
+                    Objects.equals(this.city, otherAddress.city) &&
                     Objects.equals(this.state, otherAddress.state) &&
                     Objects.equals(this.country, otherAddress.country);
         }
@@ -31,11 +33,16 @@ public class Address {
     public Address() {
     }
 
-    public Address(String zip, String city, String state, String country) {
+    public Address(String street, String zip, String city, String state, String country) {
+        this.street = street;
         this.zipcode = zip;
         this.city = city;
         this.state = state;
         this.country = country;
+    }
+
+    public String getStreet() {
+        return street;
     }
 
     public String getZipcode() {
@@ -52,6 +59,10 @@ public class Address {
 
     public String getCountry() {
         return country;
+    }
+
+    public void setStreet(String street) {
+        this.street = street;
     }
 
     public void setZipcode(String zipcode) {
