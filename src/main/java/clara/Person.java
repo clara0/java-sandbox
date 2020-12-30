@@ -6,10 +6,11 @@ public class Person {
     private int age;
     private String firstName;
     private String lastName;
+    Address address = new Address();
 
     @Override
     public String toString() {
-        return "Age: " + this.age + ", First Name: " + this.firstName + ", Last Name: " + this.lastName;
+        return "Age: " + this.age + ", First Name: " + this.firstName + ", Last Name: " + this.lastName + ", Address: " + this.address;
     }
 
     @Override
@@ -52,6 +53,10 @@ public class Person {
         return lastName;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
     public void setAge(int age) {
         this.age = age;
     }
@@ -62,5 +67,9 @@ public class Person {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

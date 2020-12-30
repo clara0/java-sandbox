@@ -42,8 +42,7 @@ public class PersonTest {
     @Test
     public void person() {
         Person person = new Person();
-
-        assertEquals("Age: 0, First Name: null, Last Name: null", person.toString());
+        Address address = new Address("3 Houston Street" ,"10004", "New York City", "New York", "USA");
 
         assertEquals(0, person.getAge());
         int newAge = 10;
@@ -59,13 +58,35 @@ public class PersonTest {
         String newLastName = "Appleman";
         person.setLastName(newLastName);
         assertEquals(newLastName, person.getLastName());
+
+        person.setAddress(address);
+
+        assertTrue(person.getAddress().toString().contains("3 Houston Street"));
+        assertTrue(person.getAddress().toString().contains("10004"));
+        assertTrue(person.getAddress().toString().contains("New York City"));
+        assertTrue(person.getAddress().toString().contains("New York"));
+        assertTrue(person.getAddress().toString().contains("USA"));
+
+        address.setStreet("1st Street");
+        address.setZipcode("99811");
+        address.setCity("Juneau");
+        address.setState("Alaska");
+        address.setCountry("USA");
+
+        assertTrue(person.getAddress().toString().contains("1st Street"));
+        assertTrue(person.getAddress().toString().contains("99811"));
+        assertTrue(person.getAddress().toString().contains("Juneau"));
+        assertTrue(person.getAddress().toString().contains("Alaska"));
+        assertTrue(person.getAddress().toString().contains("USA"));
+
+        assertTrue(person.toString().contains("10"));
+        assertTrue(person.toString().contains("Bill"));
+        assertTrue(person.toString().contains("Appleman"));
     }
 
     @Test
     public void person1() {
         Person person = new Person("Bob", "Smith");
-
-        assertEquals("Age: 0, First Name: Bob, Last Name: Smith", person.toString());
 
         assertEquals(0, person.getAge());
         int newAge = 10;
