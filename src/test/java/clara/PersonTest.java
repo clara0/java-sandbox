@@ -61,23 +61,23 @@ public class PersonTest {
 
         person.setAddress(address);
 
-        assertTrue(person.getAddress().toString().contains("3 Houston Street"));
-        assertTrue(person.getAddress().toString().contains("10004"));
-        assertTrue(person.getAddress().toString().contains("New York City"));
-        assertTrue(person.getAddress().toString().contains("New York"));
-        assertTrue(person.getAddress().toString().contains("USA"));
+        assertEquals("3 Houston Street", person.getAddress().getStreet());
+        assertEquals("10004", person.getAddress().getZipcode());
+        assertEquals("New York City", person.getAddress().getCity());
+        assertEquals("New York", person.getAddress().getState());
+        assertEquals("USA", person.getAddress().getCountry());
 
-        address.setStreet("1st Street");
+        address.setStreet("12 1st Street");
         address.setZipcode("99811");
         address.setCity("Juneau");
         address.setState("Alaska");
         address.setCountry("USA");
 
-        assertTrue(person.getAddress().toString().contains("1st Street"));
-        assertTrue(person.getAddress().toString().contains("99811"));
-        assertTrue(person.getAddress().toString().contains("Juneau"));
-        assertTrue(person.getAddress().toString().contains("Alaska"));
-        assertTrue(person.getAddress().toString().contains("USA"));
+        assertEquals("12 1st Street", person.getAddress().getStreet());
+        assertEquals("99811", person.getAddress().getZipcode());
+        assertEquals("Juneau", person.getAddress().getCity());
+        assertEquals("Alaska", person.getAddress().getState());
+        assertEquals("USA", person.getAddress().getCountry());
 
         assertTrue(person.toString().contains("10"));
         assertTrue(person.toString().contains("Bill"));
