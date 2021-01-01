@@ -36,8 +36,10 @@ public class EmailAddress {
     }
 
     public EmailAddress(String username, String domain) {
-        if (!verifyUsername(username) || !verifyDomain(domain)) {
-            throw new IllegalArgumentException("Illegal Arguments: " + username + ", " + domain);
+        if (!verifyUsername(username)) {
+            throw new IllegalArgumentException("Invalid Username: " + username);
+        } else if (!verifyDomain(domain)) {
+            throw new IllegalArgumentException("Invalid Domain: " + domain);
         }
         this.username = username;
         this.domain = domain;
@@ -53,22 +55,24 @@ public class EmailAddress {
 
     public void setUsername(String username) {
         if (!verifyUsername(username)) {
-            throw new IllegalArgumentException("Illegal Argument: " + username);
+            throw new IllegalArgumentException("Invalid Username: " + username);
         }
         this.username = username;
     }
 
     public void setDomain(String domain) {
         if (!verifyDomain(domain)) {
-            throw new IllegalArgumentException("Illegal Argument: " + domain);
+            throw new IllegalArgumentException("Invalid Domain: " + domain);
         }
         this.domain = domain;
     }
 
     public static String getEmail(String username, String domain) {
         EmailAddress emailAddress = new EmailAddress();
-        if (!emailAddress.verifyUsername(username) || !emailAddress.verifyDomain(domain)) {
-            throw new IllegalArgumentException("Illegal Arguments: " + username + ", " + domain);
+        if (!emailAddress.verifyUsername(username)) {
+            throw new IllegalArgumentException("Invalid Username: " + username);
+        } else if (!emailAddress.verifyDomain(domain)) {
+            throw new IllegalArgumentException("Invalid Domain: " + domain);
         }
 
         return username + "@" + domain;
