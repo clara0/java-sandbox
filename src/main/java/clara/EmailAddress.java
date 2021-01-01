@@ -8,7 +8,7 @@ public class EmailAddress {
 
     @Override
     public String toString() {
-        return "Username: " + this.username + ", Domain: " + this.domain;
+        return "Email Address: Username: " + this.username + ", Domain: " + this.domain;
     }
 
     @Override
@@ -28,6 +28,10 @@ public class EmailAddress {
     }
 
     public EmailAddress(String username, String domain) {
+        if (username.contains(" ") || username.contains("@") ||
+                !domain.contains(".") || domain.contains(" ") || domain.contains("@") || domain.endsWith(".")) {
+            throw new IllegalArgumentException("Illegal Arguments: " + username + ", " + domain);
+        }
         this.username = username;
         this.domain = domain;
     }
@@ -41,17 +45,23 @@ public class EmailAddress {
     }
 
     public void setUsername(String username) {
+        if (username.contains(" ") || username.contains("@")) {
+            throw new IllegalArgumentException("Illegal Argument: " + username);
+        }
         this.username = username;
     }
 
     public void setDomain(String domain) {
+        if (!domain.contains(".") || domain.contains(" ") || domain.contains("@") || domain.endsWith(".")) {
+            throw new IllegalArgumentException("Illegal Argument: " + domain);
+        }
         this.domain = domain;
     }
 
     public static String getEmail(String username, String domain) {
         if (!domain.contains(".") || domain.endsWith(".") || domain.contains(" ") || domain.contains("@")
         || username.contains(" ") || username.contains("@")) {
-            throw new IllegalArgumentException("Illegal Arguments:" + username + ", " + domain);
+            throw new IllegalArgumentException("Illegal Arguments: " + username + ", " + domain);
         }
 
         return username + "@" + domain;
