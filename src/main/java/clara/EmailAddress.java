@@ -24,12 +24,19 @@ public class EmailAddress {
         return false;
     }
 
+    private boolean verifyUsername(String username) {
+        return !username.contains(" ") && !username.contains("@");
+    }
+
+    private boolean verifyDomain(String domain) {
+        return domain.contains(".") && !domain.contains(" ") && !domain.contains("@") && !domain.endsWith(".");
+    }
+
     public EmailAddress() {
     }
 
     public EmailAddress(String username, String domain) {
-        if (username.contains(" ") || username.contains("@") ||
-                !domain.contains(".") || domain.contains(" ") || domain.contains("@") || domain.endsWith(".")) {
+        if (!verifyUsername(username) || !verifyDomain(domain)) {
             throw new IllegalArgumentException("Illegal Arguments: " + username + ", " + domain);
         }
         this.username = username;
@@ -45,22 +52,22 @@ public class EmailAddress {
     }
 
     public void setUsername(String username) {
-        if (username.contains(" ") || username.contains("@")) {
+        if (!verifyUsername(username)) {
             throw new IllegalArgumentException("Illegal Argument: " + username);
         }
         this.username = username;
     }
 
     public void setDomain(String domain) {
-        if (!domain.contains(".") || domain.contains(" ") || domain.contains("@") || domain.endsWith(".")) {
+        if (!verifyDomain(domain)) {
             throw new IllegalArgumentException("Illegal Argument: " + domain);
         }
         this.domain = domain;
     }
 
     public static String getEmail(String username, String domain) {
-        if (!domain.contains(".") || domain.endsWith(".") || domain.contains(" ") || domain.contains("@")
-        || username.contains(" ") || username.contains("@")) {
+        EmailAddress emailAddress = new EmailAddress();
+        if (!emailAddress.verifyUsername(username) || !emailAddress.verifyDomain(domain)) {
             throw new IllegalArgumentException("Illegal Arguments: " + username + ", " + domain);
         }
 
