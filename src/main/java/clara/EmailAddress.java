@@ -38,7 +38,9 @@ public class EmailAddress {
     public EmailAddress(String username, String domain) {
         if (!verifyUsername(username)) {
             throw new IllegalArgumentException("Invalid Username: " + username);
-        } else if (!verifyDomain(domain)) {
+        }
+
+        if (!verifyDomain(domain)) {
             throw new IllegalArgumentException("Invalid Domain: " + domain);
         }
         this.username = username;
@@ -71,7 +73,9 @@ public class EmailAddress {
         EmailAddress emailAddress = new EmailAddress();
         if (!emailAddress.verifyUsername(username)) {
             throw new IllegalArgumentException("Invalid Username: " + username);
-        } else if (!emailAddress.verifyDomain(domain)) {
+        }
+
+        if (!emailAddress.verifyDomain(domain)) {
             throw new IllegalArgumentException("Invalid Domain: " + domain);
         }
 
