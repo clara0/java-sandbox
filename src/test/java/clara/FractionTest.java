@@ -33,6 +33,9 @@ public class FractionTest {
         assertEquals(fraction1.multiply(fraction2), new Fraction(2, 4));
         assertEquals(fraction1.divide(fraction3), new Fraction(2, 6));
 
+        assertEquals(0.5, fraction1.convertToDecimal(), 1e-15);
+        assertEquals(1.0, fraction2.convertToDecimal(), 1e-15);
+
         try {
             fraction.setDenominator(0);
             fail("Unexpected argument: " + 0);

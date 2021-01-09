@@ -107,4 +107,8 @@ public class Fraction {
         }
         return this;
     }
+
+    public float convertToDecimal() {
+        return (float) numerator / denominator;
+    }
 }
