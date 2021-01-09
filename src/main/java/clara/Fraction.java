@@ -6,7 +6,7 @@ public class Fraction {
 
     @Override
     public String toString() {
-        return "Fraction: " + this.numerator + "/" + this.denominator;
+        return "Fraction: " + numerator + "/" + denominator;
     }
 
     @Override
@@ -70,39 +70,39 @@ public class Fraction {
     }
 
     public Fraction add(Fraction other) {
-        if (this.denominator == other.denominator) {
-            return new Fraction(this.numerator + other.numerator, this.denominator);
+        if (denominator == other.denominator) {
+            return new Fraction(numerator + other.numerator, denominator);
         }
 
-        int i = getLCM(this.denominator, other.denominator);
-        int newNumerator1 = this.numerator * i;
+        int i = getLCM(denominator, other.denominator);
+        int newNumerator1 = numerator * i;
         int newNumerator2 = other.numerator * i;
         return new Fraction(newNumerator1 + newNumerator2, i);
     }
 
     public Fraction subtract(Fraction other) {
-        if (this.denominator == other.denominator) {
-            return new Fraction(this.numerator - other.numerator, this.denominator);
+        if (denominator == other.denominator) {
+            return new Fraction(numerator - other.numerator, denominator);
         }
 
-        int i = getLCM(this.denominator, other.denominator);
-        int newNumerator1 = this.numerator * i;
+        int i = getLCM(denominator, other.denominator);
+        int newNumerator1 = numerator * i;
         int newNumerator2 = other.numerator * i;
         return new Fraction(newNumerator1 - newNumerator2, i);
     }
 
     public Fraction multiply(Fraction other) {
-        return new Fraction(this.numerator * other.numerator, this.denominator * other.denominator);
+        return new Fraction(numerator * other.numerator, denominator * other.denominator);
     }
 
     public Fraction divide(Fraction other) {
-        return new Fraction(this.numerator * other.denominator, this.denominator * other.numerator);
+        return new Fraction(numerator * other.denominator, denominator * other.numerator);
     }
 
     public Fraction simplify() {
-        for (int i = this.numerator; i > 1; i --) {
-            if (this.numerator % i == 0 && this.denominator % i == 0) {
-                return new Fraction(this.numerator / i, this.denominator / i);
+        for (int i = numerator; i > 1; i --) {
+            if (numerator % i == 0 && denominator % i == 0) {
+                return new Fraction(numerator / i, denominator / i);
             }
         }
         return this;
