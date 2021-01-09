@@ -8,15 +8,15 @@ public class FractionTest {
 
     @Test
     public void fraction() {
-        Fraction fraction = new Fraction();
+        Fraction fraction = new Fraction(12, 12);
         Fraction fraction1 = new Fraction(1, 2);
         Fraction fraction2 = new Fraction(2, 2);
         Fraction fraction3 = new Fraction(3, 2);
 
-        assertTrue(fraction.toString().contains("0"));
+        assertTrue(fraction.toString().contains("12/12"));
 
-        assertEquals(0, fraction.getNumerator());
-        assertEquals(0, fraction.getDenominator());
+        assertEquals(12, fraction.getNumerator());
+        assertEquals(12, fraction.getDenominator());
 
         int newNumerator = 12;
         fraction.setNumerator(newNumerator);
@@ -32,5 +32,19 @@ public class FractionTest {
         assertEquals(fraction3.subtract(fraction1), fraction2);
         assertEquals(fraction1.multiply(fraction2), new Fraction(2, 4));
         assertEquals(fraction1.divide(fraction3), new Fraction(2, 6));
+
+        try {
+            fraction.setDenominator(0);
+            fail("Unexpected argument: " + 0);
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
+
+        try {
+            Fraction fraction4 = new Fraction(12, 0);
+            fail("Unexpected argument: " + 0);
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
     }
 }

@@ -1,14 +1,12 @@
 package clara;
 
-import java.util.Objects;
-
 public class Fraction {
     private int numerator;
     private int denominator;
 
     @Override
     public String toString() {
-        return "Numerator: " + this.numerator + ", Denominator" + this.denominator;
+        return "Fraction: " + this.numerator + "/" + this.denominator;
     }
 
     @Override
@@ -18,17 +16,20 @@ public class Fraction {
         }
         if (other instanceof Fraction) {
             Fraction otherFraction = (Fraction) other;
-            return this.numerator == otherFraction.numerator &&
-                    Objects.equals(this.denominator, otherFraction.denominator);
+            Fraction simplifiedFraction = this.simplify();
+            Fraction simplifiedFraction1 = otherFraction.simplify();
+            return simplifiedFraction.numerator == simplifiedFraction1.numerator &&
+                    simplifiedFraction.denominator == simplifiedFraction1.denominator;
         }
         return false;
     }
 
-    public Fraction() {
-    }
 
     public Fraction(int numerator, int denominator) {
         this.numerator = numerator;
+        if (denominator == 0) {
+            throw new IllegalArgumentException("Unexpected argument: " + denominator);
+        }
         this.denominator = denominator;
     }
 
@@ -45,6 +46,9 @@ public class Fraction {
     }
 
     public void setDenominator(int denominator) {
+        if (denominator == 0) {
+            throw new IllegalArgumentException("Unexpected argument: " + denominator);
+        }
         this.denominator = denominator;
     }
 
