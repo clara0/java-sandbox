@@ -25,7 +25,7 @@ public class ImproperFraction extends Fraction {
     public Fraction add(Fraction other) {
         if (other instanceof ImproperFraction) {
             ImproperFraction otherImproperFraction = (ImproperFraction) other;
-            ImproperFraction newImproperFraction = this.add(otherImproperFraction);
+            ImproperFraction newImproperFraction = this.simplifyToImproper().add(otherImproperFraction);
             return newImproperFraction.convertToFraction();
         }
         Fraction newFraction = this.convertToFraction();
@@ -115,7 +115,6 @@ public class ImproperFraction extends Fraction {
     public ImproperFraction multiply(ImproperFraction other) {
         Fraction fraction1 = this.convertToFraction();
         Fraction fraction2 = other.convertToFraction();
-        System.out.println(fraction2);
         return fraction1.multiply(fraction2).simplifyToImproper();
     }
 

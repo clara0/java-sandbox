@@ -40,6 +40,8 @@ public class ImproperFractionTest {
         ImproperFraction improperFraction2 = new ImproperFraction("-", 1, 3, 4);
         ImproperFraction improperFraction3 = new ImproperFraction("-", 0, 3, 4);
         ImproperFraction improperFraction4 = new ImproperFraction(null, 2, 3, 4);
+        Fraction fraction = new Fraction(null, 5, 4);
+        Fraction fraction1 = new Fraction(null, 7, 4);
 
         assertEquals(improperFraction4, improperFraction.add(improperFraction1));
         improperFraction4.setWholeNumber(0);
@@ -70,6 +72,19 @@ public class ImproperFractionTest {
         improperFraction4.setNumerator(3);
         improperFraction4.setDenominator(4);
         assertEquals(improperFraction4, improperFraction.divide(improperFraction1));
+
+        assertEquals(fraction1, fraction.add(improperFraction));
+
+        fraction1.setNumerator(3);
+        assertEquals(fraction1, fraction.subtract(improperFraction));
+
+        fraction1.setNumerator(5);
+        fraction1.setDenominator(8);
+        assertEquals(fraction1, fraction.multiply(improperFraction));
+
+        fraction1.setNumerator(5);
+        fraction1.setDenominator(2);
+        assertEquals(fraction1, fraction.divide(improperFraction));
     }
 
     @Test
