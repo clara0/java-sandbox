@@ -64,10 +64,10 @@ public class Time {
         }
         if (other instanceof Time) {
             Time otherTime = (Time) other;
-            return Objects.equals(this.hours, otherTime.hours) &&
+            return this.hours == otherTime.hours &&
                     this.minutes == otherTime.minutes &&
-                    Objects.equals(this.seconds, otherTime.seconds) &&
-                    Objects.equals(this.milliseconds, otherTime.milliseconds);
+                    this.seconds == otherTime.seconds &&
+                    this.milliseconds == otherTime.milliseconds;
         }
         return false;
     }
