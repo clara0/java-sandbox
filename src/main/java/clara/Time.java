@@ -1,6 +1,8 @@
 package clara;
 
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.concurrent.TimeUnit;
 
 public class Time {
     private int hours;
@@ -80,29 +82,30 @@ public class Time {
     }
 
     public static Time getCurrentTime() {
-        int currentHour = Calendar.HOUR_OF_DAY;
-        int currentMinute = Calendar.MINUTE;
-        int currentSecond = Calendar.SECOND;
-        long currentMillisecond = System.currentTimeMillis();
+        Calendar calendar = GregorianCalendar.getInstance();
+        int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
+        int currentMinute = calendar.get(Calendar.MINUTE);
+        int currentSecond = calendar.get(Calendar.SECOND);
+        long currentMillisecond = calendar.get(Calendar.MILLISECOND);
         return new Time(currentHour, currentMinute, currentSecond, currentMillisecond);
     }
 
-    public Time addTime(Time other) {
-        long convertedMilliseconds = convertToMilliseconds();
-        long otherConvertedMilliseconds = other.convertToMilliseconds();
+    public Time add(Time other) {
+        long convertedMilliseconds = toMilliseconds();
+        long otherConvertedMilliseconds = other.toMilliseconds();
         return convertToTime(convertedMilliseconds + otherConvertedMilliseconds);
     }
 
-    public long subtractTime(Time other) {
-        long convertedMilliseconds = convertToMilliseconds();
-        long otherConvertedMilliseconds = other.convertToMilliseconds();
+    public long subtract(Time other) {
+        long convertedMilliseconds = toMilliseconds();
+        long otherConvertedMilliseconds = other.toMilliseconds();
         return convertedMilliseconds - otherConvertedMilliseconds;
     }
 
-    public long convertToMilliseconds() {
-        long convertedHours = hours * 3600000L;
-        long convertedMinutes = minutes * 60000L;
-        long convertedSeconds = seconds * 1000L;
+    public long toMilliseconds() {
+        long convertedHours = TimeUnit.HOURS.toMillis(hours);
+        long convertedMinutes = TimeUnit.MINUTES.toMillis(minutes);
+        long convertedSeconds = TimeUnit.SECONDS.toMillis(seconds);
         return convertedHours + convertedMinutes + convertedSeconds + milliseconds;
     }
 

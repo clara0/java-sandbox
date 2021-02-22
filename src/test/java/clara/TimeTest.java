@@ -2,7 +2,9 @@ package clara;
 
 import org.junit.Test;
 
+import java.time.LocalDateTime;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import static org.junit.Assert.*;
 
@@ -64,8 +66,13 @@ public class TimeTest {
 
     @Test
     public void currentTimeTest() {
-        Time time = new Time(Calendar.HOUR_OF_DAY, Calendar.MINUTE, Calendar.SECOND, System.currentTimeMillis());
-        assertEquals(time, Time.getCurrentTime());
+        Calendar calendar = GregorianCalendar.getInstance();
+        LocalDateTime currentTime = LocalDateTime.now();
+        Time time = new Time(currentTime.getHour(), currentTime.getMinute(), currentTime.getSecond(), calendar.get(Calendar.MILLISECOND));
+        Time currentTime1 = Time.getCurrentTime();
+        assertEquals(time.getHours(), currentTime1.getHours());
+        assertEquals(time.getMinutes(), currentTime1.getMinutes());
+        assertEquals(time.getSeconds(), currentTime1.getSeconds());
     }
 
     @Test
@@ -74,7 +81,7 @@ public class TimeTest {
         Time time1 = new Time(21, 76, 23, 180);
         Time time2 = new Time(32, 38, 2, 167);
 
-        assertEquals(time2, time.addTime(time1));
+        assertEquals(time2, time.add(time1));
 
         time.setHours(0);
         time.setMinutes(0);
@@ -82,7 +89,7 @@ public class TimeTest {
         time.setMilliseconds(0);
         time1.setHours(22);
         time1.setMinutes(16);
-        assertEquals(time1, time.addTime(time1));
+        assertEquals(time1, time.add(time1));
     }
 
     @Test
@@ -90,9 +97,9 @@ public class TimeTest {
         Time time = new Time(13, 22, 90, 7);
         Time time1 = new Time(33, 21, 9, 34);
 
-        assertEquals(-71859027, time.subtractTime(time1));
+        assertEquals(-71859027, time.subtract(time1));
 
         time.setHours(43);
-        assertEquals(36140973, time.subtractTime(time1));
+        assertEquals(36140973, time.subtract(time1));
     }
 }
