@@ -1,12 +1,12 @@
 package clara;
 
-import java.util.Objects;
+import java.util.Calendar;
 
 public class Time {
     private int hours;
     private int minutes;
     private int seconds;
-    private int milliseconds;
+    private long milliseconds;
 
     public int getHours() {
         return hours;
@@ -20,7 +20,7 @@ public class Time {
         return seconds;
     }
 
-    public int getMilliseconds() {
+    public long getMilliseconds() {
         return milliseconds;
     }
 
@@ -72,11 +72,19 @@ public class Time {
         return false;
     }
 
-    public Time(int hours, int minutes, int seconds, int milliseconds) {
+    public Time(int hours, int minutes, int seconds, long milliseconds) {
         this.hours = hours;
         this.minutes = minutes;
         this.seconds = seconds;
         this.milliseconds = milliseconds;
+    }
+
+    public static Time getCurrentTime() {
+        int currentHour = Calendar.HOUR_OF_DAY;
+        int currentMinute = Calendar.MINUTE;
+        int currentSecond = Calendar.SECOND;
+        long currentMillisecond = System.currentTimeMillis();
+        return new Time(currentHour, currentMinute, currentSecond, currentMillisecond);
     }
 
     public Time addTime(Time other) {
@@ -103,7 +111,7 @@ public class Time {
         int amtHours = (int) (absMilliseconds / 3600000);
         int amtMinutes = (int) ((absMilliseconds - 3600000 * amtHours) / 60000);
         int amtSeconds = (int) ((absMilliseconds - (3600000 * amtHours + 60000 * amtMinutes)) / 1000);
-        int amtMilliseconds = (int) (absMilliseconds - (3600000 * amtHours + 60000 * amtMinutes + 1000 * amtSeconds));
+        long amtMilliseconds = absMilliseconds - (3600000L * amtHours + 60000L * amtMinutes + 1000L * amtSeconds);
 
         return new Time(amtHours, amtMinutes, amtSeconds, amtMilliseconds);
     }

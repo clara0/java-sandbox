@@ -2,6 +2,8 @@ package clara;
 
 import org.junit.Test;
 
+import java.util.Calendar;
+
 import static org.junit.Assert.*;
 
 public class TimeTest {
@@ -58,6 +60,12 @@ public class TimeTest {
         } catch (IllegalArgumentException e) {
             // expected
         }
+    }
+
+    @Test
+    public void currentTimeTest() {
+        Time time = new Time(Calendar.HOUR_OF_DAY, Calendar.MINUTE, Calendar.SECOND, System.currentTimeMillis());
+        assertEquals(time, Time.getCurrentTime());
     }
 
     @Test
