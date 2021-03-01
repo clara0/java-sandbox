@@ -5,6 +5,7 @@ import org.junit.Test;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 
 import static org.junit.Assert.*;
 
@@ -77,9 +78,10 @@ public class TimeTest {
 
     @Test
     public void addTest() {
-        Time time = new Time(10, 20, 98, 987);
+        TimeZone utc = TimeZone.getTimeZone("UTC");
+        Time time = new Time(10, 20, 98, 987, utc);
         Time time1 = new Time(21, 76, 23, 180);
-        Time time2 = new Time(32, 38, 2, 167);
+        Time time2 = new Time(32, 38, 2, 167, utc);
 
         assertEquals(time2, time.add(time1));
 
@@ -94,12 +96,14 @@ public class TimeTest {
 
     @Test
     public void subtractTest() {
-        Time time = new Time(13, 22, 90, 7);
-        Time time1 = new Time(33, 21, 9, 34);
+        TimeZone utc = TimeZone.getTimeZone("UTC");
+        TimeZone newYork = TimeZone.getTimeZone("America/New_York");
+        Time time = new Time(13, 22, 90, 7, newYork);
+        Time time1 = new Time(33, 21, 9, 34, utc);
 
-        assertEquals(-71859027, time.subtract(time1));
+        assertEquals(-53859027, time.subtract(time1));
 
         time.setHours(43);
-        assertEquals(36140973, time.subtract(time1));
+        assertEquals(54140973, time.subtract(time1));
     }
 }

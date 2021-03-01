@@ -2,6 +2,7 @@ package clara;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
 public class Time {
@@ -9,6 +10,7 @@ public class Time {
     private int minutes;
     private int seconds;
     private long milliseconds;
+    private TimeZone timeZone;
 
     public int getHours() {
         return hours;
@@ -24,6 +26,10 @@ public class Time {
 
     public long getMilliseconds() {
         return milliseconds;
+    }
+
+    public TimeZone getTimeZone() {
+        return timeZone;
     }
 
     public void setHours(int hours) {
@@ -54,6 +60,10 @@ public class Time {
         this.milliseconds = milliseconds;
     }
 
+    public void setTimeZone(TimeZone timeZone) {
+        this.timeZone = timeZone;
+    }
+
     @Override
     public String toString() {
         return "Time: " + hours + ":" + minutes + ":" + seconds + ":" + milliseconds;
@@ -81,6 +91,14 @@ public class Time {
         this.milliseconds = milliseconds;
     }
 
+    public Time(int hours, int minutes, int seconds, long milliseconds, TimeZone timeZone) {
+        this.hours = hours;
+        this.minutes = minutes;
+        this.seconds = seconds;
+        this.milliseconds = milliseconds;
+        this.timeZone = timeZone;
+    }
+
     public static Time getCurrentTime() {
         Calendar calendar = GregorianCalendar.getInstance();
         int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -91,15 +109,25 @@ public class Time {
     }
 
     public Time add(Time other) {
+        if (other.timeZone == null) {
+            other.setTimeZone(TimeZone.getTimeZone("UTC"));
+        }
+        if (timeZone == null) {
+            setTimeZone(TimeZone.getTimeZone("UTC"));
+        }
         long convertedMilliseconds = toMilliseconds();
         long otherConvertedMilliseconds = other.toMilliseconds();
-        return convertToTime(convertedMilliseconds + otherConvertedMilliseconds);
+        long thisToUTC = convertedMilliseconds + timeZone.getRawOffset();
+        long otherToUTC = otherConvertedMilliseconds + other.timeZone.getRawOffset();
+        return convertToTime(thisToUTC + otherToUTC);
     }
 
     public long subtract(Time other) {
         long convertedMilliseconds = toMilliseconds();
         long otherConvertedMilliseconds = other.toMilliseconds();
-        return convertedMilliseconds - otherConvertedMilliseconds;
+        long thisToUTC = convertedMilliseconds - timeZone.getRawOffset();
+        long otherToUTC = otherConvertedMilliseconds - other.timeZone.getRawOffset();
+        return thisToUTC - otherToUTC;
     }
 
     public long toMilliseconds() {
@@ -116,6 +144,6 @@ public class Time {
         int amtSeconds = (int) ((absMilliseconds - (3600000 * amtHours + 60000 * amtMinutes)) / 1000);
         long amtMilliseconds = absMilliseconds - (3600000L * amtHours + 60000L * amtMinutes + 1000L * amtSeconds);
 
-        return new Time(amtHours, amtMinutes, amtSeconds, amtMilliseconds);
+        return new Time(amtHours, amtMinutes, amtSeconds, amtMilliseconds, TimeZone.getTimeZone("GMT"));
     }
 }
