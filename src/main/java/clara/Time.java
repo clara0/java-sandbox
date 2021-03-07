@@ -2,6 +2,7 @@ package clara;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Objects;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
@@ -11,6 +12,18 @@ public class Time {
     private int seconds;
     private long milliseconds;
     private TimeZone timeZone;
+
+    public Time(int hours, int minutes, int seconds, long milliseconds) {
+        this(hours, minutes, seconds, milliseconds, null);
+    }
+
+    public Time(int hours, int minutes, int seconds, long milliseconds, TimeZone timeZone) {
+        this.hours = hours;
+        this.minutes = minutes;
+        this.seconds = seconds;
+        this.milliseconds = milliseconds;
+        this.timeZone = timeZone;
+    }
 
     public int getHours() {
         return hours;
@@ -64,41 +77,6 @@ public class Time {
         this.timeZone = timeZone;
     }
 
-    @Override
-    public String toString() {
-        return "Time: " + hours + ":" + minutes + ":" + seconds + ":" + milliseconds;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (this == other) {
-            return true;
-        }
-        if (other instanceof Time) {
-            Time otherTime = (Time) other;
-            return this.hours == otherTime.hours &&
-                    this.minutes == otherTime.minutes &&
-                    this.seconds == otherTime.seconds &&
-                    this.milliseconds == otherTime.milliseconds;
-        }
-        return false;
-    }
-
-    public Time(int hours, int minutes, int seconds, long milliseconds) {
-        this.hours = hours;
-        this.minutes = minutes;
-        this.seconds = seconds;
-        this.milliseconds = milliseconds;
-    }
-
-    public Time(int hours, int minutes, int seconds, long milliseconds, TimeZone timeZone) {
-        this.hours = hours;
-        this.minutes = minutes;
-        this.seconds = seconds;
-        this.milliseconds = milliseconds;
-        this.timeZone = timeZone;
-    }
-
     public static Time getCurrentTime() {
         Calendar calendar = GregorianCalendar.getInstance();
         int currentHour = calendar.get(Calendar.HOUR_OF_DAY);
@@ -145,5 +123,29 @@ public class Time {
         long amtMilliseconds = absMilliseconds - (3600000L * amtHours + 60000L * amtMinutes + 1000L * amtSeconds);
 
         return new Time(amtHours, amtMinutes, amtSeconds, amtMilliseconds, TimeZone.getTimeZone("GMT"));
+    }
+
+    @Override
+    public String toString() {
+        return "Time{" +
+                "hours=" + hours +
+                ", minutes=" + minutes +
+                ", seconds=" + seconds +
+                ", milliseconds=" + milliseconds +
+                ", timeZone=" + timeZone +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Time time = (Time) o;
+        return hours == time.hours && minutes == time.minutes && seconds == time.seconds && milliseconds == time.milliseconds && Objects.equals(timeZone, time.timeZone);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(hours, minutes, seconds, milliseconds, timeZone);
     }
 }
