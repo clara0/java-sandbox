@@ -9,27 +9,6 @@ public class Address {
     private String state;
     private String country;
 
-    @Override
-    public String toString() {
-        return "Street: " + this.street + ", Zipcode: " + this.zipcode + ", City: " + this.city + ", State: " + this.state + ", Country: " + this.country;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (this == other) {
-            return true;
-        }
-        if (other instanceof Address) {
-            Address otherAddress = (Address) other;
-            return Objects.equals(this.street, otherAddress.street) &&
-                    Objects.equals(this.zipcode, otherAddress.zipcode) &&
-                    Objects.equals(this.city, otherAddress.city) &&
-                    Objects.equals(this.state, otherAddress.state) &&
-                    Objects.equals(this.country, otherAddress.country);
-        }
-        return false;
-    }
-
     public Address() {
     }
 
@@ -79,5 +58,29 @@ public class Address {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    @Override
+    public String toString() {
+        return "Address{" +
+                "street='" + street + '\'' +
+                ", zipcode='" + zipcode + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                ", country='" + country + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Address address = (Address) o;
+        return Objects.equals(street, address.street) && Objects.equals(zipcode, address.zipcode) && Objects.equals(city, address.city) && Objects.equals(state, address.state) && Objects.equals(country, address.country);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(street, zipcode, city, state, country);
     }
 }

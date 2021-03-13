@@ -50,9 +50,12 @@ public class FractionTest {
         Fraction fraction3 = new Fraction(null, 3, 2);
 
         assertEquals(fraction1.add(fraction2), fraction3);
+        fraction2.setDenominator(1);
+        fraction2.setNumerator(1);
         assertEquals(fraction3.subtract(fraction1), fraction2);
-        assertEquals(fraction1.multiply(fraction2), new Fraction(null, 2, 4));
-        assertEquals(fraction1.divide(fraction3), new Fraction(null, 2, 6));
+        fraction2.setNumerator(1);
+        assertEquals(fraction1.multiply(fraction2), new Fraction(null, 1, 2));
+        assertEquals(fraction1.divide(fraction3), new Fraction(null, 1, 3));
     }
 
     @Test

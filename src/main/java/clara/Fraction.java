@@ -1,29 +1,11 @@
 package clara;
 
+import java.util.Objects;
+
 public class Fraction {
     private int numerator;
     private int denominator;
     private String sign;
-
-    @Override
-    public String toString() {
-        return "Fraction: " + numerator + "/" + denominator;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (this == other) {
-            return true;
-        }
-        if (other instanceof Fraction) {
-            Fraction otherFraction = (Fraction) other;
-            Fraction simplifiedFraction = this.simplify();
-            Fraction simplifiedFraction1 = otherFraction.simplify();
-            return simplifiedFraction.numerator == simplifiedFraction1.numerator &&
-                    simplifiedFraction.denominator == simplifiedFraction1.denominator;
-        }
-        return false;
-    }
 
     public Fraction(String sign, int numerator, int denominator) {
         this.numerator = numerator;
@@ -177,4 +159,27 @@ public class Fraction {
     public float convertToDecimal() {
         return (float) numerator / denominator;
     }
+
+    @Override
+    public String toString() {
+        return "Fraction{" +
+                "numerator=" + numerator +
+                ", denominator=" + denominator +
+                ", sign='" + sign + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Fraction fraction = (Fraction) o;
+        return numerator == fraction.numerator && denominator == fraction.denominator && Objects.equals(sign, fraction.sign);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(numerator, denominator, sign);
+    }
+
 }

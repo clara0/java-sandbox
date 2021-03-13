@@ -10,8 +10,6 @@ public class AddressTest {
     public void address() {
         Address address = new Address();
 
-        String newStreet = "10 Newbury Street";
-
         String newZip = "02101";
         address.setZipcode(newZip);
         assertEquals(address.getZipcode(), newZip);

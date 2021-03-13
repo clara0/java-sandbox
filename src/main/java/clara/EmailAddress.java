@@ -6,32 +6,6 @@ public class EmailAddress {
     private String username;
     private String domain;
 
-    @Override
-    public String toString() {
-        return "Email Address: Username: " + this.username + ", Domain: " + this.domain;
-    }
-
-    @Override
-    public boolean equals(Object other) {
-        if (this == other) {
-            return true;
-        }
-        if (other instanceof EmailAddress) {
-            EmailAddress otherEmail = (EmailAddress) other;
-            return Objects.equals(this.username, otherEmail.username) &&
-                    this.domain.equals(otherEmail.domain);
-        }
-        return false;
-    }
-
-    private boolean verifyUsername(String username) {
-        return !username.contains(" ") && !username.contains("@");
-    }
-
-    private boolean verifyDomain(String domain) {
-        return domain.contains(".") && !domain.contains(" ") && !domain.contains("@") && !domain.endsWith(".");
-    }
-
     public EmailAddress() {
     }
 
@@ -80,5 +54,34 @@ public class EmailAddress {
         }
 
         return username + "@" + domain;
+    }
+
+    @Override
+    public String toString() {
+        return "EmailAddress{" +
+                "username='" + username + '\'' +
+                ", domain='" + domain + '\'' +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        EmailAddress that = (EmailAddress) o;
+        return Objects.equals(username, that.username) && Objects.equals(domain, that.domain);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(username, domain);
+    }
+
+    private boolean verifyUsername(String username) {
+        return !username.contains(" ") && !username.contains("@");
+    }
+
+    private boolean verifyDomain(String domain) {
+        return domain.contains(".") && !domain.contains(" ") && !domain.contains("@") && !domain.endsWith(".");
     }
 }

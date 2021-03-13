@@ -40,13 +40,14 @@ public class ImproperFractionTest {
         ImproperFraction improperFraction2 = new ImproperFraction("-", 1, 3, 4);
         ImproperFraction improperFraction3 = new ImproperFraction("-", 0, 3, 4);
         ImproperFraction improperFraction4 = new ImproperFraction(null, 2, 3, 4);
+        ImproperFraction improperFraction5 = new ImproperFraction(null, 1, 1, 2);
         Fraction fraction = new Fraction(null, 5, 4);
         Fraction fraction1 = new Fraction(null, 7, 4);
 
         assertEquals(improperFraction4, improperFraction.add(improperFraction1));
         improperFraction4.setWholeNumber(0);
         improperFraction4.setNumerator(0);
-        assertEquals(improperFraction, improperFraction.add(improperFraction4));
+        assertEquals(improperFraction5, improperFraction.add(improperFraction4));
 
         improperFraction4.setWholeNumber(0);
         improperFraction4.setNumerator(1);
@@ -59,6 +60,7 @@ public class ImproperFractionTest {
         improperFraction4.setDenominator(2);
         assertEquals(improperFraction4, improperFraction.subtract(improperFraction1));
 
+        improperFraction4.setSign(null);
         improperFraction4.setWholeNumber(3);
         improperFraction4.setNumerator(0);
         improperFraction4.setDenominator(1);
@@ -91,23 +93,26 @@ public class ImproperFractionTest {
     public void testOverrides() {
         ImproperFraction improperFraction = new ImproperFraction(null, 0, 2, 10);
         Fraction fraction = new Fraction(null, 3, 10);
-        Fraction fraction1 = new Fraction(null, 5, 10);
+        Fraction fraction1 = new Fraction(null, 1, 2);
 
         assertEquals(fraction1, improperFraction.add(fraction));
 
         improperFraction.setWholeNumber(1);
-        fraction1.setNumerator(15);
+        fraction1.setNumerator(3);
         assertEquals(fraction1, improperFraction.add(fraction));
 
         fraction1.setNumerator(9);
+        fraction1.setDenominator(10);
         assertEquals(fraction1, improperFraction.subtract(fraction));
 
         fraction.setNumerator(14);
         fraction1.setNumerator(-2);
+        fraction1.setSign("-");
         assertEquals(fraction1, improperFraction.subtract(fraction));
 
         fraction1.setNumerator(42);
         fraction1.setDenominator(25);
+        fraction1.setSign(null);
         assertEquals(fraction1, improperFraction.multiply(fraction));
 
         fraction1.setNumerator(6);
@@ -127,7 +132,7 @@ public class ImproperFractionTest {
         improperFraction1.setWholeNumber(2);
         improperFraction1.setNumerator(6);
         improperFraction1.setDenominator(10);
-        assertEquals(improperFraction, improperFraction1);
+        assertEquals(improperFraction, improperFraction1.simplify());
 
         assertEquals(2.6, improperFraction.convertToDecimal(), 0.01);
         assertEquals(3.0, improperFraction2.convertToDecimal(), 0.01);

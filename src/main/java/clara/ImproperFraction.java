@@ -16,9 +16,55 @@ public class ImproperFraction extends Fraction {
         this.wholeNumber = wholeNumber;
     }
 
-    @Override
-    public String toString() {
-        return "Improper Fraction: " + getSign() + " " + wholeNumber + " " + getNumerator() + "/" + getDenominator();
+    public ImproperFraction add(ImproperFraction other) {
+        Fraction fraction1 = this.convertToFraction();
+        Fraction fraction2 = other.convertToFraction();
+        Fraction fraction = fraction1.add(fraction2);
+        return fraction.simplifyToImproper();
+    }
+
+    public ImproperFraction subtract(ImproperFraction other) {
+        Fraction fraction1 = this.convertToFraction();
+        Fraction fraction2 = other.convertToFraction();
+        return fraction1.subtract(fraction2).simplifyToImproper();
+    }
+
+    public ImproperFraction multiply(ImproperFraction other) {
+        Fraction fraction1 = this.convertToFraction();
+        Fraction fraction2 = other.convertToFraction();
+        return fraction1.multiply(fraction2).simplifyToImproper();
+    }
+
+    public ImproperFraction divide(ImproperFraction other) {
+        Fraction fraction1 = this.convertToFraction();
+        Fraction fraction2 = other.convertToFraction();
+        return fraction1.divide(fraction2).simplifyToImproper();
+    }
+
+    public ImproperFraction simplify() {
+        for (int i = Math.abs(getNumerator()); i > 1; i --) {
+            if (getNumerator() % i == 0 && getDenominator() % i == 0) {
+                if (getNumerator() >= getDenominator()) {
+                    if (getNumerator() % getDenominator() == 0) {
+                        return new ImproperFraction(getSign(), wholeNumber + getNumerator() / getDenominator(), 0, getDenominator());
+                    }
+                    int newNumerator = getNumerator() / i;
+                    int newDenominator = getDenominator() / i;
+                    return new ImproperFraction(getSign(), wholeNumber + newNumerator / newDenominator, newNumerator - newDenominator, newDenominator);
+                }
+                return new ImproperFraction(getSign(), wholeNumber, getNumerator() / i, getDenominator() / i);
+            }
+        }
+        return this;
+    }
+
+    public float convertToDecimal() {
+        Fraction newFraction = this.convertToFraction();
+        return (float) newFraction.getNumerator() / newFraction.getDenominator();
+    }
+
+    public Fraction convertToFraction() {
+        return new Fraction(getSign(), wholeNumber * getDenominator() + getNumerator(), getDenominator());
     }
 
     @Override
@@ -99,54 +145,14 @@ public class ImproperFraction extends Fraction {
         return new Fraction(null, numerator1, denominator1);
     }
 
-    public ImproperFraction add(ImproperFraction other) {
-        Fraction fraction1 = this.convertToFraction();
-        Fraction fraction2 = other.convertToFraction();
-        Fraction fraction = fraction1.add(fraction2);
-        return fraction.simplifyToImproper();
-    }
-
-    public ImproperFraction subtract(ImproperFraction other) {
-        Fraction fraction1 = this.convertToFraction();
-        Fraction fraction2 = other.convertToFraction();
-        return fraction1.subtract(fraction2).simplifyToImproper();
-    }
-
-    public ImproperFraction multiply(ImproperFraction other) {
-        Fraction fraction1 = this.convertToFraction();
-        Fraction fraction2 = other.convertToFraction();
-        return fraction1.multiply(fraction2).simplifyToImproper();
-    }
-
-    public ImproperFraction divide(ImproperFraction other) {
-        Fraction fraction1 = this.convertToFraction();
-        Fraction fraction2 = other.convertToFraction();
-        return fraction1.divide(fraction2).simplifyToImproper();
-    }
-
-    public ImproperFraction simplify() {
-        for (int i = Math.abs(getNumerator()); i > 1; i --) {
-            if (getNumerator() % i == 0 && getDenominator() % i == 0) {
-                if (getNumerator() >= getDenominator()) {
-                    if (getNumerator() % getDenominator() == 0) {
-                        return new ImproperFraction(getSign(), wholeNumber + getNumerator() / getDenominator(), 0, getDenominator());
-                    }
-                    int newNumerator = getNumerator() / i;
-                    int newDenominator = getDenominator() / i;
-                    return new ImproperFraction(getSign(), wholeNumber + newNumerator / newDenominator, newNumerator - newDenominator, newDenominator);
-                }
-                return new ImproperFraction(getSign(), wholeNumber, getNumerator() / i, getDenominator() / i);
-            }
-        }
-        return this;
-    }
-
-    public float convertToDecimal() {
-        Fraction newFraction = this.convertToFraction();
-        return (float) newFraction.getNumerator() / newFraction.getDenominator();
-    }
-
-    public Fraction convertToFraction() {
-        return new Fraction(getSign(), wholeNumber * getDenominator() + getNumerator(), getDenominator());
+    @Override
+    public String toString() {
+        return "ImproperFraction{" +
+                "sign=" + getSign() +
+                " wholeNumber=" + wholeNumber +
+                " numerator=" + getNumerator() +
+                " denominator=" + getDenominator() +
+                '}';
     }
 }
+
