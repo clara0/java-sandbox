@@ -11,11 +11,11 @@ public class CoinFlipTest {
 
     @Test
     public void flipCoinOnce() {
-        String result = coinFlip.flipCoinOnce();
+        CoinFlip.Result result = coinFlip.flipCoinOnce();
         try {
-            assertEquals("heads", result);
+            assertEquals(CoinFlip.Result.HEADS, result);
         } catch (AssertionError e) {
-            assertEquals("tails", result);
+            assertEquals(CoinFlip.Result.TAILS, result);
         }
     }
 
