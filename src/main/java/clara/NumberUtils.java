@@ -2,6 +2,7 @@ package clara;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class NumberUtils {
 
@@ -183,5 +184,8 @@ public class NumberUtils {
         return reversedList;
     }
 
+    public static float findPercent(int part, int whole) {
+        return (float) part / whole * 100;
+    }
 
 }
