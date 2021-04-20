@@ -1,7 +1,5 @@
 package clara;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Random;
 
 public class CoinFlip {
@@ -19,7 +17,7 @@ public class CoinFlip {
         return Result.TAILS;
     }
 
-    public Map<String, Float> flipCoins(int amt) {
+    public CoinFlipData flipCoins(int amt) {
         int timesHeads = 0;
         int timesTails = 0;
         for (int i = 1; i < amt + 1; i ++) {
@@ -30,17 +28,7 @@ public class CoinFlip {
                 timesTails +=1;
             }
         }
-        final int finalTimesHeads = timesHeads;
-        final int finalTimesTails = timesTails;
-        return new HashMap<String, Float>() {
-            {
-                put("Total Times Flipped", (float) amt);
-                put("Heads", (float) finalTimesHeads);
-                put("Tails", (float) finalTimesTails);
-                put("Percent Heads", NumberUtils.findPercent(finalTimesHeads, amt));
-                put("Percent Tails", NumberUtils.findPercent(finalTimesTails, amt));
-            }
-        };
+        return new CoinFlipData(amt, timesHeads, timesTails, NumberUtils.findPercent(timesHeads, amt), NumberUtils.findPercent(timesTails, amt));
     }
 
 }

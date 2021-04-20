@@ -2,8 +2,6 @@ package clara;
 
 import org.junit.Test;
 
-import java.util.Map;
-
 import static org.junit.Assert.*;
 
 public class CoinFlipTest {
@@ -21,9 +19,7 @@ public class CoinFlipTest {
 
     @Test
     public void flipCoins() {
-        Map<String, Float> result = coinFlip.flipCoins(100);
-        assertEquals((float) 100.0, (Object) result.get("Total Times Flipped"));
-        Map<String, Float> result1 = coinFlip.flipCoins(5000);
-        assertEquals((float) 5000.0, (Object) result1.get("Total Times Flipped"));
+        assertEquals(100, coinFlip.flipCoins(100).getAmt());
+        assertEquals(5000, coinFlip.flipCoins(5000).getAmt());
     }
 }
