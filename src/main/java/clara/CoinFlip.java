@@ -17,7 +17,7 @@ public class CoinFlip {
         return Result.TAILS;
     }
 
-    public CoinFlipData flipCoins(int amt) {
+    public Stats flipCoins(int amt) {
         int timesHeads = 0;
         int timesTails = 0;
         for (int i = 1; i < amt + 1; i ++) {
@@ -28,7 +28,43 @@ public class CoinFlip {
                 timesTails +=1;
             }
         }
-        return new CoinFlipData(amt, timesHeads, timesTails, NumberUtils.findPercent(timesHeads, amt), NumberUtils.findPercent(timesTails, amt));
+        return new Stats(amt, timesHeads, timesTails, NumberUtils.findPercent(timesHeads, amt), NumberUtils.findPercent(timesTails, amt));
+    }
+
+    public static final class Stats {
+        private final int amt;
+        private final int timesHeads;
+        private final int timesTails;
+        private final float percentHeads;
+        private final float percentTails;
+
+        public Stats(int amt, int timesHeads, int timesTails, float percentHeads, float percentTails) {
+            this.amt = amt;
+            this.timesHeads = timesHeads;
+            this.timesTails = timesTails;
+            this.percentHeads = percentHeads;
+            this.percentTails = percentTails;
+        }
+
+        public int getAmt() {
+            return amt;
+        }
+
+        public int getTimesHeads() {
+            return timesHeads;
+        }
+
+        public int getTimesTails() {
+            return timesTails;
+        }
+
+        public float getPercentHeads() {
+            return percentHeads;
+        }
+
+        public float getPercentTails() {
+            return percentTails;
+        }
     }
 
 }
