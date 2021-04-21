@@ -3,6 +3,7 @@ package clara;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.Assert.*;
@@ -352,6 +353,19 @@ public class NumberUtilsTest {
         result.add(2);
         result.add(-1);
         assertEquals(result, numberUtils.reverseList(list1));
+    }
 
+    @Test
+    public void findTwinPrimes() {
+        List<Integer> twinPrime = new ArrayList<>(Arrays.asList(3, 5));
+        List<Integer> twinPrime1 = new ArrayList<>(Arrays.asList(5, 7));
+        List<List<Integer>> twinPrimes = new ArrayList<>(Arrays.asList(twinPrime, twinPrime1));
+        assertEquals(twinPrimes, numberUtils.findTwinPrimes(10));
+
+        List<Integer> twinPrime2 = new ArrayList<>(Arrays.asList(11, 13));
+        List<Integer> twinPrime3 = new ArrayList<>(Arrays.asList(17, 19));
+        twinPrimes.add(twinPrime2);
+        twinPrimes.add(twinPrime3);
+        assertEquals(twinPrimes, numberUtils.findTwinPrimes(20));
     }
 }

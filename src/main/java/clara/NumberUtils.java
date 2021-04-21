@@ -1,6 +1,7 @@
 package clara;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -186,6 +187,19 @@ public class NumberUtils {
 
     public static float findPercent(int part, int whole) {
         return (float) part / whole * 100;
+    }
+
+    public List<List<Integer>> findTwinPrimes(int maxNum){
+        List<List<Integer>> twinPrimes = new ArrayList<>();
+        for (int i = 1; i <= maxNum; i++) {
+            if (isPrime(i) && i != maxNum) {
+                int nextNum = i + 2;
+                if (isPrime(nextNum)) {
+                    twinPrimes.add(new ArrayList<>(Arrays.asList(i, nextNum)));
+                }
+            }
+        }
+        return twinPrimes;
     }
 
 }
