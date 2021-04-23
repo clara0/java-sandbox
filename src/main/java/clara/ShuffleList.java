@@ -9,9 +9,10 @@ public class ShuffleList {
     public List<Object> shuffleList(List<Object> sortedList) {
         Random random = new Random();
         List<Object> shuffledList = new ArrayList<>();
-        for (int ct = 0; ct < sortedList.size(); ct++) {
+        while (sortedList.size() != 0) {
             int randomIndex = random.nextInt(sortedList.size());
             Object item = sortedList.get(randomIndex);
+            sortedList.remove(randomIndex);
             shuffledList.add(item);
         }
         return shuffledList;
