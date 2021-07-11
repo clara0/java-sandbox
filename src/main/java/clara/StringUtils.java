@@ -3,7 +3,9 @@ package clara;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class StringUtils {
 
@@ -142,5 +144,17 @@ public class StringUtils {
             }
         }
         return brackets.size() == 0;
+    }
+
+    public List<String> getUsernames(List<EmailAddress> emails) {
+        return emails.stream().map(EmailAddress::getUsername).collect(Collectors.toList());
+    }
+
+    public List<String> sortUsernames(List<EmailAddress> emails) {
+        return emails.stream().map(EmailAddress::getUsername).sorted(Comparator.reverseOrder()).collect(Collectors.toList());
+    }
+
+    public List<String> filterUsernames(List<EmailAddress> emails) {
+        return emails.stream().map(EmailAddress::getDomain).filter(domain -> domain.startsWith("g")).collect(Collectors.toList());
     }
 }
