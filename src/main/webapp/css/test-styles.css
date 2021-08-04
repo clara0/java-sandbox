@@ -1,0 +1,7 @@
+table, th, td {padding: 15px; border: 1px solid black; border-collapse: collapse;}
+table {width: 600px; margin-right: auto; margin-left: auto;}
+th {background-color: lightblue;}
+tr:nth-child(odd) {background-color: azure;}
+
+a, h1, th, li, td, h1 {font-family: 'Pacifico', cursive;}
+a {font-size:  80px;}
