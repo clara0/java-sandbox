@@ -24,7 +24,7 @@ public class SystemPropertiesTest {
     @Test
     public void sortDescendingTest() {
         keysList.sort(Collections.reverseOrder());
-        for (Object k : keysList) {
+        for (String k : keysList) {
             System.out.println(k + ": " + properties.get(k));
         }
     }
@@ -35,8 +35,17 @@ public class SystemPropertiesTest {
     @Test
     public void sortKeyLengthTest() {
         keysList.sort(new CompareStrLengths());
-        for (Object k : keysList) {
+        for (String k : keysList) {
             System.out.println(k + ": " + properties.get(k));
+        }
+    }
+
+    @Test
+    public void filterContainsSunTest() {
+        for (String k : keysList) {
+            if (k.toLowerCase().contains("sun")) {
+                System.out.println(k + ": " + properties.get(k));
+            }
         }
     }
 
