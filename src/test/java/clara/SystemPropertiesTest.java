@@ -25,7 +25,7 @@ public class SystemPropertiesTest {
     public void sortDescendingTest() {
         keysList.sort(Collections.reverseOrder());
         for (String k : keysList) {
-            System.out.println(k + ": " + properties.get(k));
+            System.out.println(k + ": " + properties.getProperty(k));
         }
     }
 
@@ -34,9 +34,9 @@ public class SystemPropertiesTest {
      */
     @Test
     public void sortKeyLengthTest() {
-        keysList.sort(new CompareStrLengths());
+        keysList.sort(CompareStrLengths.INSTANCE);
         for (String k : keysList) {
-            System.out.println(k + ": " + properties.get(k));
+            System.out.println(k + ": " + properties.getProperty(k));
         }
     }
 
@@ -47,12 +47,20 @@ public class SystemPropertiesTest {
     public void filterContainsSunTest() {
         for (String k : keysList) {
             if (k.toLowerCase().contains("sun")) {
-                System.out.println(k + ": " + properties.get(k));
+                System.out.println(k + ": " + properties.getProperty(k));
             }
         }
     }
 
-    static class CompareStrLengths implements Comparator<String> {
+    public static final class CompareStrLengths implements Comparator<String> {
+        private static final CompareStrLengths INSTANCE = new CompareStrLengths();
+
+        private CompareStrLengths() {}
+
+        public static CompareStrLengths getInstance() {
+            return INSTANCE;
+        }
+
         public int compare(String o1, String o2) {
             return Integer.compare(o1.length(), o2.length());
         }
