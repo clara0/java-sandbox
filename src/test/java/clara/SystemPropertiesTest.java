@@ -40,6 +40,9 @@ public class SystemPropertiesTest {
         }
     }
 
+    /**
+     * Filters out system properties with keys not containing the string 'sun'; not case sensitive
+     */
     @Test
     public void filterContainsSunTest() {
         for (String k : keysList) {
