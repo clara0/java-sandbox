@@ -1,6 +1,7 @@
 package clara;
 
 import org.junit.Test;
+import static org.junit.Assert.*;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,13 +12,13 @@ public class PropertiesTest {
     private final Set<String> keys = properties.stringPropertyNames();
     private final List<String> keysList = new ArrayList<>(keys);
 
-    /***
+    /**
      * Sorts system properties by key in ascending alphabetical order.
      */
     @Test
     public void sortTest() {
         TreeMap<Object, Object> sysProps = new TreeMap<>(properties);
-        sysProps.forEach((k, v) -> System.out.println(k + ": " + v));
+        sysProps.forEach((k, v) -> System.out.printf("%s: %s", k, v));
     }
 
     /**
@@ -27,7 +28,7 @@ public class PropertiesTest {
     public void sortDescendingTest() {
         keysList.sort(Collections.reverseOrder());
         for (String k : keysList) {
-            System.out.println(k + ": " + properties.getProperty(k));
+            System.out.printf("%s: %s", k, properties.getProperty(k));
         }
     }
 
@@ -38,7 +39,7 @@ public class PropertiesTest {
     public void sortKeyLengthTest() {
         keysList.sort(CompareStrLengths.INSTANCE);
         for (String k : keysList) {
-            System.out.println(k + ": " + properties.getProperty(k));
+            System.out.printf("%s: %s", k, properties.getProperty(k));
         }
     }
 
@@ -49,19 +50,29 @@ public class PropertiesTest {
     public void filterContainsSunTest() {
         for (String k : keysList) {
             if (k.toLowerCase().contains("sun")) {
-                System.out.println(k + ": " + properties.getProperty(k));
+                System.out.printf("%s: %s", k, properties.getProperty(k));
             }
         }
     }
 
+    /**
+     * Tests properties from main/resources/user.properties
+     */
     @Test
     public void userPropertiesTest() throws IOException {
         Properties properties = new Properties();
-        InputStream reader = getClass().getClassLoader().getResourceAsStream("user.properties");
-        properties.load(reader);
+        InputStream stream = getClass().getClassLoader().getResourceAsStream("user.properties");
+        properties.load(stream);
+        assertEquals("user54", properties.getProperty("username"));
+        assertEquals("Jeff", properties.getProperty("firstName"));
+        assertEquals("Smith", properties.getProperty("lastName"));
+        assertEquals("English", properties.getProperty("language"));
         properties.forEach((k, v) -> System.out.printf("%s: %s%n", k, v));
     }
 
+    /**
+     * Immutable class comparing length of two strings
+     */
     public static final class CompareStrLengths implements Comparator<String> {
         private static final CompareStrLengths INSTANCE = new CompareStrLengths();
 
@@ -71,6 +82,9 @@ public class PropertiesTest {
             return INSTANCE;
         }
 
+        /**
+         * {@inheritDoc}
+         */
         public int compare(String o1, String o2) {
             return Integer.compare(o1.length(), o2.length());
         }
