@@ -2,9 +2,11 @@ package clara;
 
 import org.junit.Test;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.*;
 
-public class SystemPropertiesTest {
+public class PropertiesTest {
     private final Properties properties = System.getProperties();
     private final Set<String> keys = properties.stringPropertyNames();
     private final List<String> keysList = new ArrayList<>(keys);
@@ -50,6 +52,14 @@ public class SystemPropertiesTest {
                 System.out.println(k + ": " + properties.getProperty(k));
             }
         }
+    }
+
+    @Test
+    public void userPropertiesTest() throws IOException {
+        Properties properties = new Properties();
+        InputStream reader = getClass().getClassLoader().getResourceAsStream("user.properties");
+        properties.load(reader);
+        properties.forEach((k, v) -> System.out.printf("%s: %s%n", k, v));
     }
 
     public static final class CompareStrLengths implements Comparator<String> {
