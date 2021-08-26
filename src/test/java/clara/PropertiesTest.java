@@ -12,13 +12,24 @@ public class PropertiesTest {
     private final Set<String> keys = properties.stringPropertyNames();
     private final List<String> keysList = new ArrayList<>(keys);
 
+    public static void main(String[] args) {
+        String allCaps = System.getProperty("all_caps");
+        System.out.printf("all_caps: %s%n", allCaps);
+        System.out.printf("args: %s%n", Arrays.asList(args));
+        if (Boolean.parseBoolean(allCaps)) {
+            System.out.println("ALL CAPS ON");
+        } else {
+            System.out.println("all caps off");
+        }
+    }
+
     /**
      * Sorts system properties by key in ascending alphabetical order.
      */
     @Test
     public void sortTest() {
         TreeMap<Object, Object> sysProps = new TreeMap<>(properties);
-        sysProps.forEach((k, v) -> System.out.printf("%s: %s", k, v));
+        sysProps.forEach((k, v) -> System.out.printf("%s: %s%n", k, v));
     }
 
     /**
@@ -28,7 +39,7 @@ public class PropertiesTest {
     public void sortDescendingTest() {
         keysList.sort(Collections.reverseOrder());
         for (String k : keysList) {
-            System.out.printf("%s: %s", k, properties.getProperty(k));
+            System.out.printf("%s: %s%n", k, properties.getProperty(k));
         }
     }
 
@@ -60,6 +71,8 @@ public class PropertiesTest {
      */
     @Test
     public void userPropertiesTest() throws IOException {
+        String foo = System.getProperty("foo");
+        System.out.printf("foo = %s%n", foo);
         Properties properties = new Properties();
         InputStream stream = getClass().getClassLoader().getResourceAsStream("user.properties");
         properties.load(stream);
