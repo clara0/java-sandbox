@@ -1,11 +1,22 @@
 package clara;
 
 import org.junit.Test;
-import static org.junit.Assert.*;
 
-import java.io.IOException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.File;
 import java.io.InputStream;
-import java.util.*;
+import java.io.IOException;
+import java.util.Properties;
+import java.util.Set;
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.TreeMap;
+import java.util.Collections;
+import java.util.Comparator;
+
+import static org.junit.Assert.assertEquals;
 
 public class PropertiesTest {
     private final Properties properties = System.getProperties();
@@ -55,7 +66,7 @@ public class PropertiesTest {
     }
 
     /**
-     * Filters out system properties with keys not containing the string 'sun'; not case sensitive
+     * Filters out system properties with keys not containing the string {@code sun}; not case sensitive.
      */
     @Test
     public void filterContainsSunTest() {
@@ -67,12 +78,10 @@ public class PropertiesTest {
     }
 
     /**
-     * Tests properties from main/resources/user.properties
+     * Tests properties from {@code main/resources/user.properties}.
      */
     @Test
     public void userPropertiesTest() throws IOException {
-        String foo = System.getProperty("foo");
-        System.out.printf("foo = %s%n", foo);
         Properties properties = new Properties();
         InputStream stream = getClass().getClassLoader().getResourceAsStream("user.properties");
         properties.load(stream);
@@ -81,15 +90,58 @@ public class PropertiesTest {
         assertEquals("Smith", properties.getProperty("lastName"));
         assertEquals("English", properties.getProperty("language"));
         properties.forEach((k, v) -> System.out.printf("%s: %s%n", k, v));
+        if (stream != null) {
+            stream.close();
+        }
     }
 
     /**
-     * Immutable class comparing length of two strings
+     * Creates file {@code book.properties} in tmp dir and writes in properties, and then deletes file.
+     */
+    @Test
+    public void tmpdirPropertiesTest() throws IOException {
+        FileWriter writer = null;
+        File file = new File(System.getProperty("java.io.tmpdir"), "book.properties");
+        System.out.printf("New file created: %s%n", file.getName());
+        String newLine = System.getProperty("line.separator");
+
+        try {
+            writer = new FileWriter(file);
+            writer.write("title=The Namesake" + newLine + "author=Jhumpa Lahiri" + newLine + "pgs=340");
+        } finally {
+            if (writer != null) {
+                try {
+                    writer.close();
+                } catch (IOException e) {
+                    // ignore
+                }
+            }
+        }
+
+        FileReader fileReader = new FileReader(file);
+        Properties properties = new Properties();
+        properties.load(fileReader);
+
+        assertEquals("The Namesake", properties.getProperty("title"));
+        assertEquals("Jhumpa Lahiri", properties.getProperty("author"));
+        assertEquals("340", properties.getProperty("pgs"));
+
+        if (file.delete()) {
+            System.out.println("File successfully deleted");
+        } else {
+            System.out.println("File not deleted");
+        }
+        fileReader.close();
+    }
+
+    /**
+     * An immutable class comparing length of two strings
      */
     public static final class CompareStrLengths implements Comparator<String> {
         private static final CompareStrLengths INSTANCE = new CompareStrLengths();
 
-        private CompareStrLengths() {}
+        private CompareStrLengths() {
+        }
 
         public static CompareStrLengths getInstance() {
             return INSTANCE;
