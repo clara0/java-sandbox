@@ -2,11 +2,7 @@ package clara;
 
 import org.junit.Test;
 
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.File;
-import java.io.InputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.Properties;
 import java.util.Set;
 import java.util.List;
@@ -84,15 +80,23 @@ public class PropertiesTest {
     public void userPropertiesTest() throws IOException {
         Properties properties = new Properties();
         InputStream stream = getClass().getClassLoader().getResourceAsStream("user.properties");
-        properties.load(stream);
-        assertEquals("user54", properties.getProperty("username"));
-        assertEquals("Jeff", properties.getProperty("firstName"));
-        assertEquals("Smith", properties.getProperty("lastName"));
-        assertEquals("English", properties.getProperty("language"));
-        properties.forEach((k, v) -> System.out.printf("%s: %s%n", k, v));
-        if (stream != null) {
-            stream.close();
+
+        try {
+            properties.load(stream);
+            assertEquals("user54", properties.getProperty("username"));
+            assertEquals("Jeff", properties.getProperty("firstName"));
+            assertEquals("Smith", properties.getProperty("lastName"));
+            assertEquals("English", properties.getProperty("language"));
+        } finally {
+            if (stream != null) {
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    // ignore
+                }
+            }
         }
+        properties.forEach((k, v) -> System.out.printf("%s: %s%n", k, v));
     }
 
     /**
@@ -118,20 +122,75 @@ public class PropertiesTest {
             }
         }
 
-        FileReader fileReader = new FileReader(file);
+        FileReader fileReader = null;
         Properties properties = new Properties();
-        properties.load(fileReader);
 
-        assertEquals("The Namesake", properties.getProperty("title"));
-        assertEquals("Jhumpa Lahiri", properties.getProperty("author"));
-        assertEquals("340", properties.getProperty("pgs"));
+        try {
+            fileReader = new FileReader(file);
+            properties.load(fileReader);
+
+            assertEquals("The Namesake", properties.getProperty("title"));
+            assertEquals("Jhumpa Lahiri", properties.getProperty("author"));
+            assertEquals("340", properties.getProperty("pgs"));
+        } finally {
+            if (fileReader != null) {
+                try {
+                    fileReader.close();
+                } catch (IOException e) {
+                    // ignore
+                }
+            }
+        }
 
         if (file.delete()) {
             System.out.println("File successfully deleted");
         } else {
             System.out.println("File not deleted");
         }
-        fileReader.close();
+    }
+
+    /**
+     * Creates file {@code eastern_chipmunk.properties}, stores properties in it, then deletes the file.
+     */
+    @Test
+    public void storePropertiesTest() throws IOException {
+        OutputStream stream = null;
+        FileReader fileReader = null;
+        File file = new File(System.getProperty("java.io.tmpdir") + "eastern_chipmunk.properties");
+
+        Properties properties = new Properties();
+        properties.setProperty("scientific name", "Tamias striatus");
+        properties.setProperty("diet", "omnivore");
+        properties.setProperty("habitat", "woodlands");
+
+        try {
+            stream = new FileOutputStream(file);
+            properties.store(stream, null);
+            properties.clear();
+
+            fileReader = new FileReader(file);
+            properties.load(fileReader);
+
+            assertEquals("Tamias striatus", properties.getProperty("scientific name"));
+            assertEquals("omnivore", properties.getProperty("diet"));
+            assertEquals("woodlands", properties.getProperty("habitat"));
+        } finally {
+            if (stream != null) {
+                try {
+                    stream.close();
+                } catch (IOException e) {
+                    // ignore
+                }
+            }
+            if (fileReader != null) {
+                try {
+                    fileReader.close();
+                } catch (IOException e) {
+                    // ignore
+                }
+            }
+        }
+        file.delete();
     }
 
     /**
