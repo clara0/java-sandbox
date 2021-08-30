@@ -1,6 +1,7 @@
 package clara;
 
 import org.junit.Test;
+import util.NumberUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

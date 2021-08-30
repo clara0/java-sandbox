@@ -1,5 +1,7 @@
-package clara;
+package util;
 
+
+import clara.EmailAddress;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;

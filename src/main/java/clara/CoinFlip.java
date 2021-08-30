@@ -1,5 +1,7 @@
 package clara;
 
+import util.NumberUtils;
+
 import java.util.Random;
 
 public class CoinFlip {

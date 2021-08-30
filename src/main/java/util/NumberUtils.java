@@ -1,4 +1,4 @@
-package clara;
+package util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -173,7 +173,7 @@ public class NumberUtils {
             num = num / 10;
         }
         digits.add(num);
-        return digits;
+        return reverseList(digits);
     }
 
     public List<Integer> reverseList(List<Integer> list1){
