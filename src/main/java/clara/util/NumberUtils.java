@@ -1,13 +1,14 @@
-package util;
+package clara.util;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
-public class NumberUtils {
+public final class NumberUtils {
 
-    public boolean isEven(int num) {
+    private NumberUtils() {}
+
+    public static boolean isEven(int num) {
         return num % 2 == 0;
     }
 
@@ -24,7 +25,7 @@ public class NumberUtils {
         return true;
     }
 
-    public int sum(int[] nums) {
+    public static int sum(int[] nums) {
         if (nums.length == 0) {
             throw new IllegalArgumentException("Please enter an array with at least one element");
         }
@@ -35,7 +36,7 @@ public class NumberUtils {
         return numSum;
     }
 
-    public int min(int[] nums) {
+    public static int min(int[] nums) {
         if (nums.length == 0) {
             throw new IllegalArgumentException("Please enter an array with at least one element");
         }
@@ -48,7 +49,7 @@ public class NumberUtils {
         return currentMin;
     }
 
-    public int max(int[] nums) {
+    public static int max(int[] nums) {
         if (nums.length == 0) {
             throw new IllegalArgumentException("Please enter an array with at least one element");
         }
@@ -61,7 +62,7 @@ public class NumberUtils {
         return currentMax;
     }
 
-    public int recursiveSum(int[] nums) {
+    public static int recursiveSum(int[] nums) {
         if (nums.length == 0) {
             throw new IllegalArgumentException("Please enter an array with at least one element");
         }
@@ -76,7 +77,7 @@ public class NumberUtils {
 
     }
 
-    public int recursiveMin(int[] nums) {
+    public static int recursiveMin(int[] nums) {
         if (nums.length == 0) {
             throw new IllegalArgumentException("Please enter an array with at least one element");
         }
@@ -94,7 +95,7 @@ public class NumberUtils {
 
     }
 
-    public int recursiveMax(int[] nums) {
+    public static int recursiveMax(int[] nums) {
         if (nums.length == 0) {
             throw new IllegalArgumentException("Please enter an array with at least one element");
         }
@@ -112,7 +113,7 @@ public class NumberUtils {
 
     }
 
-    public int findFactorial(int num) {
+    public static int findFactorial(int num) {
 
         int currentProduct = 1;
         if (num < 0) {
@@ -125,7 +126,7 @@ public class NumberUtils {
         return currentProduct;
     }
 
-    public int recursiveFindFactorial(int num) {
+    public static int recursiveFindFactorial(int num) {
         if (num < 0) {
             throw new IllegalArgumentException("Please enter a non-negative number");
         }
@@ -137,7 +138,7 @@ public class NumberUtils {
         return num * recursiveFindFactorial(oneLess);
     }
 
-    public List<Integer> findFactors(int num) {
+    public static List<Integer> findFactors(int num) {
         if (num < 2) {
             throw new IllegalArgumentException("Please enter an integer greater than 1");
         }
@@ -150,7 +151,7 @@ public class NumberUtils {
         return factorlist;
     }
 
-    public List<Integer> listDigits(int num) {
+    public static List<Integer> listDigits(int num) {
         num = Math.abs(num);
         if (num < 10) {
             List<Integer> digit = new ArrayList<>();
@@ -164,7 +165,7 @@ public class NumberUtils {
         return digits;
     }
 
-    public List<Integer> listDigits1(int num) {
+    public static List<Integer> listDigits1(int num) {
         num = Math.abs(num);
         List<Integer> digits = new ArrayList<>();
         while (num >= 10) {
@@ -176,7 +177,7 @@ public class NumberUtils {
         return reverseList(digits);
     }
 
-    public List<Integer> reverseList(List<Integer> list1){
+    public static List<Integer> reverseList(List<Integer> list1){
         List<Integer> reversedList = new ArrayList<>();
         for (int i = list1.size() - 1; i >= 0; i--) {
             reversedList.add(list1.get(i));
@@ -189,7 +190,7 @@ public class NumberUtils {
         return (float) part / whole * 100;
     }
 
-    public List<List<Integer>> findTwinPrimes(int maxNum){
+    public static List<List<Integer>> findTwinPrimes(int maxNum){
         List<List<Integer>> twinPrimes = new ArrayList<>();
         for (int i = 1; i <= maxNum; i++) {
             if (isPrime(i) && i != maxNum) {

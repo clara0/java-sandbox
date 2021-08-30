@@ -1,7 +1,7 @@
 package clara;
 
 import org.junit.Test;
-import util.ResourceUtils;
+import clara.util.ResourceUtils;
 
 import java.io.*;
 import java.util.Properties;
@@ -19,7 +19,6 @@ public class PropertiesTest {
     private final Properties properties = System.getProperties();
     private final Set<String> keys = properties.stringPropertyNames();
     private final List<String> keysList = new ArrayList<>(keys);
-    private final ResourceUtils resourceUtils = new ResourceUtils();
 
     public static void main(String[] args) {
         String allCaps = System.getProperty("all_caps");
@@ -90,7 +89,7 @@ public class PropertiesTest {
             assertEquals("Smith", properties.getProperty("lastName"));
             assertEquals("English", properties.getProperty("language"));
         } finally {
-            resourceUtils.closeResource(stream);
+            ResourceUtils.closeResource(stream);
         }
         properties.forEach((k, v) -> System.out.printf("%s: %s%n", k, v));
     }
@@ -109,7 +108,7 @@ public class PropertiesTest {
             writer = new FileWriter(file);
             writer.write("title=The Namesake" + newLine + "author=Jhumpa Lahiri" + newLine + "pgs=340");
         } finally {
-            resourceUtils.closeResource(writer);
+            ResourceUtils.closeResource(writer);
         }
 
         FileReader fileReader = null;
@@ -123,7 +122,7 @@ public class PropertiesTest {
             assertEquals("Jhumpa Lahiri", properties.getProperty("author"));
             assertEquals("340", properties.getProperty("pgs"));
         } finally {
-            resourceUtils.closeResource(fileReader);
+            ResourceUtils.closeResource(fileReader);
         }
 
         if (file.delete()) {
@@ -159,8 +158,8 @@ public class PropertiesTest {
             assertEquals("omnivore", properties.getProperty("diet"));
             assertEquals("woodlands", properties.getProperty("habitat"));
         } finally {
-            resourceUtils.closeResource(stream);
-            resourceUtils.closeResource(fileReader);
+            ResourceUtils.closeResource(stream);
+            ResourceUtils.closeResource(fileReader);
         }
         file.delete();
     }

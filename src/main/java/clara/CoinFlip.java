@@ -1,6 +1,6 @@
 package clara;
 
-import util.NumberUtils;
+import clara.util.NumberUtils;
 
 import java.util.Random;
 

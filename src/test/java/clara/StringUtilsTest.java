@@ -1,7 +1,7 @@
 package clara;
 
 import org.junit.Test;
-import util.StringUtils;
+import clara.util.StringUtils;
 
 import static org.junit.Assert.*;
 
@@ -9,18 +9,17 @@ public class StringUtilsTest {
 
     @Test
     public void pigLatin() {
-        StringUtils stringUtils = new StringUtils();
-        assertEquals("ihay heretay", stringUtils.pigLatin("hi there"));
-        assertEquals("ihay heretay", stringUtils.pigLatin("Hi there"));
-        assertEquals("mmmhay", stringUtils.pigLatin("hmmm"));
-        assertEquals("", stringUtils.pigLatin(" "));
-        assertEquals("ihay here!tay", stringUtils.pigLatin("hi there!"));
-        assertEquals("ellohay", stringUtils.pigLatin("hello"));
-        assertEquals("ihay here3tay", stringUtils.pigLatin("hi there3"));
-        assertEquals("333ay", stringUtils.pigLatin("333"));
+        assertEquals("ihay heretay", StringUtils.pigLatin("hi there"));
+        assertEquals("ihay heretay", StringUtils.pigLatin("Hi there"));
+        assertEquals("mmmhay", StringUtils.pigLatin("hmmm"));
+        assertEquals("", StringUtils.pigLatin(" "));
+        assertEquals("ihay here!tay", StringUtils.pigLatin("hi there!"));
+        assertEquals("ellohay", StringUtils.pigLatin("hello"));
+        assertEquals("ihay here3tay", StringUtils.pigLatin("hi there3"));
+        assertEquals("333ay", StringUtils.pigLatin("333"));
 
         try {
-            stringUtils.pigLatin(null);
+            StringUtils.pigLatin(null);
             fail("Unexpected input" + null);
         } catch (IllegalArgumentException e) {
             // expected
@@ -29,16 +28,15 @@ public class StringUtilsTest {
 
     @Test
     public void reverseString() {
-        StringUtils stringUtils = new StringUtils();
-        assertEquals("ih", stringUtils.reverseString("hi"));
-        assertEquals(" ih", stringUtils.reverseString("hi "));
-        assertEquals("olleh", stringUtils.reverseString("hello"));
-        assertEquals("", stringUtils.reverseString(""));
-        assertEquals(" ", stringUtils.reverseString(" "));
-        assertEquals("dlrow olleh", stringUtils.reverseString("hello world"));
+        assertEquals("ih", StringUtils.reverseString("hi"));
+        assertEquals(" ih", StringUtils.reverseString("hi "));
+        assertEquals("olleh", StringUtils.reverseString("hello"));
+        assertEquals("", StringUtils.reverseString(""));
+        assertEquals(" ", StringUtils.reverseString(" "));
+        assertEquals("dlrow olleh", StringUtils.reverseString("hello world"));
 
         try {
-            stringUtils.reverseString(null);
+            StringUtils.reverseString(null);
             fail("Unexpected input" + null);
         } catch (IllegalArgumentException e) {
             // expected
@@ -48,16 +46,15 @@ public class StringUtilsTest {
 
     @Test
     public void switchCase() {
-        StringUtils stringUtils = new StringUtils();
-        assertEquals("Hi", stringUtils.switchCase("hI"));
-        assertEquals("hI THERE", stringUtils.switchCase("Hi there"));
-        assertEquals("oOf", stringUtils.switchCase("OoF"));
-        assertEquals("HI", stringUtils.switchCase("hi"));
-        assertEquals("", stringUtils.switchCase(""));
-        assertEquals(" ", stringUtils.switchCase(" "));
+        assertEquals("Hi", StringUtils.switchCase("hI"));
+        assertEquals("hI THERE", StringUtils.switchCase("Hi there"));
+        assertEquals("oOf", StringUtils.switchCase("OoF"));
+        assertEquals("HI", StringUtils.switchCase("hi"));
+        assertEquals("", StringUtils.switchCase(""));
+        assertEquals(" ", StringUtils.switchCase(" "));
 
         try {
-            stringUtils.switchCase(null);
+            StringUtils.switchCase(null);
             fail("Unexpected input" + null);
         } catch (IllegalArgumentException e) {
             // expected
@@ -66,23 +63,22 @@ public class StringUtilsTest {
 
     @Test
     public void isPalindrome() {
-        StringUtils stringUtils = new StringUtils();
-        assertTrue(stringUtils.isPalindrome("racecar"));
-        assertTrue(stringUtils.isPalindrome("abba"));
-        assertTrue(stringUtils.isPalindrome("aabaa"));
-        assertTrue(stringUtils.isPalindrome(""));
-        assertTrue(stringUtils.isPalindrome(" "));
-        assertTrue(stringUtils.isPalindrome("a"));
-        assertTrue(stringUtils.isPalindrome("aa"));
-        assertTrue(stringUtils.isPalindrome("1221"));
-        assertTrue(stringUtils.isPalindrome("989"));
-        assertFalse(stringUtils.isPalindrome("asdfasdf"));
-        assertFalse(stringUtils.isPalindrome("asdfsa"));
-        assertFalse(stringUtils.isPalindrome("gah"));
-        assertFalse(stringUtils.isPalindrome("123"));
+        assertTrue(StringUtils.isPalindrome("racecar"));
+        assertTrue(StringUtils.isPalindrome("abba"));
+        assertTrue(StringUtils.isPalindrome("aabaa"));
+        assertTrue(StringUtils.isPalindrome(""));
+        assertTrue(StringUtils.isPalindrome(" "));
+        assertTrue(StringUtils.isPalindrome("a"));
+        assertTrue(StringUtils.isPalindrome("aa"));
+        assertTrue(StringUtils.isPalindrome("1221"));
+        assertTrue(StringUtils.isPalindrome("989"));
+        assertFalse(StringUtils.isPalindrome("asdfasdf"));
+        assertFalse(StringUtils.isPalindrome("asdfsa"));
+        assertFalse(StringUtils.isPalindrome("gah"));
+        assertFalse(StringUtils.isPalindrome("123"));
 
         try {
-            stringUtils.switchCase(null);
+            StringUtils.switchCase(null);
             fail("Unexpected input" + null);
         } catch (IllegalArgumentException e) {
             // expected
@@ -91,24 +87,23 @@ public class StringUtilsTest {
 
     @Test
     public void validBrackets() {
-        StringUtils stringUtils = new StringUtils();
-        assertTrue(stringUtils.validBrackets("{}"));
-        assertTrue(stringUtils.validBrackets(""));
-        assertTrue(stringUtils.validBrackets(" "));
-        assertTrue(stringUtils.validBrackets("{1[2 + 2]}"));
-        assertTrue(stringUtils.validBrackets("{12 + 24}"));
-        assertTrue(stringUtils.validBrackets("{12 + gh}"));
-        assertTrue(stringUtils.validBrackets("(21<12>21)"));
-        assertTrue(stringUtils.validBrackets("(21<as>21)"));
-        assertTrue(stringUtils.validBrackets("(21<>1 + 21)"));
-        assertFalse(stringUtils.validBrackets("(21>1 + 21"));
-        assertFalse(stringUtils.validBrackets("(21>1 + 2)1"));
-        assertFalse(stringUtils.validBrackets("(21>1 + 2>1"));
-        assertFalse(stringUtils.validBrackets("("));
-        assertFalse(stringUtils.validBrackets("(a"));
+        assertTrue(StringUtils.validBrackets("{}"));
+        assertTrue(StringUtils.validBrackets(""));
+        assertTrue(StringUtils.validBrackets(" "));
+        assertTrue(StringUtils.validBrackets("{1[2 + 2]}"));
+        assertTrue(StringUtils.validBrackets("{12 + 24}"));
+        assertTrue(StringUtils.validBrackets("{12 + gh}"));
+        assertTrue(StringUtils.validBrackets("(21<12>21)"));
+        assertTrue(StringUtils.validBrackets("(21<as>21)"));
+        assertTrue(StringUtils.validBrackets("(21<>1 + 21)"));
+        assertFalse(StringUtils.validBrackets("(21>1 + 21"));
+        assertFalse(StringUtils.validBrackets("(21>1 + 2)1"));
+        assertFalse(StringUtils.validBrackets("(21>1 + 2>1"));
+        assertFalse(StringUtils.validBrackets("("));
+        assertFalse(StringUtils.validBrackets("(a"));
 
         try {
-            stringUtils.switchCase(null);
+            StringUtils.switchCase(null);
             fail("Unexpected input" + null);
         } catch (IllegalArgumentException e) {
             // expected
@@ -117,24 +112,23 @@ public class StringUtilsTest {
 
     @Test
     public void validBrackets1() {
-        StringUtils stringUtils = new StringUtils();
-        assertTrue(stringUtils.validBrackets1("{}"));
-        assertTrue(stringUtils.validBrackets1(""));
-        assertTrue(stringUtils.validBrackets1(" "));
-        assertTrue(stringUtils.validBrackets1("{1[2 + 2]}"));
-        assertTrue(stringUtils.validBrackets1("{12 + 24}"));
-        assertTrue(stringUtils.validBrackets1("{12 + gh}"));
-        assertTrue(stringUtils.validBrackets1("(21<12>21)"));
-        assertTrue(stringUtils.validBrackets1("(21<as>21)"));
-        assertTrue(stringUtils.validBrackets1("(21<>1 + 21)"));
-        assertFalse(stringUtils.validBrackets1("(21>1 + 21"));
-        assertFalse(stringUtils.validBrackets1("(21>1 + 2)1"));
-        assertFalse(stringUtils.validBrackets1("(21>1 + 2>1"));
-        assertFalse(stringUtils.validBrackets1("("));
-        assertFalse(stringUtils.validBrackets1("(a"));
+        assertTrue(StringUtils.validBrackets1("{}"));
+        assertTrue(StringUtils.validBrackets1(""));
+        assertTrue(StringUtils.validBrackets1(" "));
+        assertTrue(StringUtils.validBrackets1("{1[2 + 2]}"));
+        assertTrue(StringUtils.validBrackets1("{12 + 24}"));
+        assertTrue(StringUtils.validBrackets1("{12 + gh}"));
+        assertTrue(StringUtils.validBrackets1("(21<12>21)"));
+        assertTrue(StringUtils.validBrackets1("(21<as>21)"));
+        assertTrue(StringUtils.validBrackets1("(21<>1 + 21)"));
+        assertFalse(StringUtils.validBrackets1("(21>1 + 21"));
+        assertFalse(StringUtils.validBrackets1("(21>1 + 2)1"));
+        assertFalse(StringUtils.validBrackets1("(21>1 + 2>1"));
+        assertFalse(StringUtils.validBrackets1("("));
+        assertFalse(StringUtils.validBrackets1("(a"));
 
         try {
-            stringUtils.switchCase(null);
+            StringUtils.switchCase(null);
             fail("Unexpected input" + null);
         } catch (IllegalArgumentException e) {
             // expected

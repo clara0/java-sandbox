@@ -1,17 +1,16 @@
-package util;
-
+package clara.util;
 
 import clara.EmailAddress;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class StringUtils {
+public final class StringUtils {
+    private StringUtils() {}
 
-    public String pigLatin(String sentence) {
+    public static String pigLatin(String sentence) {
         if (sentence == null) {
             throw new IllegalArgumentException("Invalid input: " + sentence);
         }
@@ -27,7 +26,7 @@ public class StringUtils {
         return String.join(" ", words);
     }
 
-    public String reverseString(String str) {
+    public static String reverseString(String str) {
         if (str == null) {
             throw new IllegalArgumentException("Invalid input: " + str);
         }
@@ -39,7 +38,7 @@ public class StringUtils {
         return new String(reversed);
     }
 
-    public String switchCase(String str) {
+    public static String switchCase(String str) {
         if (str == null) {
             throw new IllegalArgumentException("Invalid input: " + str);
         }
@@ -57,7 +56,7 @@ public class StringUtils {
         return new String(chars);
     }
 
-    public boolean isPalindrome(String str) {
+    public static boolean isPalindrome(String str) {
         if (str == null) {
             throw new IllegalArgumentException("Invalid input: " + str);
         }
@@ -71,7 +70,7 @@ public class StringUtils {
         return true;
     }
 
-    public boolean validBrackets(String str) {
+    public static boolean validBrackets(String str) {
         if (str == null) {
             throw new IllegalArgumentException("Invalid input: " + str);
         }
@@ -109,7 +108,7 @@ public class StringUtils {
         return brackets.size() == 0;
     }
 
-    public boolean validBrackets1(String str) {
+    public static boolean validBrackets1(String str) {
         if (str == null) {
             throw new IllegalArgumentException("Invalid input: " + str);
         }
@@ -148,15 +147,15 @@ public class StringUtils {
         return brackets.size() == 0;
     }
 
-    public List<String> getUsernames(List<EmailAddress> emails) {
+    public static List<String> getUsernames(List<EmailAddress> emails) {
         return emails.stream().map(EmailAddress::getUsername).collect(Collectors.toList());
     }
 
-    public List<String> sortUsernames(List<EmailAddress> emails) {
+    public static List<String> sortUsernames(List<EmailAddress> emails) {
         return emails.stream().map(EmailAddress::getUsername).sorted(Comparator.reverseOrder()).collect(Collectors.toList());
     }
 
-    public List<String> filterUsernames(List<EmailAddress> emails) {
+    public static List<String> filterUsernames(List<EmailAddress> emails) {
         return emails.stream().map(EmailAddress::getDomain).filter(domain -> domain.startsWith("g")).collect(Collectors.toList());
     }
 }
