@@ -1,6 +1,7 @@
 package clara;
 
 import org.junit.Test;
+import util.ResourceUtils;
 
 import java.io.*;
 import java.util.Properties;
@@ -18,6 +19,7 @@ public class PropertiesTest {
     private final Properties properties = System.getProperties();
     private final Set<String> keys = properties.stringPropertyNames();
     private final List<String> keysList = new ArrayList<>(keys);
+    private final ResourceUtils resourceUtils = new ResourceUtils();
 
     public static void main(String[] args) {
         String allCaps = System.getProperty("all_caps");
@@ -88,13 +90,7 @@ public class PropertiesTest {
             assertEquals("Smith", properties.getProperty("lastName"));
             assertEquals("English", properties.getProperty("language"));
         } finally {
-            if (stream != null) {
-                try {
-                    stream.close();
-                } catch (IOException e) {
-                    // ignore
-                }
-            }
+            resourceUtils.closeResource(stream);
         }
         properties.forEach((k, v) -> System.out.printf("%s: %s%n", k, v));
     }
@@ -113,13 +109,7 @@ public class PropertiesTest {
             writer = new FileWriter(file);
             writer.write("title=The Namesake" + newLine + "author=Jhumpa Lahiri" + newLine + "pgs=340");
         } finally {
-            if (writer != null) {
-                try {
-                    writer.close();
-                } catch (IOException e) {
-                    // ignore
-                }
-            }
+            resourceUtils.closeResource(writer);
         }
 
         FileReader fileReader = null;
@@ -133,13 +123,7 @@ public class PropertiesTest {
             assertEquals("Jhumpa Lahiri", properties.getProperty("author"));
             assertEquals("340", properties.getProperty("pgs"));
         } finally {
-            if (fileReader != null) {
-                try {
-                    fileReader.close();
-                } catch (IOException e) {
-                    // ignore
-                }
-            }
+            resourceUtils.closeResource(fileReader);
         }
 
         if (file.delete()) {
@@ -175,20 +159,8 @@ public class PropertiesTest {
             assertEquals("omnivore", properties.getProperty("diet"));
             assertEquals("woodlands", properties.getProperty("habitat"));
         } finally {
-            if (stream != null) {
-                try {
-                    stream.close();
-                } catch (IOException e) {
-                    // ignore
-                }
-            }
-            if (fileReader != null) {
-                try {
-                    fileReader.close();
-                } catch (IOException e) {
-                    // ignore
-                }
-            }
+            resourceUtils.closeResource(stream);
+            resourceUtils.closeResource(fileReader);
         }
         file.delete();
     }
