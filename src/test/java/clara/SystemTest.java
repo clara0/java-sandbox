@@ -4,18 +4,11 @@ import org.junit.Test;
 import clara.util.ResourceUtils;
 
 import java.io.*;
-import java.util.Properties;
-import java.util.Set;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.TreeMap;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 
 import static org.junit.Assert.assertEquals;
 
-public class PropertiesTest {
+public class SystemTest {
     private final Properties properties = System.getProperties();
     private final Set<String> keys = properties.stringPropertyNames();
     private final List<String> keysList = new ArrayList<>(keys);
@@ -24,7 +17,7 @@ public class PropertiesTest {
         String allCaps = System.getProperty("all_caps");
         System.out.printf("all_caps: %s%n", allCaps);
         System.out.printf("args: %s%n", Arrays.asList(args));
-        if (Boolean.parseBoolean(allCaps)) {
+        if (Boolean.parseBoolean(allCaps) || Objects.equals(allCaps, "")) {
             System.out.println("ALL CAPS ON");
         } else {
             System.out.println("all caps off");
@@ -162,6 +155,23 @@ public class PropertiesTest {
             ResourceUtils.closeResource(fileReader);
         }
         file.delete();
+    }
+
+    /**
+     * Gets environment variables and prints them out.
+     */
+    @Test
+    public void getenvTest() {
+        int count = 0;
+        for (String k : System.getenv().keySet()) {
+            System.out.printf("%s: %s%n", k, System.getenv(k));
+            if (++count == 5) {
+                break;
+            }
+        }
+        System.out.printf("SHELL: %s%n", System.getenv("SHELL"));
+        System.out.printf("TEST: %s%n", System.getenv("TEST"));
+        System.out.printf("NONEXISTENT: %s%n", System.getenv("NONEXISTENT"));
     }
 
     /**
