@@ -5,6 +5,7 @@ import org.junit.Test;
 /**
  * Tests different ways of getting {@code Boolean} values
  */
+@SuppressWarnings({"deprecation", "UnnecessaryBoxing", "BooleanConstructorCall" })
 public class BooleanTest {
 
     /**
@@ -33,6 +34,7 @@ public class BooleanTest {
      * and creating a new instance of {@code Boolean} class
      */
     @Test
+    @SuppressWarnings("all")
     public void strToBooleanTest() {
         Boolean b = Boolean.valueOf("true");
         boolean b1 = Boolean.parseBoolean("true");

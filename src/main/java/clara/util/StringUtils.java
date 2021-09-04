@@ -10,6 +10,7 @@ import java.util.stream.Collectors;
 public final class StringUtils {
     private StringUtils() {}
 
+    @SuppressWarnings("all")
     public static String pigLatin(String sentence) {
         if (sentence == null) {
             throw new IllegalArgumentException("Invalid input: " + sentence);

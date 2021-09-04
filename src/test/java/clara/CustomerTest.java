@@ -62,6 +62,7 @@ public class CustomerTest {
     }
 
     @Test
+    @SuppressWarnings("all")
     public void equalsTest() {
         Customer customer = new Customer();
         Customer customer1 = new Customer();

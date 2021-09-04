@@ -129,6 +129,7 @@ public class SystemTest {
      * Creates file {@code eastern_chipmunk.properties}, stores properties in it, then deletes the file.
      */
     @Test
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public void storePropertiesTest() throws IOException {
         OutputStream stream = null;
         FileReader fileReader = null;

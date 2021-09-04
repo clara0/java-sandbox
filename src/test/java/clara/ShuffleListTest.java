@@ -36,6 +36,7 @@ public class ShuffleListTest {
     }
 
     @Test
+    @SuppressWarnings("deprecation")
     public void shuffleArray() {
         Object[] objectArray = new Object[]{1, 2, 3, 4, 5};
         assertNotEquals(objectArray, shuffleList.shuffleArray(objectArray));

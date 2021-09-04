@@ -105,6 +105,7 @@ public class PersonTest {
     }
 
     @Test
+    @SuppressWarnings("all")
     public void equalsTest() {
         Person person = new Person();
         Person person1 = new Person();

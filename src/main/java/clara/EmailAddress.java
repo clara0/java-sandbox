@@ -24,10 +24,12 @@ public class EmailAddress {
         return false;
     }
 
+    @SuppressWarnings("all")
     private boolean verifyUsername(String username) {
         return !username.contains(" ") && !username.contains("@");
     }
 
+    @SuppressWarnings("all")
     private boolean verifyDomain(String domain) {
         return domain.contains(".") && !domain.contains(" ") && !domain.contains("@") && !domain.endsWith(".");
     }
