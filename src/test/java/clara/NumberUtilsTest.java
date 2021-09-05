@@ -366,4 +366,51 @@ public class NumberUtilsTest {
         twinPrimes.add(twinPrime3);
         assertEquals(twinPrimes, NumberUtils.findTwinPrimes(20));
     }
+
+    /**
+     * Tests {@code NumberUtils.countDaysInMonth(int year, int month)}.
+     *
+     * @see NumberUtils#countDaysInMonth(int year, int month)
+     */
+    @Test
+    public void countDaysInMonthTest() {
+        assertEquals(31, NumberUtils.countDaysInMonth(2020, 1));
+        assertEquals(31, NumberUtils.countDaysInMonth(2421, 1));
+        assertEquals(30, NumberUtils.countDaysInMonth(1900, 4));
+        assertEquals(31, NumberUtils.countDaysInMonth(3000, 8));
+        assertEquals(31, NumberUtils.countDaysInMonth(1900, 12));
+        assertEquals(28, NumberUtils.countDaysInMonth(2421, 2));
+        assertEquals(28, NumberUtils.countDaysInMonth(1, 2));
+        assertEquals(29, NumberUtils.countDaysInMonth(2400, 2));
+        assertEquals(28, NumberUtils.countDaysInMonth(1900, 2));
+        assertEquals(29, NumberUtils.countDaysInMonth(0, 2));
+
+        try {
+            NumberUtils.countDaysInMonth(-1, 12);
+            fail("Unexpected");
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
+
+        try {
+            NumberUtils.countDaysInMonth(1, 0);
+            fail("Unexpected");
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
+
+        try {
+            NumberUtils.countDaysInMonth(1, -1);
+            fail("Unexpected");
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
+
+        try {
+            NumberUtils.countDaysInMonth(-11, 0);
+            fail("Unexpected");
+        } catch (IllegalArgumentException e) {
+            // expected
+        }
+    }
 }

@@ -203,4 +203,45 @@ public final class NumberUtils {
         return twinPrimes;
     }
 
+    /**
+     * Finds the number of days in a certain month of a certain year.
+     *
+     * @param year  any year
+     * @param month  any month
+     * @return number of days in the month of the year
+     */
+
+    public static int countDaysInMonth(int year, int month) {
+        if (month > 12 || month < 1) {
+            throw new IllegalArgumentException("input: " + month + "int between 1 and 12 expected");
+        }
+        if (year < 0) {
+            throw new IllegalArgumentException("input: " + year + "non-negative int expected");
+        }
+        int days;
+        switch (month) {
+            case 4, 6, 9, 11:
+                days = 30;
+                break;
+            case 2:
+                if (year % 100 == 0) {
+                    if (year % 400 == 0) {
+                        days = 29;
+                    } else {
+                        days = 28;
+                    }
+                } else if (year % 4 == 0) {
+                    days = 29;
+                } else {
+                    days = 28;
+                }
+                break;
+            default:
+                days = 31;
+                break;
+        }
+
+        return days;
+    }
+
 }
