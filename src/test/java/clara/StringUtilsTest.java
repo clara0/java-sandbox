@@ -5,6 +5,7 @@ import clara.util.StringUtils;
 
 import static org.junit.Assert.*;
 
+@SuppressWarnings("all")
 public class StringUtilsTest {
 
     @Test

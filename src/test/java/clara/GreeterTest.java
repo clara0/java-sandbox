@@ -65,6 +65,7 @@ public class GreeterTest {
     }
 
     @Test
+    @SuppressWarnings("all")
     public void findUsages() {
         Map<Character, Integer> charCount = new HashMap<>();
         charCount.put('a', 1);
@@ -128,6 +129,7 @@ public class GreeterTest {
     }
 
     @Test
+    @SuppressWarnings("all")
     public void findCommon() {
         Set<Character> commonChars = new HashSet<>();
         commonChars.add('a');
