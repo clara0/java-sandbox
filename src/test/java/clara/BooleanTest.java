@@ -13,7 +13,7 @@ public class BooleanTest {
      * Compares getting {@code Boolean} values by using {@code Boolean.TRUE}/{@code Boolean.FALSE}
      * and creating a new instance of {@code Boolean} class
      */
-    @Ignore
+    @Ignore("too much output")
     @Test
     public void booleanTest() {
         Boolean b = Boolean.TRUE;
@@ -35,7 +35,7 @@ public class BooleanTest {
      * Compares using {@code Boolean.valueOf()}, {@code Boolean.parseBoolean()},
      * and creating a new instance of {@code Boolean} class
      */
-    @Ignore
+    @Ignore("too much output")
     @Test
     @SuppressWarnings("all")
     public void strToBooleanTest() {

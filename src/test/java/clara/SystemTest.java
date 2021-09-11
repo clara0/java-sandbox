@@ -28,7 +28,7 @@ public class SystemTest {
     /**
      * Sorts system properties by key in ascending alphabetical order.
      */
-    @Ignore
+    @Ignore("too much output")
     @Test
     public void sortTest() {
         TreeMap<Object, Object> sysProps = new TreeMap<>(properties);
@@ -38,7 +38,7 @@ public class SystemTest {
     /**
      * Sorts system properties by key in descending alphabetical order.
      */
-    @Ignore
+    @Ignore("too much output")
     @Test
     public void sortDescendingTest() {
         keysList.sort(Collections.reverseOrder());

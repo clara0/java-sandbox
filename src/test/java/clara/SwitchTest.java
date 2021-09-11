@@ -25,7 +25,7 @@ public class SwitchTest {
      *     <li>A
      * </ol>
      */
-    @Ignore
+    @Ignore("too much output")
     @Test
     public void findGrade() {
         Random random = new Random();
@@ -62,7 +62,7 @@ public class SwitchTest {
      *
      * @see SwitchTest#findGrade()
      */
-    @Ignore
+    @Ignore("too much output")
     @Test
     public void findGradeMap() {
         Random random = new Random();
