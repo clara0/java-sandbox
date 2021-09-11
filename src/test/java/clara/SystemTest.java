@@ -1,5 +1,6 @@
 package clara;
 
+import org.junit.Ignore;
 import org.junit.Test;
 import clara.util.ResourceUtils;
 
@@ -27,6 +28,7 @@ public class SystemTest {
     /**
      * Sorts system properties by key in ascending alphabetical order.
      */
+    @Ignore
     @Test
     public void sortTest() {
         TreeMap<Object, Object> sysProps = new TreeMap<>(properties);
@@ -36,6 +38,7 @@ public class SystemTest {
     /**
      * Sorts system properties by key in descending alphabetical order.
      */
+    @Ignore
     @Test
     public void sortDescendingTest() {
         keysList.sort(Collections.reverseOrder());
