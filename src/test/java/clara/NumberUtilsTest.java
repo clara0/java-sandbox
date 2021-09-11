@@ -178,27 +178,21 @@ public class NumberUtilsTest {
         assertEquals(list2, NumberUtils.findFactors(30));
         List<Integer> list3 = new ArrayList<>();
         assertEquals(list3, NumberUtils.findFactors(17));
+    }
 
-        try {
-            NumberUtils.findFactors(0);
-            fail("Please enter a positive, non-one number");
-        } catch (IllegalArgumentException e) {
-            //expected
-        }
-        try {
-            NumberUtils.findFactors(-123);
-            fail("Please enter a positive, non-one number");
-        } catch (IllegalArgumentException e) {
-            //expected
-        }
+    @Test(expected = IllegalArgumentException.class)
+    public void findFactors2() {
+        NumberUtils.findFactors(0);
+    }
 
-        try {
-            NumberUtils.findFactors(1);
-            fail("Please enter a positive, non-one number");
-        } catch (IllegalArgumentException e) {
-            //expected
-        }
+    @Test(expected = IllegalArgumentException.class)
+    public void findFactors3() {
+        NumberUtils.findFactors(-123);
+    }
 
+    @Test(expected = IllegalArgumentException.class)
+    public void findFactors4() {
+        NumberUtils.findFactors(1);
     }
 
     @Test
@@ -384,33 +378,45 @@ public class NumberUtilsTest {
         assertEquals(29, NumberUtils.countDaysInMonth(2400, 2));
         assertEquals(28, NumberUtils.countDaysInMonth(1900, 2));
         assertEquals(29, NumberUtils.countDaysInMonth(0, 2));
+    }
 
-        try {
-            NumberUtils.countDaysInMonth(-1, 12);
-            fail("Unexpected");
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
+    /**
+     * Tests exception for {@code year} parameter in {@code NumberUtils.countDaysInMonth(int year, int month)}.
+     *
+     * @see NumberUtils#countDaysInMonth(int year, int month)
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void countDaysInMonth2Test() {
+        NumberUtils.countDaysInMonth(-1, 12);
+    }
 
-        try {
-            NumberUtils.countDaysInMonth(1, 0);
-            fail("Unexpected");
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
+    /**
+     * Tests exception for {@code month} parameter in {@code NumberUtils.countDaysInMonth(int year, int month)}.
+     *
+     * @see NumberUtils#countDaysInMonth(int year, int month)
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void countDaysInMonth3Test() {
+        NumberUtils.countDaysInMonth(1, 0);
+    }
 
-        try {
-            NumberUtils.countDaysInMonth(1, -1);
-            fail("Unexpected");
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
+    /**
+     * Tests exception for {@code month} parameter in {@code NumberUtils.countDaysInMonth(int year, int month)}.
+     *
+     * @see NumberUtils#countDaysInMonth(int year, int month)
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void countDaysInMonth4Test() {
+        NumberUtils.countDaysInMonth(1, -1);
+    }
 
-        try {
-            NumberUtils.countDaysInMonth(-11, 0);
-            fail("Unexpected");
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
+    /**
+     * Tests exception for {@code year} and {@code month} parameter in {@code NumberUtils.countDaysInMonth(int year, int month)}.
+     *
+     * @see NumberUtils#countDaysInMonth(int year, int month)
+     */
+    @Test(expected = IllegalArgumentException.class)
+    public void countDaysInMonth5Test() {
+        NumberUtils.countDaysInMonth(-11, 0);
     }
 }
