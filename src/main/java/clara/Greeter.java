@@ -1,7 +1,5 @@
 package clara;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.util.*;
 
 public class Greeter {
@@ -45,7 +43,11 @@ public class Greeter {
         return longest;
     }
 
-    public Map<Character, Integer> findUsages(@NotNull String str) {
+    public Map<Character, Integer> findUsages(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("invalid input: " + str);
+        }
+
         Map<Character, Integer> charCount = new HashMap<>();
         char[] chars = str.toLowerCase().toCharArray();
         for (char c: chars) {
@@ -59,7 +61,10 @@ public class Greeter {
         return charCount;
     }
 
-    public Set<Character> findCommon(@NotNull String str1, @NotNull String str2, boolean ignoreCase) {
+    public Set<Character> findCommon(String str1, String str2, boolean ignoreCase) {
+        if (str1 == null || str2 == null) {
+            throw new IllegalArgumentException("invalid input: " + str1 + ", " + str2);
+        }
         Set<Character> commonChars = new HashSet<>();
         if (ignoreCase) {
             char[] chars1 = str1.toLowerCase().toCharArray();

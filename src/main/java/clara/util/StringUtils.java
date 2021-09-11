@@ -1,7 +1,6 @@
 package clara.util;
 
 import clara.EmailAddress;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -12,7 +11,11 @@ public final class StringUtils {
     private StringUtils() {}
 
     @SuppressWarnings("all")
-    public static String pigLatin(@NotNull String sentence) {
+    public static String pigLatin(String sentence) {
+        if (sentence == null) {
+            throw new IllegalArgumentException("Invalid input: " + sentence);
+        }
+
         String[] words = sentence.toLowerCase().split(" ");
 
         for (int i = 0; i < words.length; i++) {
@@ -24,7 +27,10 @@ public final class StringUtils {
         return String.join(" ", words);
     }
 
-    public static String reverseString(@NotNull String str) {
+    public static String reverseString(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("Invalid input: " + str);
+        }
         char[] chars = str.toCharArray();
         char[] reversed = new char[chars.length];
         for (int i = chars.length - 1, j = 0; i >= 0; i--) {
@@ -33,7 +39,10 @@ public final class StringUtils {
         return new String(reversed);
     }
 
-    public static String switchCase(@NotNull String str) {
+    public static String switchCase(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("Invalid input: " + str);
+        }
         char[] chars = str.toCharArray();
 
         for (int i = 0; i < chars.length; i++) {
@@ -48,7 +57,10 @@ public final class StringUtils {
         return new String(chars);
     }
 
-    public static boolean isPalindrome(@NotNull String str) {
+    public static boolean isPalindrome(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("Invalid input: " + str);
+        }
         char[] chars = str.toCharArray();
         for (int i = 0, j = chars.length - 1; i < chars.length; i++) {
             if (chars[j--] != chars[i]) {
@@ -59,7 +71,10 @@ public final class StringUtils {
         return true;
     }
 
-    public static boolean validBrackets(@NotNull String str) {
+    public static boolean validBrackets(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("Invalid input: " + str);
+        }
         List<Character> firstBrackets = new ArrayList<Character>() {{
             add('{');
             add('[');
@@ -94,7 +109,10 @@ public final class StringUtils {
         return brackets.size() == 0;
     }
 
-    public static boolean validBrackets1(@NotNull String str) {
+    public static boolean validBrackets1(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("Invalid input: " + str);
+        }
         char[] chars = str.toCharArray();
         List<Character> brackets = new ArrayList<>();
 
