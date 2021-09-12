@@ -1,5 +1,7 @@
 package clara.util;
 
+import clara.InvalidDateException;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -209,14 +211,16 @@ public final class NumberUtils {
      * @param year  any year
      * @param month  any month
      * @return number of days in the month of the year
+     * @throws InvalidDateException if {@code year} is negative or {@code month}
+     * is smaller than one or larger than 12.
      */
 
-    public static int countDaysInMonth(int year, int month) {
+    public static int countDaysInMonth(int year, int month) throws InvalidDateException {
         if (month > 12 || month < 1) {
-            throw new IllegalArgumentException("input: " + month + "int between 1 and 12 expected");
+            throw new InvalidDateException();
         }
         if (year < 0) {
-            throw new IllegalArgumentException("input: " + year + "non-negative int expected");
+            throw new InvalidDateException("input: " + year + " non-negative int expected");
         }
         int days;
         switch (month) {

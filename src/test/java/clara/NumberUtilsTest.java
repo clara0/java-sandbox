@@ -364,10 +364,12 @@ public class NumberUtilsTest {
     /**
      * Tests {@code NumberUtils.countDaysInMonth(int year, int month)}.
      *
+     * @throws InvalidDateException if {@code year} is negative or {@code month}
+     * is smaller than one or larger than 12.
      * @see NumberUtils#countDaysInMonth(int year, int month)
      */
     @Test
-    public void countDaysInMonthTest() {
+    public void countDaysInMonthTest() throws InvalidDateException {
         assertEquals(31, NumberUtils.countDaysInMonth(2020, 1));
         assertEquals(31, NumberUtils.countDaysInMonth(2421, 1));
         assertEquals(30, NumberUtils.countDaysInMonth(1900, 4));
@@ -381,42 +383,54 @@ public class NumberUtilsTest {
     }
 
     /**
-     * Tests exception for {@code year} parameter in {@code NumberUtils.countDaysInMonth(int year, int month)}.
+     * Tests {@code InvalidDateException} for {@code year} parameter in
+     * {@code NumberUtils.countDaysInMonth(int year, int month)}.
      *
+     * @throws InvalidDateException if {@code year} is negative or {@code month}
+     * is smaller than one or larger than 12.
      * @see NumberUtils#countDaysInMonth(int year, int month)
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void countDaysInMonth2Test() {
+    @Test(expected = InvalidDateException.class)
+    public void countDaysInMonth2Test() throws InvalidDateException {
         NumberUtils.countDaysInMonth(-1, 12);
     }
 
     /**
-     * Tests exception for {@code month} parameter in {@code NumberUtils.countDaysInMonth(int year, int month)}.
+     * Tests exception for {@code month} parameter in
+     * {@code NumberUtils.countDaysInMonth(int year, int month)}.
      *
+     * @throws InvalidDateException if {@code year} is negative or {@code month}
+     * is smaller than one or larger than 12.
      * @see NumberUtils#countDaysInMonth(int year, int month)
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void countDaysInMonth3Test() {
+    @Test(expected = InvalidDateException.class)
+    public void countDaysInMonth3Test() throws InvalidDateException {
         NumberUtils.countDaysInMonth(1, 0);
     }
 
     /**
-     * Tests exception for {@code month} parameter in {@code NumberUtils.countDaysInMonth(int year, int month)}.
+     * Tests exception for {@code month} parameter in
+     * {@code NumberUtils.countDaysInMonth(int year, int month)}.
      *
+     * @throws InvalidDateException if {@code year} is negative or {@code month}
+     * is smaller than one or larger than 12.
      * @see NumberUtils#countDaysInMonth(int year, int month)
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void countDaysInMonth4Test() {
+    @Test(expected = InvalidDateException.class)
+    public void countDaysInMonth4Test() throws InvalidDateException {
         NumberUtils.countDaysInMonth(1, -1);
     }
 
     /**
-     * Tests exception for {@code year} and {@code month} parameter in {@code NumberUtils.countDaysInMonth(int year, int month)}.
+     * Tests exception for {@code year} and {@code month} parameter in
+     * {@code NumberUtils.countDaysInMonth(int year, int month)}.
      *
+     * @throws InvalidDateException if {@code year} is negative or {@code month}
+     * is smaller than one or larger than 12.
      * @see NumberUtils#countDaysInMonth(int year, int month)
      */
-    @Test(expected = IllegalArgumentException.class)
-    public void countDaysInMonth5Test() {
+    @Test(expected = InvalidDateException.class)
+    public void countDaysInMonth5Test() throws InvalidDateException {
         NumberUtils.countDaysInMonth(-11, 0);
     }
 }
