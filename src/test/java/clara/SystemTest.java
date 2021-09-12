@@ -1,5 +1,6 @@
 package clara;
 
+import org.junit.BeforeClass;
 import org.junit.Ignore;
 import org.junit.Test;
 import clara.util.ResourceUtils;
@@ -10,9 +11,19 @@ import java.util.*;
 import static org.junit.Assert.assertEquals;
 
 public class SystemTest {
-    private final Properties properties = System.getProperties();
-    private final Set<String> keys = properties.stringPropertyNames();
-    private final List<String> keysList = new ArrayList<>(keys);
+    static Properties properties;
+    static Set<String> keys;
+    static List<String> keysList;
+
+    /**
+     * Sets values of {@code properties}, {@code keys}, and {@code keysList} before any tests are run.
+     */
+    @BeforeClass
+    public static void beforeClass() {
+        properties = System.getProperties();
+        keys = properties.stringPropertyNames();
+        keysList = new ArrayList<>(keys);
+    }
 
     public static void main(String[] args) {
         String allCaps = System.getProperty("all_caps");

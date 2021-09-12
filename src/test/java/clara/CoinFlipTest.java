@@ -17,13 +17,12 @@ public class CoinFlipTest {
      * Creates new instance of {@code CoinFlip} before every method.
      */
     @Before
-    public void Before() {
+    public void before() {
         coinFlip = new CoinFlip();
     }
 
     @Test
     public void flipCoinOnce() {
-        Before();
         CoinFlip.Result result = coinFlip.flipCoinOnce();
         try {
             assertEquals(CoinFlip.Result.HEADS, result);
