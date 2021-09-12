@@ -1,14 +1,29 @@
 package clara;
 
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+/**
+ * Tests {@code CoinFlip}.
+ *
+ * @see CoinFlip
+ */
 public class CoinFlipTest {
-    CoinFlip coinFlip = new CoinFlip();
+    CoinFlip coinFlip;
+
+    /**
+     * Creates new instance of {@code CoinFlip} before every method.
+     */
+    @Before
+    public void Before() {
+        coinFlip = new CoinFlip();
+    }
 
     @Test
     public void flipCoinOnce() {
+        Before();
         CoinFlip.Result result = coinFlip.flipCoinOnce();
         try {
             assertEquals(CoinFlip.Result.HEADS, result);
