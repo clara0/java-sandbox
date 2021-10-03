@@ -1,2 +1,2 @@
-# learn-java
+# java-sandbox
 This is sample project
