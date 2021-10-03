@@ -1,6 +1,7 @@
 package clara;
 
 import java.util.Objects;
+import java.util.UUID;
 
 public class Customer extends Person{
     private String id;
@@ -28,16 +29,27 @@ public class Customer extends Person{
     public Customer() {
     }
 
-    public Customer(String id, int age, String fn, String ln) {
+    public Customer(UUID uuid, int age, String fn, String ln) {
         super(age, fn, ln);
-        this.id = id;
+        this.id = omitDashes(uuid);
     }
 
     public String getId() {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(UUID uuid) {
+        this.id = omitDashes(uuid);
+    }
+
+    public static String omitDashes(UUID uuid) {
+        String[] strs = uuid.toString().split("-");
+        StringBuilder stringBuilder = new StringBuilder(32);
+
+        for (String str : strs) {
+            stringBuilder.append(str);
+        }
+
+        return stringBuilder.toString();
     }
 }
