@@ -159,4 +159,23 @@ public final class StringUtils {
     public static List<String> filterUsernames(List<EmailAddress> emails) {
         return emails.stream().map(EmailAddress::getDomain).filter(domain -> domain.startsWith("g")).collect(Collectors.toList());
     }
+
+    /**
+     * Finds duplicates in a list of strings.
+     *
+     * @param strList a list of strings to be checked for duplicates.
+     * @return a list of duplicate elements.
+     */
+    public static List<String> findDuplicates(List<String> strList) {
+        List<String> duplicates = new ArrayList<>();
+
+        for (String d : strList) {
+            if (strList.indexOf(d) != strList.lastIndexOf(d)) {
+                if (! duplicates.contains(d)) {
+                    duplicates.add(d);
+                }
+            }
+        }
+        return duplicates;
+    }
 }
