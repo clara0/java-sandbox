@@ -14,16 +14,24 @@ import java.util.List;
 public class FindModuleDuplicates {
 
     public static void main(String[] args) throws IOException {
+        FindModuleDuplicates findModuleDuplicates = new FindModuleDuplicates();
         List<String> paths = new ArrayList<>();
-        findModuleFiles(new File(args[0]), paths);
+        String dir = args[0];
+        String fileSep = System.getProperty("file.separator");
+
+        if (! args[0].endsWith(fileSep)) {
+            dir = args[0] + fileSep;
+        }
+
+        findModuleFiles(new File(dir), paths);
 
         for (String s : paths) {
             File f = new File(s);
-            List<String> dependencies = findDependencies(f);
+            List<String> dependencies = findModuleDuplicates.findDependencies(f);
             List<String> duplicates = StringUtils.findDuplicates(dependencies);
 
             if (! duplicates.isEmpty()) {
-                System.out.printf("File path: %s%n", s.substring(args[0].length() + 1));
+                System.out.printf("File path: %s%n", s.replace(dir, ""));
                 System.out.println("Duplicates:");
                 duplicates.forEach(d -> System.out.printf("%s%n%n", d));
             }
@@ -59,7 +67,7 @@ public class FindModuleDuplicates {
      * @return a list of strings representing dependencies
      * @throws IOException if input/output error occurs
      */
-    public static List<String> findDependencies(File moduleFile) throws IOException {
+    public List<String> findDependencies(File moduleFile) throws IOException {
 
         List<String> dependencies = new ArrayList<>();
         FileReader fileReader = null;
