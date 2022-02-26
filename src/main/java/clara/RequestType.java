@@ -1,6 +1,8 @@
 package clara;
 
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public enum RequestType {
     UNKNOWN('z', 0),
@@ -19,46 +21,43 @@ public enum RequestType {
         this.code = code;
     }
 
+    private static final Map<Character, RequestType> charIdMap;
+    private static final Map<Integer, RequestType> codeMap;
+
+    static {
+        Map<Character, RequestType> tempCharMap = new HashMap<>();
+        tempCharMap.put(GET.id, GET);
+        tempCharMap.put(POST.id, POST);
+        tempCharMap.put(DELETE.id, DELETE);
+        tempCharMap.put(INFO.id, INFO);
+        tempCharMap.put(TRACE.id, TRACE);
+        tempCharMap.put(CANCEL.id, CANCEL);
+        charIdMap = tempCharMap;
+
+        Map<Integer, RequestType> tempCodeMap = new HashMap<>();
+        tempCodeMap.put(GET.code, GET);
+        tempCodeMap.put(POST.code, POST);
+        tempCodeMap.put(DELETE.code, DELETE);
+        tempCodeMap.put(INFO.code, INFO);
+        tempCodeMap.put(TRACE.code, TRACE);
+        tempCodeMap.put(CANCEL.code, CANCEL);
+        codeMap = tempCodeMap;
+    }
+
     public static RequestType fromCharId(char id) {
-        switch (id) {
-            case 'g':
-                return GET;
-            case 'p':
-                return POST;
-            case 'd':
-                return DELETE;
-            case 'i':
-                return INFO;
-            case 't':
-                return TRACE;
-            case 'c':
-                return CANCEL;
-        }
-        return UNKNOWN;
+        RequestType requestType = charIdMap.get(id);
+        return requestType == null ? UNKNOWN : requestType;
     }
 
     public static RequestType fromCode(int code) {
-        switch (code) {
-            case 100:
-                return GET;
-            case 200:
-                return POST;
-            case 300:
-                return DELETE;
-            case 400:
-                return INFO;
-            case 500:
-                return TRACE;
-            case 600:
-                return CANCEL;
-        }
-        return UNKNOWN;
+        RequestType requestType = codeMap.get(code);
+        return requestType == null ? UNKNOWN : requestType;
     }
 
     public static RequestType fromName(String name) {
         try {
             return RequestType.valueOf(name.toUpperCase(Locale.ROOT));
-        } catch (IllegalArgumentException e) {
+        } catch (IllegalArgumentException | NullPointerException e) {
             return UNKNOWN;
         }
     }

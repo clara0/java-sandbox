@@ -50,5 +50,6 @@ public class RequestTypeTest {
         assertEquals(RequestType.UNKNOWN, RequestType.fromName("Cat Dog"));
         assertEquals(RequestType.UNKNOWN, RequestType.fromName("Cat-Dog"));
         assertEquals(RequestType.UNKNOWN, RequestType.fromName("***-Dog"));
+        assertEquals(RequestType.UNKNOWN, RequestType.fromName(null));
     }
 }
