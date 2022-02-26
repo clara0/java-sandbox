@@ -1,5 +1,7 @@
 package clara;
 
+import java.util.Locale;
+
 public enum RequestType {
     UNKNOWN('z', 0),
     GET('g', 100),
@@ -17,7 +19,7 @@ public enum RequestType {
         this.code = code;
     }
 
-    public static RequestType getRequestType(char id) {
+    public static RequestType fromCharId(char id) {
         switch (id) {
             case 'g':
                 return GET;
@@ -35,7 +37,7 @@ public enum RequestType {
         return UNKNOWN;
     }
 
-    public static RequestType getRequestType(int code) {
+    public static RequestType fromCode(int code) {
         switch (code) {
             case 100:
                 return GET;
@@ -51,6 +53,14 @@ public enum RequestType {
                 return CANCEL;
         }
         return UNKNOWN;
+    }
+
+    public static RequestType fromName(String name) {
+        try {
+            return RequestType.valueOf(name.toUpperCase(Locale.ROOT));
+        } catch (IllegalArgumentException e) {
+            return UNKNOWN;
+        }
     }
 }
 
