@@ -2,9 +2,15 @@ package clara;
 
 import org.junit.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class GreeterTest {
     Greeter greeter = new Greeter();
@@ -118,13 +124,7 @@ public class GreeterTest {
         charCount.clear();
         assertEquals(charCount, greeter.findUsages(""));
 
-        try {
-            greeter.findUsages(null);
-            fail("unexpected input: null");
-        } catch (IllegalArgumentException e) {
-            //expected
-        }
-
+        assertThrows(IllegalArgumentException.class, () -> greeter.findUsages(null));
     }
 
     @Test
@@ -166,26 +166,9 @@ public class GreeterTest {
         assertEquals(commonChars, greeter.findCommon("Hi there!", "Hello there!", false));
         commonChars.clear();
 
-        try {
-            greeter.findCommon(null, "abc", true);
-            fail("unexpected input: null");
-        } catch (IllegalArgumentException e) {
-            //expected
-        }
-
-        try {
-            greeter.findCommon(null, null, true);
-            fail("unexpected input: null");
-        } catch (IllegalArgumentException e) {
-            //expected
-        }
-
-        try {
-            greeter.findCommon(null, "abc", false);
-            fail("unexpected input: null");
-        } catch (IllegalArgumentException e) {
-            //expected
-        }
+        assertThrows(IllegalArgumentException.class, () -> greeter.findCommon(null, "abc", true));
+        assertThrows(IllegalArgumentException.class, () -> greeter.findCommon(null, null, true));
+        assertThrows(IllegalArgumentException.class, () -> greeter.findCommon(null, "abc", false));
 
     }
 }

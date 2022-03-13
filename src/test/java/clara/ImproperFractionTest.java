@@ -2,7 +2,8 @@ package clara;
 
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class ImproperFractionTest {
 
@@ -25,12 +26,7 @@ public class ImproperFractionTest {
         improperFraction.setDenominator(newDenominator);
         assertEquals(newNumerator, improperFraction.getNumerator());
 
-        try {
-            improperFraction.setDenominator(0);
-            fail("Unexpected argument: 0");
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
+        assertThrows(IllegalArgumentException.class, () -> improperFraction.setDenominator(0));
     }
 
     @Test

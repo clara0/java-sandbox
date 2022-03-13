@@ -7,7 +7,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
 
 public class TimeTest {
 
@@ -36,33 +37,10 @@ public class TimeTest {
         time.setMilliseconds(newMilliseconds);
         assertEquals(newMilliseconds, time.getMilliseconds());
 
-        try {
-            time.setMinutes(-23);
-            fail("Unexpected argument: " + -23);
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
-
-        try {
-            time.setMinutes(-32);
-            fail("Unexpected argument: " + -32);
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
-
-        try {
-            time.setSeconds(-24);
-            fail("Unexpected argument: " + -24);
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
-
-        try {
-            time.setMilliseconds(-9);
-            fail("Unexpected argument: " + -9);
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
+        assertThrows(IllegalArgumentException.class, () -> time.setMinutes(-23));
+        assertThrows(IllegalArgumentException.class, () -> time.setMinutes(-32));
+        assertThrows(IllegalArgumentException.class, () -> time.setSeconds(-24));
+        assertThrows(IllegalArgumentException.class, () -> time.setMilliseconds(-9));
     }
 
     @Test

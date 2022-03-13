@@ -3,7 +3,10 @@ package clara;
 import org.junit.Test;
 import clara.util.StringUtils;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThrows;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class StringUtilsTest {
 
@@ -18,12 +21,7 @@ public class StringUtilsTest {
         assertEquals("ihay here3tay", StringUtils.pigLatin("hi there3"));
         assertEquals("333ay", StringUtils.pigLatin("333"));
 
-        try {
-            StringUtils.pigLatin(null);
-            fail("Unexpected input" + null);
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
+        assertThrows(IllegalArgumentException.class, () -> StringUtils.pigLatin(null));
     }
 
     @Test
@@ -35,12 +33,7 @@ public class StringUtilsTest {
         assertEquals(" ", StringUtils.reverseString(" "));
         assertEquals("dlrow olleh", StringUtils.reverseString("hello world"));
 
-        try {
-            StringUtils.reverseString(null);
-            fail("Unexpected input" + null);
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
+        assertThrows(IllegalArgumentException.class, () -> StringUtils.reverseString(null));
 
     }
 
@@ -53,12 +46,7 @@ public class StringUtilsTest {
         assertEquals("", StringUtils.switchCase(""));
         assertEquals(" ", StringUtils.switchCase(" "));
 
-        try {
-            StringUtils.switchCase(null);
-            fail("Unexpected input" + null);
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
+        assertThrows(IllegalArgumentException.class, () -> StringUtils.switchCase(null));
     }
 
     @Test
@@ -77,12 +65,7 @@ public class StringUtilsTest {
         assertFalse(StringUtils.isPalindrome("gah"));
         assertFalse(StringUtils.isPalindrome("123"));
 
-        try {
-            StringUtils.switchCase(null);
-            fail("Unexpected input" + null);
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
+        assertThrows(IllegalArgumentException.class, () -> StringUtils.isPalindrome(null));
     }
 
     @Test
@@ -102,12 +85,7 @@ public class StringUtilsTest {
         assertFalse(StringUtils.validBrackets("("));
         assertFalse(StringUtils.validBrackets("(a"));
 
-        try {
-            StringUtils.switchCase(null);
-            fail("Unexpected input" + null);
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
+        assertThrows(IllegalArgumentException.class, () -> StringUtils.validBrackets(null));
     }
 
     @Test
@@ -127,12 +105,7 @@ public class StringUtilsTest {
         assertFalse(StringUtils.validBrackets1("("));
         assertFalse(StringUtils.validBrackets1("(a"));
 
-        try {
-            StringUtils.switchCase(null);
-            fail("Unexpected input" + null);
-        } catch (IllegalArgumentException e) {
-            // expected
-        }
+        assertThrows(IllegalArgumentException.class, () -> StringUtils.validBrackets1(null));
     }
 
     }
