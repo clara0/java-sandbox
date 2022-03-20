@@ -28,7 +28,7 @@ public class FindModuleDependencies extends FindModuleDuplicates {
             dir = args[0] + fileSep;
         }
 
-        findModuleFiles(new File(dir), paths);
+        findFiles(new File(dir), paths, "module.xml");
 
         for (String s : paths) {
             File f = new File(s);

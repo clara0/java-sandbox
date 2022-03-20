@@ -23,7 +23,7 @@ public class FindModuleDuplicates {
             dir = args[0] + fileSep;
         }
 
-        findModuleFiles(new File(dir), paths);
+        findFiles(new File(dir), paths, "module.xml");
 
         for (String s : paths) {
             File f = new File(s);
@@ -43,18 +43,18 @@ public class FindModuleDuplicates {
      *
      * @param startingDir directory in which search starts
      */
-    public static void findModuleFiles(File startingDir, List<String> paths) {
+    public static void findFiles(File startingDir, List<String> paths, String fileName) {
 
         File[] filesList = startingDir.listFiles();
 
         assert filesList != null;
         for (File f : filesList) {
             if (f.isFile()) {
-                if (f.getName().equals("module.xml")) {
+                if (f.getName().equals(fileName)) {
                     paths.add(f.getAbsolutePath());
                 }
             } else {
-                findModuleFiles(f, paths);
+                findFiles(f, paths, fileName);
             }
         }
 
