@@ -5,11 +5,9 @@ import static clara.wildfly.FindModuleDuplicates.findFiles;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
-import clara.util.StringUtils;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
@@ -31,37 +29,20 @@ public class PomDependencies {
         findFiles(new File(dir), paths, "pom.xml");
 
         for (String s : paths) {
-            List<String> duplicates = new ArrayList<>();
+            List<Dependency> duplicates = new ArrayList<>();
             File f = new File(s);
-            List<List<String>> dependencies = pomDependencies.findDependencies(f);
-            for (List<String> l : dependencies) {
-                List<String> d = StringUtils.findDuplicates(l);
-                if (!d.isEmpty())
-                    duplicates.addAll(d);
-            }
+            List<List<Dependency>> fileDependencies = pomDependencies.findDependencies(f);
 
-            if (! duplicates.isEmpty()) {
+            for (List<Dependency> dependencyList : fileDependencies) {
+                List<Dependency> dup = PomDependencies.findDuplicates(dependencyList);
+                if (!dup.isEmpty()) {
+                    duplicates.addAll(dup);
+                }
+            }
+            if (!duplicates.isEmpty()) {
                 System.out.printf("File path: %s%n", s.replace(dir, ""));
                 System.out.println("Duplicates:");
-                for (String str : duplicates) {
-                    String[] ids = str.split(":");
-                    if (ids.length > 2) {
-                        if (ids.length > 3) {
-                            if (Objects.equals(ids[3], "type")) {
-                                System.out.printf("groupId: %s    artifactId: %s    type:%s%n",
-                                        ids[0], ids[1], ids[2]);
-                            } else {
-                                System.out.printf("groupId: %s    artifactId: %s    classifier:%s    type:%s%n",
-                                        ids[0], ids[1], ids[2], ids[3]);
-                            }
-                        } else {
-                            System.out.printf("groupId: %s    artifactId: %s    classifier:%s%n", ids[0], ids[1], ids[2]);
-                        }
-                    } else {
-                        System.out.printf("groupId: %s    artifactId: %s%n", ids[0], ids[1]);
-                    }
-                }
-                System.out.printf("%n");
+                duplicates.forEach(d -> System.out.println(d.toString()));
             }
         }
     }
@@ -71,9 +52,9 @@ public class PomDependencies {
      * @param pomFile pom.xml file to be checked
      * @return list of dependencies in each dependencies element in the pom.xml file
      */
-    public List<List<String>> findDependencies(File pomFile) {
+    public List<List<Dependency>> findDependencies(File pomFile) {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        List<List<String>> dependencyIds = new ArrayList<>();
+        List<List<Dependency>> dependencyIds = new ArrayList<>();
 
         try {
             DocumentBuilder builder = factory.newDocumentBuilder();
@@ -83,10 +64,8 @@ public class PomDependencies {
             for (int i = 0; i < dependenciesElements.getLength(); i++) {
                 Element dependenciesElement = (Element) dependenciesElements.item(i);
                 NodeList dependencies = dependenciesElement.getElementsByTagName("dependency");
-                List<String> idList = findDependencyIds(dependencies);
-                dependencyIds.add(idList);
+                dependencyIds.add(findDependencyIds(dependencies));
             }
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -99,36 +78,49 @@ public class PomDependencies {
      * @param dependencies {@code NodeList} of dependencies
      * @return list containing strings consisting of each dependency's child elements
      */
-    public List<String> findDependencyIds(NodeList dependencies) {
-        List<String> idList = new ArrayList<>();
+    public List<Dependency> findDependencyIds(NodeList dependencies) {
+        List<Dependency> dependenciesList = new ArrayList<>();
         for (int i = 0; i < dependencies.getLength(); i++) {
-            Element dependency = (Element) dependencies.item(i);
-            NodeList classifier = dependency.getElementsByTagName("classifier");
-            NodeList type = dependency.getElementsByTagName("type");
+            Dependency dependency = new Dependency();
+            Element currentDependency = (Element) dependencies.item(i);
+            dependency.setGroupId(currentDependency.getElementsByTagName("groupId").item(0).getTextContent());
+            dependency.setArtifactId(currentDependency.getElementsByTagName("artifactId").item(0).getTextContent());
+            NodeList classifier = currentDependency.getElementsByTagName("classifier");
+            NodeList type = currentDependency.getElementsByTagName("type");
+
             if (classifier.getLength() > 0) {
                 if (type.getLength() > 0) {
-                    idList.add(dependency.getElementsByTagName("groupId").item(0).getTextContent() + ":" +
-                            dependency.getElementsByTagName("artifactId").item(0).getTextContent() + ":" +
-                            dependency.getElementsByTagName("classifier").item(0).getTextContent() + ":" +
-                            dependency.getElementsByTagName("type").item(0).getTextContent());
+                    dependency.setClassifier(classifier.item(0).getTextContent());
+                    dependency.setType(type.item(0).getTextContent());
                 } else {
-                    idList.add(dependency.getElementsByTagName("groupId").item(0).getTextContent() + ":" +
-                            dependency.getElementsByTagName("artifactId").item(0).getTextContent() + ":" +
-                            dependency.getElementsByTagName("classifier").item(0).getTextContent());
+                    dependency.setClassifier(classifier.item(0).getTextContent());
                 }
             } else {
                 if (type.getLength() > 0) {
-                    idList.add(dependency.getElementsByTagName("groupId").item(0).getTextContent() + ":" +
-                            dependency.getElementsByTagName("artifactId").item(0).getTextContent() + ":" +
-                            dependency.getElementsByTagName("type").item(0).getTextContent() + ":" +
-                            "type");
-                } else {
-                    idList.add(dependency.getElementsByTagName("groupId").item(0).getTextContent() + ":" +
-                            dependency.getElementsByTagName("artifactId").item(0).getTextContent());
+                    dependency.setType(type.item(0).getTextContent());
+                }
+            }
+            dependenciesList.add(dependency);
+        }
+        return dependenciesList;
+    }
+
+    /**
+     * Finds duplicates in list of dependencies.
+     * @param dependencyList list of dependencies
+     * @return list of duplicate dependencies
+     */
+    public static List<Dependency> findDuplicates(List<Dependency> dependencyList) {
+        List<Dependency> duplicates = new ArrayList<>();
+
+        for (Dependency d : dependencyList) {
+            if (dependencyList.indexOf(d) != dependencyList.lastIndexOf(d)) {
+                if (! duplicates.contains(d)) {
+                    duplicates.add(d);
                 }
             }
         }
-        return idList;
+        return duplicates;
     }
 
 }
