@@ -147,7 +147,7 @@ public class SystemTest {
     public void storePropertiesTest() throws IOException {
         OutputStream stream = null;
         FileReader fileReader = null;
-        File file = new File(System.getProperty("java.io.tmpdir") + "eastern_chipmunk.properties");
+        File file = new File(System.getProperty("java.io.tmpdir"), "eastern_chipmunk.properties");
 
         Properties properties = new Properties();
         properties.setProperty("scientific name", "Tamias striatus");
