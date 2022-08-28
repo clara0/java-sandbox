@@ -4,14 +4,20 @@ on:
       types: [opened, synchronize, reopened, ready_for_review]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    name: ${{ matrix.os }} ${{ matrix.distribution }} ${{ matrix.jdk }}
+    runs-on: ${{ matrix.os }}
     timeout-minutes: 5
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        jdk: [8, 11, 17]
+        distribution: [adopt-hotspot, adopt-openj9]
     steps:
     - uses: actions/checkout@v2
     - name: Set up
       uses: actions/setup-java@v2
       with: 
-        java-version: '8'
-        distribution: 'adopt'
+        java-version: ${{ matrix.jdk }}
+        distribution: ${{ matrix.distribution }}
     - name: Build with Maven
       run: mvn --no-transfer-progress --batch-mode --update-snapshots verify
