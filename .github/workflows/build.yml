@@ -1,5 +1,7 @@
 name: Github Actions
 on:
+  schedule:
+    - cron: '0 23 1 * *'
   pull_request:
       types: [opened, synchronize, reopened, ready_for_review]
   workflow_dispatch:
