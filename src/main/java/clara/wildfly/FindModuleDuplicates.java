@@ -53,7 +53,7 @@ public class FindModuleDuplicates {
                 if (f.getName().equals(fileName)) {
                     paths.add(f.getAbsolutePath());
                 }
-            } else {
+            } else if (!f.getName().equals("target")) {
                 findFiles(f, paths, fileName);
             }
         }
