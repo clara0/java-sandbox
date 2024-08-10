@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 
+/**
+ * Represents a file detailing access permissions of various subjects for various resources.
+ * */
 public class PolicyFile {
 
     // defaults for resources and actions
@@ -28,6 +31,7 @@ public class PolicyFile {
 
     private File file;
 
+    // Allows for the user to specify valid resources and actions
     public PolicyFile(File file, String[][] validResource, String[] validAction) throws IOException {
         this.file = file;
 
@@ -46,7 +50,9 @@ public class PolicyFile {
         this(file, resources, actions);
     }
 
-
+    /**
+     * Reads the csv file given and populates the list of permissions given in this file.
+     * */
     public void ReadData() throws IOException {
         FileReader fileReader = null;
         BufferedReader bufferedReader = null;
@@ -79,6 +85,11 @@ public class PolicyFile {
 
     }
 
+    /**
+     * Checks if a given permission is allowed.
+     * @param check the permission to be checked.
+     * @return true if the subject is allowed permission; false if not or if permission not stated in the file
+     * */
     public boolean isAllowed(Permission check) {
         for (Permission p : permissions) {
             if (p.equals(check)) {
@@ -89,6 +100,14 @@ public class PolicyFile {
         return false;
     }
 
+    /**
+     * Creates and adds a permission to the list of permissions.
+     * @param subject subject of the permission
+     * @param resource the resource that the action can be performed upon
+     * @param action the action to be performed
+     * @param allow whether the subject is allowed to perform said action on said resource
+     * @return true if the permission was created successfully; false if not
+     * */
     public boolean addPermission(String subject, String resource, String action, boolean allow) {
 
         Permission newPerm = createPermission(subject, resource, action, allow);
@@ -112,6 +131,14 @@ public class PolicyFile {
         return true;
     }
 
+    /**
+     * Creates a permission from a subject, resource, and action
+     * @param subject subject of the permission
+     * @param resource the resource that the action can be performed upon
+     * @param action the action to be performed
+     * @param allow whether the subject is allowed to perform said action on said resource
+     * @return the created permission if the resource and action provided are valid; null otherwise
+     * */
     public Permission createPermission(String subject, String resource, String action, boolean allow) {
         String r = validResource.get(resource);
         boolean a = validAction.contains(action);

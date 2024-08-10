@@ -5,6 +5,12 @@ import java.io.IOException;
 
 public class Main {
 
+    /**
+     * Reads a csv file of permissions and checks if a subject has permission to perform a provided task.
+     * The csv file path should be provided with either {@code --policy-file={insert file path here}} or {@code
+     * --policy-file {insert file path here}} at either the beginning or end of the arguments given. The permission to
+     * be checked should be provided in the order of subject, action, resource.
+     * */
     public static void main(String[] args) throws IOException {
         int fileIndex = 0;
 
