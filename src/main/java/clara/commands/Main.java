@@ -12,7 +12,7 @@ public class Main {
      * be checked should be provided in the order of subject, action, resource.
      * */
     public static void main(String[] args) throws IOException {
-        int fileIndex = 0;
+        int fileIndex = 1;
 
         for (int i = 0; i < args.length; i++) {
             if (args[i].toLowerCase().startsWith("--policy-file")) {
