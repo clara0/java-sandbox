@@ -218,7 +218,7 @@ public final class StringUtils {
      * For example, "{}", "()", "[{()}]" would be considered valid, while
      * "{[}]", "{{{", and "(<]" would not.
      * */
-    public boolean validBrackets3(String str) {
+    public static boolean validBrackets3(String str) {
         if (str == null) {
             throw new IllegalArgumentException("Invalid input: " + str);
         }

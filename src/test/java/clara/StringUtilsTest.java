@@ -84,6 +84,7 @@ public class StringUtilsTest {
         assertFalse(StringUtils.validBrackets("(21>1 + 2>1"));
         assertFalse(StringUtils.validBrackets("("));
         assertFalse(StringUtils.validBrackets("(a"));
+        assertFalse(StringUtils.validBrackets1("(a<)>"));
 
         assertThrows(IllegalArgumentException.class, () -> StringUtils.validBrackets(null));
     }
@@ -104,8 +105,50 @@ public class StringUtilsTest {
         assertFalse(StringUtils.validBrackets1("(21>1 + 2>1"));
         assertFalse(StringUtils.validBrackets1("("));
         assertFalse(StringUtils.validBrackets1("(a"));
+        assertFalse(StringUtils.validBrackets1("(a<)>"));
 
         assertThrows(IllegalArgumentException.class, () -> StringUtils.validBrackets1(null));
     }
 
+    @Test
+    public void validBrackets2() {
+        assertTrue(StringUtils.validBrackets2("{}"));
+        assertTrue(StringUtils.validBrackets2(""));
+        assertTrue(StringUtils.validBrackets2(" "));
+        assertTrue(StringUtils.validBrackets2("{1[2 + 2]}"));
+        assertTrue(StringUtils.validBrackets2("{12 + 24}"));
+        assertTrue(StringUtils.validBrackets2("{12 + gh}"));
+        assertTrue(StringUtils.validBrackets2("(21<12>21)"));
+        assertTrue(StringUtils.validBrackets2("(21<as>21)"));
+        assertTrue(StringUtils.validBrackets2("(21<>1 + 21)"));
+        assertTrue(StringUtils.validBrackets2("(21<1 + 21)>"));
+        assertFalse(StringUtils.validBrackets2("(21>1 + 21"));
+        assertFalse(StringUtils.validBrackets2("(21>1 + 2)1"));
+        assertFalse(StringUtils.validBrackets2("(21>1 + 2>1"));
+        assertFalse(StringUtils.validBrackets2("("));
+        assertFalse(StringUtils.validBrackets2("(a"));
+
+        assertThrows(IllegalArgumentException.class, () -> StringUtils.validBrackets2(null));
     }
+
+    @Test
+    public void validBrackets3() {
+        assertTrue(StringUtils.validBrackets3("{}"));
+        assertTrue(StringUtils.validBrackets3(""));
+        assertTrue(StringUtils.validBrackets3(" "));
+        assertTrue(StringUtils.validBrackets3("{1[2 + 2]}"));
+        assertTrue(StringUtils.validBrackets3("{12 + 24}"));
+        assertTrue(StringUtils.validBrackets3("{12 + gh}"));
+        assertTrue(StringUtils.validBrackets3("(21<12>21)"));
+        assertTrue(StringUtils.validBrackets3("(21<as>21)"));
+        assertTrue(StringUtils.validBrackets3("(21<>1 + 21)"));
+        assertFalse(StringUtils.validBrackets3("(21<1 + 21)>"));
+        assertFalse(StringUtils.validBrackets3("(21>1 + 21"));
+        assertFalse(StringUtils.validBrackets3("(21>1 + 2)1"));
+        assertFalse(StringUtils.validBrackets3("(21>1 + 2>1"));
+        assertFalse(StringUtils.validBrackets3("("));
+        assertFalse(StringUtils.validBrackets3("(a"));
+
+        assertThrows(IllegalArgumentException.class, () -> StringUtils.validBrackets3(null));
+    }
+}
