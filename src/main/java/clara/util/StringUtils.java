@@ -3,9 +3,7 @@ package clara.util;
 import clara.EmailAddress;
 
 import java.security.InvalidParameterException;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public final class StringUtils {
@@ -212,6 +210,51 @@ public final class StringUtils {
         }
 
         return parenCt == 0 && curlCt == 0 && sqCt == 0 && carrotCt == 0;
+    }
+
+    /**
+     * Checks if a string has a valid pattern for brackets by adding and
+     * removing opening brackets from a deque.
+     * For example, "{}", "()", "[{()}]" would be considered valid, while
+     * "{[}]", "{{{", and "(<]" would not.
+     * */
+    public boolean validBrackets3(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("Invalid input: " + str);
+        }
+
+        char[] chars = str.toCharArray();
+        Deque<Character> brackets = new ArrayDeque<>();
+
+        for (char c : chars) {
+            switch (c) {
+                case '(': case '{': case '[': case '<':
+                    brackets.push(c);
+                    break;
+                case ')':
+                    if (brackets.pop() != '(') {
+                        return false;
+                    }
+                    break;
+                case '}':
+                    if (brackets.pop() != '{') {
+                        return false;
+                    }
+                    break;
+                case ']':
+                    if (brackets.pop() != '[') {
+                        return false;
+                    }
+                    break;
+                case '>':
+                    if (brackets.pop() != '<') {
+                        return false;
+                    }
+                    break;
+            }
+        }
+
+        return brackets.size() == 0;
     }
 
     public static List<String> getUsernames(List<EmailAddress> emails) {
