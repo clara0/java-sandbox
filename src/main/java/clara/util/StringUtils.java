@@ -2,6 +2,7 @@ package clara.util;
 
 import clara.EmailAddress;
 
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -146,6 +147,29 @@ public final class StringUtils {
             }
         }
         return brackets.size() == 0;
+    }
+
+    public static boolean validParentheses(String str) {
+        if (str == null) {
+            throw new IllegalArgumentException("Invalid input: " + str);
+        }
+
+        char[] chars = str.toCharArray();
+        int parenCt = 0;
+
+        for (char c : chars) {
+            if (c == '(') {
+                parenCt++;
+            } else if (c == ')') {
+                parenCt--;
+            }
+
+            if (parenCt < 0) {
+                return false;
+            }
+        }
+
+        return parenCt == 0;
     }
 
     public static List<String> getUsernames(List<EmailAddress> emails) {
