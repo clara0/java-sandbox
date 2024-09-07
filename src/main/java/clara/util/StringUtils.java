@@ -72,6 +72,12 @@ public final class StringUtils {
         return true;
     }
 
+    /**
+     * Checks if a string has a valid pattern for brackets using a list for
+     * each set of opening or closing brackets.
+     * For example, "{}", "()", "[{()}]" would be considered valid, while
+     * "{[}]", "{{{", and "(<]" would not.
+     * */
     public static boolean validBrackets(String str) {
         if (str == null) {
             throw new IllegalArgumentException("Invalid input: " + str);
@@ -110,6 +116,12 @@ public final class StringUtils {
         return brackets.size() == 0;
     }
 
+    /**
+     * Checks if a string has a valid pattern for brackets by adding and
+     * removing opening brackets from a list.
+     * For example, "{}", "()", "[{()}]" would be considered valid, while
+     * "{[}]", "{{{", and "(<]" would not.
+     * */
     public static boolean validBrackets1(String str) {
         if (str == null) {
             throw new IllegalArgumentException("Invalid input: " + str);
@@ -149,27 +161,57 @@ public final class StringUtils {
         return brackets.size() == 0;
     }
 
-    public static boolean validParentheses(String str) {
+    /**
+     * Checks if a string has a valid pattern for parentheses, without checking for overlap.
+     * For example, "([)]", "({)[]}", "[{()}]" would be considered valid, while
+     * "[}]", "{{{", and "(<]" would not.
+     * */
+    public static boolean validBrackets2(String str) {
         if (str == null) {
             throw new IllegalArgumentException("Invalid input: " + str);
         }
 
         char[] chars = str.toCharArray();
         int parenCt = 0;
+        int curlCt = 0;
+        int sqCt = 0;
+        int carrotCt = 0;
 
         for (char c : chars) {
-            if (c == '(') {
-                parenCt++;
-            } else if (c == ')') {
-                parenCt--;
+            switch(c) {
+                case '(':
+                    parenCt++;
+                    break;
+                case '{':
+                    curlCt++;
+                    break;
+                case '[':
+                    sqCt++;
+                    break;
+                case '<':
+                    carrotCt++;
+                    break;
+                case ')':
+                    parenCt--;
+                    break;
+                case '}':
+                    curlCt--;
+                    break;
+                case ']':
+                    sqCt--;
+                    break;
+                case '>':
+                    carrotCt--;
+                    break;
+
             }
 
-            if (parenCt < 0) {
+            if (parenCt < 0 || curlCt < 0 || sqCt < 0 || carrotCt < 0) {
                 return false;
             }
         }
 
-        return parenCt == 0;
+        return parenCt == 0 && curlCt == 0 && sqCt == 0 && carrotCt == 0;
     }
 
     public static List<String> getUsernames(List<EmailAddress> emails) {
